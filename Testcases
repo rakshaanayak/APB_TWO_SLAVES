@@ -1,1 +1,46 @@
+Sl.No.	SIGNALS	WIDTH	SUB FEATURES	DESCRIPTION	STATUS
+1	Transfer	1 bit	i)High	If Transfer is high APB is enabled 	Pass/Fail
+			ii)Low	If Transfer is low APB is disabled	Pass/Fail
+					
+2	 PRESETn	1 bit	i)High	When PRESETn is high then operations will occur	Pass/Fail
+			ii)Low	When PRESETn is low then PADDR and other control signals should take default values	Pass/Fail
+					
+3	PADDR	9 bits	i)Checking valid address	When address is valid then it should be in the range of 0 to 2^32-1	Pass/Fail
+			ii)PADDR[8]==0	If 9th bit of PADDR is 0 then slave 1 will be selected	Pass/Fail
+			iii)PADDR[8]==1	If 9th bit of PADDR is 1 then slave 2 will be selected	Pass/Fail
+					
+4	PSEL1	1 bit	i)High	If PSEL1 is high then slave is ready 	Pass/Fail
+			ii)Low	If PSEL1 is low slave is not ready	
+					
+5	PENABLE	1 bit	i)High	If PSEL is high and  PENABLE is also high then it will be in access phase.	Pass/Fail
+			ii)Low	If PSEL is high and PENABLE is low then it will be in setup phase	Pass/Fail
+					
+6	PWRITE	1 bit	i)High(Write Operation)	If PWRITE is high then the data will be written to the particular address   	Pass/Fail
+			ii)Low(Read Operation)	if PWRITE is low then it will be read from the particular address	Pass/Fail
+			iii)Continuous write operation	If PWRITE is high for continuous clock cycles	Pass/Fail
+			iv)Alternate write and read operation	If PWRITE is high for alternate clock cycles	Pass/Fail
+					
+7	PREADY	1 bit	i)Low	If PWRITE is high and PENABLE and PREADY is low then no operation  	Pass/Fail
+			ii)High (Write Without wait state)	If PWRITE is high and PENABLE and PREADY is high in the same clock cycle then write operation	Pass/Fail
+			iii)High (Write With wait state)	If PWRITE is high and PENABLE and PREADY is high in the next clock cycle then write operation 	Pass/Fail
+			iv)High (Read Without wait state)	If PWRITE is low and PENABLE and PREADY is high in the same clock cycle then write operation	Pass/Fail
+			v)High (Read With wait state)	If PWRITE is low and PENABLE and PREADY is high in the next clock cycle then write operation 	
+			vi)Slave 1 is ready	If 9th bit of PADDR is 0 and PREADY is high then slave 1 is ready	Pass/Fail
+			vii)Slave 2 is ready	If 9th bit of PADDR is 1 and PREADY is high then slave 2 is ready	Pass/Fail
+					
+8	PSLVERR	1 bit	i)High	If data written to read only register then write error will occur and if data is read from the  	Pass/Fail
+				write only register then read error will occur and if either of this case commits then PSLVERR 	
+				high 	
+			ii)Low	If neither of those above cases commits then PSLVERR is low	Pass/Fail
+					
+9	PRDATA	8 bits	i)Valid	If PWRITE is low ,PREADY is high, PADDR and PRDATA is valid then data will be read from	Pass/Fail
+				particular HADDR	
+			ii)Invalid	If PWRITE is low ,PREADY is high ,PADDR is valid and PRDATA is not valid then data will not be 	Pass/Fail
+				read from particular HADDR	
+					
+10	PWDATA	8 bits	i)Valid	If PWRITE is high ,PREADY is high, PADDR and PWDATA is valid then data will be written to	Pass/Fail
+				particular HADDR	
+			ii)Invalid	If PWRITE is high ,PREADY is high ,PADDR is valid and PWDATA is not valid then data will not  	Pass/Fail
+				be written to particular HADDR	
+					
 
