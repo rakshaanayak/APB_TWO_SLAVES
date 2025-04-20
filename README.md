@@ -1,4 +1,4 @@
--CHAPTER–1 DESIGN OVERVIEW
+CHAPTER–1 DESIGN OVERVIEW
 
 
  1.1 INTRODUCTION
@@ -43,7 +43,7 @@
 
 
 1.3.2 PIN DESCRIPTION 
-
+```
 
 
 
@@ -99,11 +99,13 @@ PWDATA
 APB write data bus	             The write data bus is driven by the peripheral bus bridge unit during 
                                  write cycles (when PWRITE is HIGH). The write data bus can be up to 32-bits wide.	             8
 
-
+```
 1.4 STATE DIAGRAM
 
 
 
+
+```
 Transitions:
 
 IDLE → SETUP: Happens when a transfer is initiated (PREADY = 1 and transfer request occurs).
@@ -113,6 +115,9 @@ Transitions:
 ACCESS → IDLE: Happens when PREADY = 1 and the transfer completes.
 
 IDLE (No Transfer): The system remains idle if no transfer is initiated (PREADY = 1 and no transfer).
+
+
+```
 
 
 
@@ -125,6 +130,9 @@ Transitions:
 The system will remain in the IDLE state if PREADY = 1 and no transfer is required.
 
 Transition occurs to the SETUP state if a transfer request is initiated (trigger not explicitly shown but implied by the transition arrow).
+
+
+
 
 
 1.4.2. SETUP STATE:
