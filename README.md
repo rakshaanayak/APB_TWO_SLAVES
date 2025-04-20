@@ -47,57 +47,59 @@ CHAPTER–1 DESIGN OVERVIEW
 
 
 
-  SIGNALS	                                DESCRIPTION                                	                                   WIDTH
+  SIGNALS	                                DESCRIPTION                                	                              WIDTH
 
 Transfer
 
-Transfer signal	             APB enable signal. If high APB is activated else APB is disabled                              	1
+Transfer signal	             APB enable signal. If high APB is activated else APB is disabled                        	1
 
 PCLK
 
-Bus clock	                    The rising edge of PCLK is used to time all transfers on the APB.                              1
+Bus clock	                    The rising edge of PCLK is used to time all transfers on the APB.                       1
 
 PRESETn
 
 APB reset	                   The APB bus reset signal is active LOW and this signal will normally be 
-                             connected directly to the system bus reset signal.	                                              1
+                             connected directly to the system bus reset signal.	                                      1
 
 PADDR
 
 APB address bus	             This is the APB address bus, which may be up to 32-bits wide and is driven
-                             by the peripheral bus bridge unit.	                                                              9
+                             by the peripheral bus bridge unit.	                                                      9
 
 PSEL1
 
 APB select	                 This signal indicates that the slave device is selected and a
-                             data transfer is required.                                                                      	1
+                             data transfer is required.                                                               1
 
 PENABLE
 
 APB enable	                 The enable signal is used to indicate the second cycle of an APB transfer. 
-                             The rising edge of PENABLE occurs in the middle of the APB transfer.	                             1
+                             The rising edge of PENABLE occurs in the middle of the APB transfer.	                    1
 
 PWRITE
 
-APB transfer direction	      When HIGH this signal indicates an APB write access and when LOW a read access.                 	1
+APB transfer direction	      When HIGH this signal indicates an APB write access and when LOW a read access.         	1
 
 PREADY
 
-APB ready	                     This is an input from Slave. It is used to enter the access state.                              	1
+APB ready	                     This is an input from Slave. It is used to enter the access state.                    	1
 
 PSLVERR
 
-APB slave error	                This indicates a transfer failure by the slave.                                               	1
+APB slave error	                This indicates a transfer failure by the slave.                                       1
 
 PRDATA
 
 APB read data bus             	The read data bus is driven by the selected slave during
-                                read cycles (when PWRITE is LOW). The read data bus can be up to 32-bits wide.                 	8
+                               read cycles (when PWRITE is LOW). The read data bus can be up to
+                               32-bits wide.                                                                         	8
 
 PWDATA
 
 APB write data bus	             The write data bus is driven by the peripheral bus bridge unit during 
-                                 write cycles (when PWRITE is HIGH). The write data bus can be up to 32-bits wide.	             8
+                                write cycles (when PWRITE is HIGH). The write data bus can be up to
+                                32-bits wide.	                                                                        8
 
 ```
 1.4 STATE DIAGRAM
@@ -105,9 +107,13 @@ APB write data bus	             The write data bus is driven by the peripheral b
 
 
 
-```
+
+
+
 Transitions:
 
+
+```
 IDLE → SETUP: Happens when a transfer is initiated (PREADY = 1 and transfer request occurs).
 
 SETUP → ACCESS: Happens when PREADY = 0, meaning the system is still preparing to transfer.
@@ -123,6 +129,8 @@ Transitions:
 
 1.4.1 IDLE STATE:
 
+```
+
 PSELx = 0, PENABLE = 0
 
 This is the default or inactive state. No transfer is initiated here.
@@ -131,12 +139,14 @@ Transitions:
 
 Transition occurs to the SETUP state if a transfer request is initiated (trigger not explicitly shown but implied by the transition arrow).
 
-
+```
 
 
 
 1.4.2. SETUP STATE:
 
+
+```
 PSELx = 1, PENABLE = 0
 
 In this state, the peripheral select signal (PSELx) is asserted, indicating the target peripheral is selected for communication.
@@ -146,8 +156,12 @@ Transitions:
 Transition to the ACCESS state occurs when PREADY = 0, meaning the bus is not yet ready to complete the transfer.
 
 
+```
+
 1.4.3. ACCESS STATE:
 
+
+```
 PSELx = 1, PENABLE = 1
 
 This state represents the active transfer phase, where both PSELx and PENABLE are asserted.
@@ -158,7 +172,7 @@ Transitions:
 
 If PREADY = 0, the system stays in the ACCESS state, waiting for the bus to be ready.
 
-
+```
 
 
 
@@ -189,7 +203,7 @@ Transitions:
 
 
 
-
+```
 
 2.3.1 Interface(apb_interface.sv) 
 
@@ -202,14 +216,14 @@ Transitions:
 
 • Modports for apb_drv, apb_mon 
 
-
+```
 
 
 
 
 
 2.3.2 Sequence_item(alu_sequence_item.sv): 
-
+```
 
 • Class name: apb_seq_item 
 
@@ -218,7 +232,7 @@ Transitions:
 • Input variables are declared as rand and output variables are as non-rand 
 
 • Consists of constraints 
-
+```
 
 
 
@@ -226,7 +240,7 @@ Transitions:
 
 
 2.3.3 Sequence(apb_sequence.sv): 
-
+```
 
 • Class name: apb_seq 
 
@@ -248,14 +262,14 @@ Transitions:
 
 (f) Get_response() 
 
-
+```
 
 
 
 
 
 2.3.4 Sequencer(apb_sequencer.sv): 
-
+```
 • Class name: apb_seqr 
 
 • Derived from uvm_sequencer 
@@ -264,14 +278,14 @@ Transitions:
 
 • Use of class constructor 
 
-
+```
 
 
 
 
 2.3.5 Driver(apb_driver.sv): 
 
-
+```
 • Class name: apb_drv 
 
 • Virtual interface handle 
@@ -300,7 +314,7 @@ item processing has been completed
  drive()  task is used to drive the values of the sequence item onto the DUT through 
 the interface 
 
-
+```
 
 
 
@@ -309,7 +323,7 @@ the interface
 
 2.3.6 Monitor-1 (apb_op_monitor.sv): 
 
-
+```
 • Class name: apb_op_mon 
 
 • User-defined monitor class extended from uvm_monitor and register it in the uvm factory 
@@ -328,7 +342,7 @@ interface handle
 • The write() method sends transactions to the collector component 
 
 • In apb_mon_wr, input signals are captured 
-
+```
 
 
 
@@ -336,7 +350,7 @@ interface handle
 
 
 2.3.7 Monitor-2 (apb_ip_monitor.sv): 
-
+```
 
 • Class name: apb_ip_mon 
 
@@ -357,14 +371,14 @@ interface handle
 
 • In apb_mon_rd, DUT signals are captured 
 
-
+```
 
 
 
 
 
 2.3.8 Scoreboard(apb_scoreboard.sv): 
-
+```
 
 • Class name: apb_scb 
 
@@ -385,7 +399,7 @@ to the analysis component of the apb_scoreboard.
 
 • Virtual task run_phase () 
 
-
+```
 
 
 
@@ -393,7 +407,7 @@ to the analysis component of the apb_scoreboard.
 
 2.3.9 Coverage(apb_coverage.sv): 
 
-
+```
 • Class name:apb_cov 
 
 • This class extended from uvm_subscriber 
@@ -406,7 +420,7 @@ to the analysis component of the apb_scoreboard.
 
 • Register the apb_cov class with the UVM factory  
 
-
+```
 
 
 
@@ -414,6 +428,8 @@ to the analysis component of the apb_scoreboard.
 
 2.3.10 Agent_Active(apb_agent_active.sv): 
 
+
+```
 • Class name:apb_agt_active 
 
 • Define  apb_agt_active class 
@@ -440,14 +456,14 @@ instantiate the driver
  Connect sequencer to driver  
 
  Connect monitor’s analysis port 
-
+```
 
 
 
 
 
 2.3.11 Agent_Passive(apb_agent_passive.sv): 
-
+```
 
 • Class name:apb_agt_passive 
 
@@ -472,7 +488,7 @@ instantiate the driver
 • Implement the connect phase() 
 
  Connect monitor’s analysis port 
-
+```
 
 
 
@@ -480,6 +496,7 @@ instantiate the driver
 
 2.3.12 Environment(apb_env.sv): 
 
+```
 • Class name:apb_env 
 
 • Define alu_env class
@@ -508,13 +525,13 @@ instantiate the driver
    Connecting agents and scoreboard 
 
 Setup analysis port to transfer data from monitor to scoreboard and coverage  
-
+```
 
 
 
 
 2.3.13 Test(apb_test.sv):
-
+```
 
 • Class name: apb_test 
 
@@ -540,12 +557,12 @@ Setup analysis port to transfer data from monitor to scoreboard and coverage
 
  Print summary 
 
-
+```
 
 
 2.3.14 Top(apb_top.sv): 
 
-
+```
 • Module name:apb_top 
 
 • Includes uvm packages 
@@ -566,7 +583,7 @@ Setup analysis port to transfer data from monitor to scoreboard and coverage
 
 • Waveform generation 
 
-   
+   ```
  
  
 
