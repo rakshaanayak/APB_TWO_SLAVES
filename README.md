@@ -183,6 +183,7 @@ Transitions:
 
 
 2.1 STANDARD ARCHITECTURE
+![Alt Text]standard_new_archit.drawio (1).png)
 
 
 
