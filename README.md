@@ -183,7 +183,8 @@ Transitions:
 
 
 2.1 STANDARD ARCHITECTURE
-![Alt Text](standard_new_archit.drawio (1))
+![image](https://github.com/user-attachments/assets/868ef8ba-c393-45f1-854e-7f85f31cc8cf)
+(standard_new_archit.drawio (1))
 
 
 
