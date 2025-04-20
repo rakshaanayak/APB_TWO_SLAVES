@@ -179,6 +179,9 @@ Transitions:
 
 
 
+
+
+
 2.3.1 Interface(apb_interface.sv) 
 
 
@@ -191,6 +194,11 @@ Transitions:
 • Modports for apb_drv, apb_mon 
 
 
+
+
+
+
+
 2.3.2 Sequence_item(alu_sequence_item.sv): 
 
 
@@ -201,6 +209,10 @@ Transitions:
 • Input variables are declared as rand and output variables are as non-rand 
 
 • Consists of constraints 
+
+
+
+
 
 
 
@@ -230,6 +242,9 @@ Transitions:
 
 
 
+
+
+
 2.3.4 Sequencer(apb_sequencer.sv): 
 
 • Class name: apb_seqr 
@@ -239,6 +254,9 @@ Transitions:
 • Use of uvm macros for factory registration 
 
 • Use of class constructor 
+
+
+
 
 
 
@@ -276,6 +294,10 @@ the interface
 
 
 
+
+
+
+
 2.3.6 Monitor-1 (apb_op_monitor.sv): 
 
 
@@ -297,6 +319,10 @@ interface handle
 • The write() method sends transactions to the collector component 
 
 • In apb_mon_wr, input signals are captured 
+
+
+
+
 
 
 
@@ -324,6 +350,10 @@ interface handle
 
 
 
+
+
+
+
 2.3.8 Scoreboard(apb_scoreboard.sv): 
 
 
@@ -348,6 +378,10 @@ to the analysis component of the apb_scoreboard.
 
 
 
+
+
+
+
 2.3.9 Coverage(apb_coverage.sv): 
 
 
@@ -362,6 +396,10 @@ to the analysis component of the apb_scoreboard.
 • write() method to collect data  
 
 • Register the apb_cov class with the UVM factory  
+
+
+
+
 
 
 
@@ -396,6 +434,9 @@ instantiate the driver
 
 
 
+
+
+
 2.3.11 Agent_Passive(apb_agent_passive.sv): 
 
 
@@ -422,6 +463,9 @@ instantiate the driver
 • Implement the connect phase() 
 
  Connect monitor’s analysis port 
+
+
+
 
 
 
@@ -456,6 +500,10 @@ instantiate the driver
 
 Setup analysis port to transfer data from monitor to scoreboard and coverage  
 
+
+
+
+
 2.3.13 Test(apb_test.sv):
 
 
@@ -482,6 +530,8 @@ Setup analysis port to transfer data from monitor to scoreboard and coverage
  Generate report 
 
  Print summary 
+
+
 
 
 2.3.14 Top(apb_top.sv): 
