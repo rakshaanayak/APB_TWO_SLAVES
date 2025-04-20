@@ -1,4 +1,6 @@
 CHAPTER–1 DESIGN OVERVIEW
+
+
 1.1 INTRODUCTION
 The ARM Advanced Microcontroller Bus Architecture (AMBA) is an open-standard, on-chip interconnect specification used for connecting and managing functional blocks within system-on-a-chip (SoC) designs. It provides a standardized framework for high-performance communications in 16-bit and 32-bit microcontrollers, signal processors, and complex peripheral devices. The AMBA specification is built around a Master-Slave protocol, enabling efficient communication and control between different components on the chip.
 
