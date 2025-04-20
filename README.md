@@ -32,6 +32,7 @@ CHAPTER–1 DESIGN OVERVIEW
 1.3.1 BLOCK DIAGRAM
 
 
+![image](https://github.com/user-attachments/assets/b6b81028-aa90-4fd4-8260-33ee0442b0aa)
 
 
 
@@ -104,6 +105,7 @@ APB write data bus	             The write data bus is driven by the peripheral b
 ```
 1.4 STATE DIAGRAM
 
+![image](https://github.com/user-attachments/assets/1ab5a869-0810-4747-910a-bfb93fac0712)
 
 
 
@@ -184,7 +186,6 @@ Transitions:
 
 2.1 STANDARD ARCHITECTURE
 ![image](https://github.com/user-attachments/assets/868ef8ba-c393-45f1-854e-7f85f31cc8cf)
-(standard_new_archit.drawio (1))
 
 
 
@@ -194,6 +195,7 @@ Transitions:
 
 
 2.2 APB ARCHITECTURE
+![image](https://github.com/user-attachments/assets/182680cc-e577-4642-ab5f-2d03eaec64b1)
 
 
 
