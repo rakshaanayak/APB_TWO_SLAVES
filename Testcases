@@ -1,18 +1,20 @@
-Sl.No.	SIGNALS	WIDTH	SUB FEATURES	DESCRIPTION	STATUS
-1	Transfer	1 bit	i)High	If Transfer is high APB is enabled 	Pass/Fail
-			ii)Low	If Transfer is low APB is disabled	Pass/Fail
+|Sl.No.	|         SIGNALS      |	WIDTH    |	SUB FEATURES	|       DESCRIPTION	                                     |      STATUS         |
+ -------  -------------------   ----------------   --------------------   ----------------------------------------------------------    ------------------
+1	         Transfer	| 1 bit	                  i)High	    If Transfer is high APB is enabled 	                            Pass/Fail
+			                                  ii)Low	    If Transfer is low APB is disabled	                            Pass/Fail
 					
-2	 PRESETn	1 bit	i)High	When PRESETn is high then operations will occur	Pass/Fail
-			ii)Low	When PRESETn is low then PADDR and other control signals should take default values	Pass/Fail
+2	         PRESETn	     1 bit	          i)High	     When PRESETn is high then operations will occur	              Pass/Fail
+			                                  ii)Low	     When PRESETn is low then PADDR and other control signals 
+                                                                             should take default values                                       Pass/Fail
 					
-3	PADDR	9 bits	i)Checking valid address	When address is valid then it should be in the range of 0 to 2^32-1	Pass/Fail
+3	         PADDR	9 bits	i)Checking valid address	When address is valid then it should be in the range of 0 to 2^32-1	Pass/Fail
 			ii)PADDR[8]==0	If 9th bit of PADDR is 0 then slave 1 will be selected	Pass/Fail
 			iii)PADDR[8]==1	If 9th bit of PADDR is 1 then slave 2 will be selected	Pass/Fail
 					
-4	PSEL1	1 bit	i)High	If PSEL1 is high then slave is ready 	Pass/Fail
+4	         PSEL1	1 bit	i)High	If PSEL1 is high then slave is ready 	Pass/Fail
 			ii)Low	If PSEL1 is low slave is not ready	
 					
-5	PENABLE	1 bit	i)High	If PSEL is high and  PENABLE is also high then it will be in access phase.	Pass/Fail
+5	         PENABLE	1 bit	i)High	If PSEL is high and  PENABLE is also high then it will be in access phase.	Pass/Fail
 			ii)Low	If PSEL is high and PENABLE is low then it will be in setup phase	Pass/Fail
 					
 6	PWRITE	1 bit	i)High(Write Operation)	If PWRITE is high then the data will be written to the particular address   	Pass/Fail
