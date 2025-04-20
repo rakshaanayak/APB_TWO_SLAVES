@@ -185,6 +185,9 @@ Transitions:
 
 
 2.1 STANDARD ARCHITECTURE
+
+
+
 ![image](https://github.com/user-attachments/assets/868ef8ba-c393-45f1-854e-7f85f31cc8cf)
 
 
@@ -195,6 +198,9 @@ Transitions:
 
 
 2.2 APB ARCHITECTURE
+
+
+
 ![image](https://github.com/user-attachments/assets/182680cc-e577-4642-ab5f-2d03eaec64b1)
 
 
