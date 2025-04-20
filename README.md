@@ -21,7 +21,11 @@ The ARM Advanced Microcontroller Bus Architecture (AMBA) is an open-standard, on
 
 
 
+
+
 1.3 SIGNAL DESCRIPTION OF APB
+
+
 
 
 1.3.1 BLOCK DIAGRAM
@@ -34,7 +38,13 @@ The ARM Advanced Microcontroller Bus Architecture (AMBA) is an open-standard, on
 
 
 
+
+
+
 1.3.2 PIN DESCRIPTION 
+
+
+
 
   SIGNALS	                                DESCRIPTION                                	                                   WIDTH
 
@@ -82,6 +92,7 @@ PRDATA
 
 APB read data bus             	The read data bus is driven by the selected slave during
                                 read cycles (when PWRITE is LOW). The read data bus can be up to 32-bits wide.                 	8
+
 PWDATA
 
 APB write data bus	             The write data bus is driven by the peripheral bus bridge unit during 
