@@ -175,7 +175,7 @@ Transitions:
 2.3.1 Interface(apb_interface.sv) 
 
 
-• Interface name: apb_if 
+• Interface name: apb_inf 
 
 • Signal Declaration 
 
