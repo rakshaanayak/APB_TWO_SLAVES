@@ -46,61 +46,20 @@
 1.3.2 PIN DESCRIPTION 
 ```
 
+| SIGNAL   | DESCRIPTION | WIDTH |
+|----------|-------------|-------|
+| Transfer | APB enable signal. If high APB is activated else APB is disabled | 1 |
+| PCLK | The rising edge of PCLK is used to time all transfers on the APB. | 1 |
+| PRESETn | The APB bus reset signal is active LOW and this signal will normally be connected directly to the system bus reset signal. | 1 |
+| PADDR | This is the APB address bus, which may be up to 32-bits wide and is driven by the peripheral bus bridge unit. | 9 |
+| PSEL1 | This signal indicates that the slave device is selected and a data transfer is required. | 1 |
+| PENABLE | The enable signal is used to indicate the second cycle of an APB transfer. The rising edge of PENABLE occurs in the middle of the APB transfer. | 1 |
+| PWRITE | When HIGH this signal indicates an APB write access and when LOW a read access. | 1 |
+| PREADY | This is an input from Slave. It is used to enter the access state. | 1 |
+| PSLVERR | This indicates a transfer failure by the slave. | 1 |
+| PRDATA | The read data bus is driven by the selected slave during read cycles (when PWRITE is LOW). The read data bus can be up to 32-bits wide. | 8 |
+| PWDATA | The write data bus is driven by the peripheral bus bridge unit during write cycles (when PWRITE is HIGH). The write data bus can be up to 32-bits wide. | 8 |
 
-
-  SIGNALS	                                DESCRIPTION                                	                              WIDTH
-
-Transfer
-
-Transfer signal	             APB enable signal. If high APB is activated else APB is disabled                        	1
-
-PCLK
-
-Bus clock	                    The rising edge of PCLK is used to time all transfers on the APB.                       1
-
-PRESETn
-
-APB reset	                   The APB bus reset signal is active LOW and this signal will normally be 
-                             connected directly to the system bus reset signal.	                                      1
-
-PADDR
-
-APB address bus	             This is the APB address bus, which may be up to 32-bits wide and is driven
-                             by the peripheral bus bridge unit.	                                                      9
-
-PSEL1
-
-APB select	                 This signal indicates that the slave device is selected and a
-                             data transfer is required.                                                               1
-
-PENABLE
-
-APB enable	                 The enable signal is used to indicate the second cycle of an APB transfer. 
-                             The rising edge of PENABLE occurs in the middle of the APB transfer.	                    1
-
-PWRITE
-
-APB transfer direction	      When HIGH this signal indicates an APB write access and when LOW a read access.         	1
-
-PREADY
-
-APB ready	                     This is an input from Slave. It is used to enter the access state.                    	1
-
-PSLVERR
-
-APB slave error	                This indicates a transfer failure by the slave.                                       1
-
-PRDATA
-
-APB read data bus             	The read data bus is driven by the selected slave during
-                               read cycles (when PWRITE is LOW). The read data bus can be up to
-                               32-bits wide.                                                                         	8
-
-PWDATA
-
-APB write data bus	             The write data bus is driven by the peripheral bus bridge unit during 
-                                write cycles (when PWRITE is HIGH). The write data bus can be up to
-                                32-bits wide.	                                                                        8
 
 ```
 ## 1.4 STATE DIAGRAM
