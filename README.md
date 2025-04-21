@@ -103,7 +103,7 @@ APB write data bus	             The write data bus is driven by the peripheral b
                                 32-bits wide.	                                                                        8
 
 ```
-1.4 STATE DIAGRAM
+## 1.4 STATE DIAGRAM
 
 ![image](https://github.com/user-attachments/assets/1ab5a869-0810-4747-910a-bfb93fac0712)
 
@@ -179,12 +179,12 @@ Transitions:
 
 
 
- CHAPTER–2 ARCHITECTURE
+# CHAPTER–2 ARCHITECTURE
 
 
 
 
-2.1 STANDARD ARCHITECTURE
+## 2.1 STANDARD ARCHITECTURE
 
 
 
@@ -197,7 +197,7 @@ Transitions:
 
 
 
-2.2 APB ARCHITECTURE
+## 2.2 APB ARCHITECTURE
 
 
 
@@ -207,7 +207,7 @@ Transitions:
 
 
 
-2.3 Testbench Components: 
+## 2.3 Testbench Components: 
 
 
 
