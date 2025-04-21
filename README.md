@@ -44,7 +44,6 @@
 
 
 1.3.2 PIN DESCRIPTION 
-```
 
 | SIGNAL   | DESCRIPTION | WIDTH |
 |----------|-------------|-------|
@@ -61,7 +60,6 @@
 | PWDATA | The write data bus is driven by the peripheral bus bridge unit during write cycles (when PWRITE is HIGH). The write data bus can be up to 32-bits wide. | 8 |
 
 
-```
 ## 1.4 STATE DIAGRAM
 
 ![image](https://github.com/user-attachments/assets/1ab5a869-0810-4747-910a-bfb93fac0712)
