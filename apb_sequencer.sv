@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_sequencer.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
 class apb_sequencer extends uvm_sequencer #(apb_seq_item);
 
   `uvm_component_utils(apb_sequencer)
