@@ -1,3 +1,10 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_passive_agent.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
 class apb_passive_agent extends uvm_agent;
 
   `uvm_component_utils(apb_passive_agent)
