@@ -1,11 +1,20 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_coverage.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
 class apb_coverage extends uvm_subscriber #(apb_seq_item);
 
   //Register with factory
   `uvm_component_utils(apb_cov)
 
   //Declare two analysis implementation ports for input and output monitor connections
-  uvm_analysis_imp_mon_ip #(apb_seq_item, apb_cov) mon_ip_imp;
-  uvm_analysis_imp_mon_op #(apb_seq_item, apb_cov) mon_op_imp;
+  `uvm_analysis_imp_mon_ip #(apb_seq_item, apb_cov) mon_ip_imp;
+  `uvm_analysis_imp_mon_op #(apb_seq_item, apb_cov) mon_op_imp;
 
   //Sequence item instances for input/output samples
   alu_seq_item seq_item_ip;
