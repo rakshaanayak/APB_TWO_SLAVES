@@ -1,3 +1,11 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_scoreboard.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
 `uvm_analysis_imp_decl(_ip)
 `uvm_analysis_imp_decl(_op)
 
