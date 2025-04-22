@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_env.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
 //import uvm_pkg::*;
 //`include "uvm_macros.svh"
 class apb_env extends uvm_env;
