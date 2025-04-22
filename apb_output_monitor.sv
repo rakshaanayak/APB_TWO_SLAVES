@@ -1,3 +1,11 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_output_monitor.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
 `define MON_op_if vif.MON.mon_cb
 
 
