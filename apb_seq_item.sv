@@ -1,3 +1,13 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_seq_item.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
+
 class apb_seq_item extends uvm_sequence_item;
 
   rand bit            transfer;
