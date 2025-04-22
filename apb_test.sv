@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_test.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
 class apb_test extends uvm_test;
 
   `uvm_component_utils(apb_test)
