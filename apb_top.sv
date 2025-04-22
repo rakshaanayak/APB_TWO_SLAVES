@@ -14,17 +14,12 @@ module tb_apb_slave;
   ) dut (
     .pclk(apb_if.pclk),
     .presetn(apb_if.presetn),
-    .i_paddr(apb_if.i_paddr),
-    .i_pwrite(apb_if.i_pwrite),
-    .i_psel(apb_if.i_psel),
-    .i_penable(apb_if.i_penable),
-    .i_pwdata(apb_if.i_pwdata),
-    .i_pstrb(apb_if.i_pstrb),
-    .o_prdata(apb_if.o_prdata),
-    .o_pslverr(apb_if.o_pslverr),
-    .o_pready(apb_if.o_pready),
-    .o_hw_ctl(apb_if.o_hw_ctl),
-    .i_hw_sts(apb_if.i_hw_sts)
+    .transfer(apb_if.transfer),
+    .read_write(apb_if.read_write),
+    .apb_write_paddr(apb_if.apb_write_paddr),
+    .apb_write_data(apb_if.apb_write_data),
+    .apb_read_paddr(apb_if.apb_read_paddr),
+    .apb_read_data_out(apb_if.apb_data_out)
   );
 
   initial begin
