@@ -1,5 +1,14 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_top.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
 `include "alu_package.sv"
-module tb_apb_slave;
+module apb_top;
 
   logic pclk;
   logic presetn;
