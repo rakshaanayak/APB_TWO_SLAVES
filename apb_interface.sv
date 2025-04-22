@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------
+// Project      : APB
+// File Name    : apb_interface.sv
+// Developer    : Raksha Nayak
+//------------------------------------------------------------------------------
+// Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
+//------------------------------------------------------------------------------
+
+
 interface apb_inf
 (
   input logic pclk,
