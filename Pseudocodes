@@ -350,15 +350,11 @@ endclass
 
 class apb_scoreboard extends uvm_scoreboard;
 
-  //Register component with factory
+  //Factory registration
   `uvm_component_utils(apb_scoreboard)
 
-  //Virtual interface handle and internal register model
+  //Virtual interface handle 
   virtual apb_inf vif;
-  logic [DW-1:0] apb_reg[5];
-
-  //Constant for address offset
-  localparam ADDR_LSB = $clog2(DW/8);
 
   //Analysis ports for input and output monitors
   uvm_analysis_imp_ip #(apb_seq_item, apb_scoreboard) aport_ip;
@@ -377,13 +373,12 @@ class apb_scoreboard extends uvm_scoreboard;
     super.new(name, parent);
   endfunction
 
-  //Build phase: create ports, FIFOs, get interface handle
+  //Build phase: create ports, FIFOs
   function void build_phase(uvm_phase phase);
     aport_ip     = new("aport_ip", this);
     aport_op     = new("aport_op", this);
     exp_op_fifo  = new("exp_op_fifo", this);
     act_op_fifo  = new("act_op_fifo", this);
- //   get interface handle from config_db or raise fatal error
   endfunction
 
   //Input port write method: store expected transaction
@@ -396,7 +391,7 @@ class apb_scoreboard extends uvm_scoreboard;
     //put transaction in actual FIFO
   endfunction
 
-  //Run phase: compare expected and actual outputs (not implemented here)
+  //Run phase: compare expected and actual outputs 
   task run_phase(uvm_phase phase);
     // Compare logic can be implemented here
   endtask
@@ -418,7 +413,7 @@ endclass
 
 class apb_coverage extends uvm_subscriber #(apb_seq_item);
 
-  //Register with factory
+  //Factory registration
   `uvm_component_utils(apb_cov)
 
   //Declare two analysis implementation ports for input and output monitor connections
@@ -431,21 +426,16 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
 
   //Input coverage group
   covergroup fun_cov_ip;
-    coverpoint i_psel
-    coverpoint i_penable
-    coverpoint i_pwrite
-    coverpoint i_paddr
-    coverpoint i_pwdata
-    coverpoint i_pstrb
-    cross coverpoint: PWRITE x PENABLE
+    coverpoint transfer
+    coverpoint read_write
+    coverpoint apb_write_paddr;
+    coverpoint apb_read_paddr;
+    coverpoint apb_write_data;
   endgroup
 
   //Output coverage group
   covergroup fun_cov_op;
-    coverpoint o_pready
-    coverpoint o_prdata
-    coverpoint o_pslverr
-    cross coverpoint: PSLVERR x PREADY
+    coverpoint apb_read_data_out;
   endgroup
 
   //Coverage percentage variables
@@ -454,30 +444,31 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
   //Constructor: create ports and coverage groups
   function new(string name, uvm_component parent);
     super.new(name, parent);
-    create analysis ports
-    create coverage groups
+   // create analysis ports
+    //create coverage groups
   endfunction
 
   //Callback for input monitor transactions
   function void write_mon_ip(apb_seq_item item);
-    assign to local sample variable
-    sample input coverage group
+   // assign to local sample variable
+    //sample input coverage group
   endfunction
 
   //Callback for output monitor transactions
   function void write_mon_op(apb_seq_item item);
-    assign to local sample variable
-    sample output coverage group
+   // assign to local sample variable
+    //sample output coverage group
   endfunction
 
-  //UVM base write method (unused here)
+  //UVM base write method 
   function void write(apb_seq_item t);
+     //body
   endfunction
 
   //Extract phase: calculate and report coverage
   function void extract_phase(uvm_phase phase);
-    get coverage values
-    print info message with percentages
+   // get coverage values
+   // print info messages
   endfunction
 
 endclass
