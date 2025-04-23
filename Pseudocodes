@@ -421,8 +421,8 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
   uvm_analysis_imp_mon_op #(apb_seq_item, apb_cov) mon_op_imp;
 
   //Sequence item instances for input/output samples
-  alu_seq_item seq_item_ip;
-  alu_seq_item seq_item_op;
+  apb_seq_item seq_item_ip;
+  apb_seq_item seq_item_op;
 
   //Input coverage group
   covergroup fun_cov_ip;
