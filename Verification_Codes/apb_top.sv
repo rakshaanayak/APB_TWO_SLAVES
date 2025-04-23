@@ -7,7 +7,8 @@
 //------------------------------------------------------------------------------
 
 
-`include "alu_package.sv"
+`include "apb_package.sv"
+`include "define.svh"
 module apb_top;
 
   logic pclk;
@@ -46,7 +47,7 @@ module apb_top;
 
   initial begin
 
-    uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
+    `uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
   end
   initial begin
     run_test();
