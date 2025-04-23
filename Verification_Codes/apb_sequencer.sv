@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //-----------------------------------------------------------------------------
-`include "apb_package.sv"
+//`include "apb_package.sv"
 
 class apb_sequencer extends uvm_sequencer #(apb_seq_item);
   
