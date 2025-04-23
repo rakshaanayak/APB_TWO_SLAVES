@@ -6,58 +6,52 @@
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
-`uvm_analysis_imp_decl(_ip)
-`uvm_analysis_imp_decl(_op)
-
 class apb_scoreboard extends uvm_scoreboard;
 
+  //Register component with factory
   `uvm_component_utils(apb_scoreboard)
-  
-  virtual apb_inf vif;
-  logic [`DW-1:0] apb_reg[5];
-  
-  localparam ADDR_LSB = $clog2(`DW/8);
 
+  //Virtual interface handle and internal register model
+  virtual apb_inf vif;
+
+
+  //Analysis ports for input and output monitors
   uvm_analysis_imp_ip #(apb_seq_item, apb_scoreboard) aport_ip;
   uvm_analysis_imp_op #(apb_seq_item, apb_scoreboard) aport_op;
-  
+
+  //TLM FIFOs to store expected and actual transactions
   uvm_tlm_fifo #(apb_seq_item) exp_op_fifo;
   uvm_tlm_fifo #(apb_seq_item) act_op_fifo;
 
-  extern function void compare(apb_seq_item exp_tr, apb_seq_item act_tr);	
-  extern function void display(apb_seq_item exp_tr, apb_seq_item act_tr);	
-  
-  function new(string name = "apb_scoreboard", uvm_component parent);
-    super.new(name,parent);
+  //External function declarations for comparison and display
+  extern function void compare(apb_seq_item exp_tr, apb_seq_item act_tr);
+  extern function void display(apb_seq_item exp_tr, apb_seq_item act_tr);
+
+  //Constructor
+  function new(string name, uvm_component parent);
+    super.new(name, parent);
   endfunction
 
-	
-    
+  //Build phase: create ports, FIFOs, get interface handle
   function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    aport_ip = new("aport_ip", this);
-    aport_op = new("aport_op", this);
-    exp_op_fifo = new("exp_op_fifo", this);
-    act_op_fifo = new("act_op_fifo",this);
-	if(!(uvm_config_db #(virtual apb_inf)::get(this, "*", "vif", vif)))
-    `uvm_fatal("apb_driver","unable to get interface");
-     
-  endfunction
-  
+    aport_ip     = new("aport_ip", this);
+    aport_op     = new("aport_op", this);
+    exp_op_fifo  = new("exp_op_fifo", this);
+    act_op_fifo  = new("act_op_fifo", this);
 
+  //Input port write method: store expected transaction
   function void write_ip(apb_seq_item tr);
-    //logic
-    void'(exp_op_fifo.try_put(tr));
+   // put transaction in expected FIFO
   endfunction
 
+  //Output port write method: store actual transaction
   function void write_op(apb_seq_item tr);
-    //logic
-     void'(act_op_fifo.try_put(tr));
+    //put transaction in actual FIFO
   endfunction
 
+  //Run phase: compare expected and actual outputs (not implemented here)
   task run_phase(uvm_phase phase);
-    //body
+    // Compare logic can be implemented here
   endtask
- endfunction
 
 endclass

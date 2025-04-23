@@ -29,7 +29,7 @@ module apb_top;
     .apb_write_paddr(apb_if.apb_write_paddr),
     .apb_write_data(apb_if.apb_write_data),
     .apb_read_paddr(apb_if.apb_read_paddr),
-    .apb_read_data_out(apb_if.apb_data_out)
+    .apb_read_data_out(apb_if.apb_read_data_out)
   );
 
   initial begin

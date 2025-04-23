@@ -35,7 +35,27 @@ class apb_output_monitor extends uvm_monitor;
   endfunction
 
   virtual task run_phase(uvm_phase phase);
-   //body
+   forever begin
+      @(posedge vif.pclk);
+      if(!vif.presetn) begin
+        //repeat(1) @(posedge vif.pclk);
+        op_mon_seq.apb_read_paddr = `MON_op_if.apb_read_paddr;
+        op_mon_seq.apb_read_data_out= `MON_op_if.apb_read_data_out;
+        op_mon_port.write(op_mon_seq);
+        `uvm_info("out_monitor","out_monitor",UVM_LOW);
+      end
+      
+      else begin
+		if(vif.transfer && !vif.read_write) begin
+                    op_mon_seq.apb_read_paddr = `MON_op_if.apb_read_paddr;
+                    op_mon_seq.apb_read_data_out = `MON_op_if.apb_read_data_out;
+                    op_mon_port.write(op_mon_seq);
+             `uvm_info(get_type_name(),$sformatf("apb_read_paddr = %b, apb_read_data_out = %b",ip_mon_seq.apb_read_paddr, ip_mon_seq.apb_read_data_out),UVM_LOW);
+       // `uvm_info("out_monitor","out_monitor",UVM_LOW);
+      end
+      
+          `uvm_info("out_monitor","out_monitor",UVM_LOW);
+        end
   endtask
 endclass
 

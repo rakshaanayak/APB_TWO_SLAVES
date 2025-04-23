@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Project      : APB
 // File Name    : apb_interface.sv
-// Developer    : Raksha Nayak
+// Developer    : Team-3
 //------------------------------------------------------------------------------
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
-
+`include "define.svh"
 interface apb_inf
 (
   input logic pclk,
@@ -25,12 +25,12 @@ interface apb_inf
   clocking drv_cb @(posedge pclk or negedge presetn);
     default input #0 output #0;
     output transfer,read_write,apb_write_paddr,apb_read_paddr,apb_write_data;
-    input presetn;
+    input presetn,apb_read_data_out;
   endclocking
 
   clocking mon_cb @(posedge pclk or negedge presetn);
     default input #0 output #0;
-    input apb_read_data_out;
+    input transfer,read_write,apb_write_paddr,apb_read_paddr,apb_write_data,apb_read_data_out;
   endclocking
 
   modport DRV(clocking drv_cb);

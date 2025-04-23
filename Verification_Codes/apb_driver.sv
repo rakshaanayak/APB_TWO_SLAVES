@@ -5,6 +5,10 @@
 //------------------------------------------------------------------------------
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
+import uvm_pkg::*;
+`include "define.svh"
+`include "uvm_pkg"
+
 `define DRV_if vif.DRV.drv_cb
 
 class apb_driver extends uvm_driver #(apb_seq_item);
@@ -35,6 +39,7 @@ class apb_driver extends uvm_driver #(apb_seq_item);
   endtask
 
   virtual task drive();
+    
 
   endtask
 endclass

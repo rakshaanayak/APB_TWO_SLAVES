@@ -1,6 +1,6 @@
 import uvm_pkg::*;
 `include "uvm_macros.svh"
-`include "defines.svh"
+`include "define.svh"
 `include "apb_interface.sv"
 `include "apb_seq_item.sv"
 `include "apb_sequence.sv"
