@@ -6,7 +6,7 @@
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
-//`include "define.svh"
+`include "define.svh"
 interface apb_inf
 (
   input logic pclk,

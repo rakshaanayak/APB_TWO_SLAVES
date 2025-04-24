@@ -1,6 +1,6 @@
-import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "define.svh"
+
+
+
 `include "apb_interface.sv"
 `include "apb_seq_item.sv"
 `include "apb_sequence.sv"
@@ -13,3 +13,4 @@ import uvm_pkg::*;
 `include "apb_scoreboard.sv"
 `include "apb_env.sv"
 `include "apb_test.sv"
+`include "define.svh"
