@@ -42,7 +42,7 @@ class apb_input_monitor extends uvm_monitor;
       ip_mon_port.write(ip_mon_seq);
        `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %b, apb_write_data = %b",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data),UVM_LOW);
        // `uvm_info("in_monitor","in_monitor",UVM_LOW);
-      //ip_mon_seq.print();
+      ip_mon_seq.print();
       end
     end
   endtask
