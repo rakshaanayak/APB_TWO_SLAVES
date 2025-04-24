@@ -42,19 +42,19 @@ endinterface
     @(posedge pclk) disable iff (!presetn)
   endproperty
 
-  property checkWriteAddressValidity
+  property checkWriteAddressValidity;
     @(posedge pclk) disable iff (!presetn)
   endproperty
 
-  property checkReadAddressValidity
+  property checkReadAddressValidity;
     @(posedge pclk) disable iff (!prestn)
   endproperty
 
-  property checkWriteDataValidity
+  property checkWriteDataValidity;
     @(posedge pclk) disable iff (!presetn)
   endproperty
 
-  property checkReadDataValidity
+  property checkReadDataValidity;
     @(posedge pclk) disable iff (!presetn)
   endproperty  
 
