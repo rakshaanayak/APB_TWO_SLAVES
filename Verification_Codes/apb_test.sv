@@ -46,7 +46,37 @@ class apb_test extends uvm_test;
 endclass
 
 
+class write_test extends apb_test;
+  `uvm_component_utils(write_test)
 
+  apb_write_sequence write_seq;
+
+  function new(string name = "write_test", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+    write_seq = apb_write_sequence::type_id::create("write_seq");
+    `uvm_info("write_test","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+    
+    `uvm_info("SEQUENCE","\n----------------------------!!! WRITE BEGINS !!!-------------------------------\n",UVM_LOW)
+    //repeat(1) begin
+      write_seq.start(env.a_agent_h.sequencer_h);
+    //end
+    `uvm_info("SEQUENCE","\n----------------------------!!! WRITE ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+    phase.phase_done.set_drain_time(this,50);
+
+  endtask
+endclass
 
 class apb_read_sequence extends apb_test;
   `uvm_component_utils(apb_read_sequence)
