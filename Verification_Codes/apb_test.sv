@@ -46,12 +46,12 @@ class apb_test extends uvm_test;
 endclass
 
 
-class write_test extends apb_test;
-  `uvm_component_utils(write_test)
+class ApbWriteTest extends apb_test;
+  `uvm_component_utils( ApbWriteTest)
 
   apb_write_sequence write_seq;
 
-  function new(string name = "write_test", uvm_component parent = null);
+  function new(string name = " ApbWriteTest", uvm_component parent = null);
     super.new(name,parent);
   endfunction
 
@@ -59,7 +59,7 @@ class write_test extends apb_test;
      super.build_phase(phase);
      //create sequences
     write_seq = apb_write_sequence::type_id::create("write_seq");
-    `uvm_info("write_test","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
+    `uvm_info(" ApbWriteTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
   endfunction :build_phase
 
   task run_phase(uvm_phase phase);
@@ -73,7 +73,7 @@ class write_test extends apb_test;
     //end
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
-    phase.phase_done.set_drain_time(this,50);
+    phase.phase_done.set_drain_time(this);
 
   endtask
 endclass
