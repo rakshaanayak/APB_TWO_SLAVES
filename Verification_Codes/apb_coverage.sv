@@ -28,7 +28,7 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
     coverpoint APB_WRITE_DATA_CP:
   endgroup
 
-  READ_WRITE_X_APB_WRITE_PADDR: cross READ_WRITE_CP , APB_WRITE_PADDR_CP;
+  READ_WRITE_X_APB_WRITE_PADDR: cross READ_WRITE_CP,APB_WRITE_PADDR_CP;
   //Output coverage group
   covergroup fun_cov_op;
     coverpoint APB_READ_DATA_OUT_CP:
