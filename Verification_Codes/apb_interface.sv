@@ -37,5 +37,40 @@ interface apb_inf
   modport MON(clocking mon_cb);
 
 endinterface
+  
+  property CheckWrite;
+    @(posedge pclk) disable iff (!presetn)
+  endproperty
+
+  property checkWriteAddressValidity
+    @(posedge pclk) disable iff (!presetn)
+  endproperty
+
+  property checkReadAddressValidity
+    @(posedge pclk) disable iff (!prestn)
+  endproperty
+
+  property checkWriteDataValidity
+    @(posedge pclk) disable iff (!presetn)
+  endproperty
+
+  property checkReadDataValidity
+    @(posedge pclk) disable iff (!presetn)
+  endproperty  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
