@@ -5,7 +5,8 @@
 //------------------------------------------------------------------------------
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
-
+`uvm_analysis_imp_decl(_ip)
+`uvm_analysis_imp_decl(_op)
 class apb_scoreboard extends uvm_scoreboard;
 
   `uvm_component_utils(apb_scoreboard)

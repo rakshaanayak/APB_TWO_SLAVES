@@ -34,7 +34,7 @@ class apb_input_monitor extends uvm_monitor;
     forever begin
       @(posedge vif.pclk);
       
-      if((`MON_if.transfer && `MON_if.read_write | (!vif.presetn)) begin
+      if((`MON_if.transfer && `MON_if.read_write && (!vif.presetn))) begin
       
           ip_mon_seq.apb_write__paddr = `MON_if.apb_write_paddr;
           ip_mon_seq.apb_write_data = `MON_if.apb_write_data;

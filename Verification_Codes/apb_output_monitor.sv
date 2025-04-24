@@ -27,7 +27,7 @@ class apb_output_monitor extends uvm_monitor;
     op_mon_port = new("op_mon_port",this);
   endfunction
 
-  virtual function void build_phase(uvm_phase phase);
+  function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     if(!(uvm_config_db #(virtual apb_inf)::get(this,"","vif",vif)))
       `uvm_fatal("Output monitor","unable to get interface handle");
@@ -56,6 +56,7 @@ class apb_output_monitor extends uvm_monitor;
       
           `uvm_info("out_monitor","out_monitor",UVM_LOW);
         end
+end
   endtask
 endclass
 
