@@ -7,6 +7,7 @@
 //------------------------------------------------------------------------------
 `uvm_analysis_imp_decl(_ip)
 `uvm_analysis_imp_decl(_op)
+
 class apb_scoreboard extends uvm_scoreboard;
 
   `uvm_component_utils(apb_scoreboard)
@@ -31,6 +32,8 @@ class apb_scoreboard extends uvm_scoreboard;
     aport_op     = new("aport_op", this);
     exp_op_fifo  = new("exp_op_fifo", this);
     act_op_fifo  = new("act_op_fifo", this);
+    if (!uvm_config_db#(virtual apb_inf)::get(this, "*", "vif", vif))
+      `uvm_fatal("SCOREBOARD", "Unable to get vif from config DB")
   endfunction
 
   function void write_ip(apb_seq_item tr);
@@ -42,41 +45,59 @@ class apb_scoreboard extends uvm_scoreboard;
   endfunction
 
   task run_phase(uvm_phase phase);
-    super.run_phase(phase);
+   
     apb_seq_item exp_tr, act_tr;
-
+     super.run_phase(phase);
+   
     forever begin
       exp_op_fifo.get(exp_tr);
       act_op_fifo.get(act_tr);
+
+      preprocess_expected_output(exp_tr, act_tr);
       compare(exp_tr, act_tr);
+    end
+  endtask
+
+  task preprocess_expected_output(apb_seq_item exp_tr, apb_seq_item act_tr);
+    if (vif.presetn == 0) begin
+      exp_tr.apb_read_data_out = act_tr.apb_read_data_out; // Simulate default
+    end
+    else if (exp_tr.read_write) begin // Write
+      ref_mem[exp_tr.apb_write_paddr] = exp_tr.apb_write_data;
+    end
+    else begin // Read
+      exp_tr.apb_read_data_out = ref_mem.exists(exp_tr.apb_read_paddr) ? ref_mem[exp_tr.apb_read_paddr] : 'x;
     end
   endtask
 
   function void compare(apb_seq_item exp_tr, apb_seq_item act_tr);
     if (vif.presetn == 0) begin
-      if (exp_tr.apb_read_data_out == act_tr.apb_read_data_out) begin
+      if (exp_tr.apb_read_data_out == act_tr.apb_read_data_out)begin
         `uvm_info(get_type_name(), "**packet_matched**\tReset condition", UVM_NONE);
-      end else begin
-        `uvm_error(get_type_name(), "**packet_mismatched**\tReset condition");
       end
+
+      else begin
+        `uvm_error(get_type_name(), "**packet_mismatched**\tReset condition");
+       end
       display(exp_tr, act_tr);
       return;
     end
 
-    if (exp_tr.read_write) begin // write
-      ref_mem[exp_tr.apb_write_paddr] = exp_tr.apb_write_data;
-      if ((exp_tr.apb_write_paddr == act_tr.apb_write_paddr) && (exp_tr.apb_write_data  == act_tr.apb_write_data)) begin
-        `uvm_info(get_type_name(), "**packet_matched**\tWrite Transaction", UVM_NONE);
-      end else begin
+    if (exp_tr.read_write) begin
+      if ((exp_tr.apb_write_paddr == act_tr.apb_write_paddr) &&
+          (exp_tr.apb_write_data == act_tr.apb_write_data))begin
+        `uvm_info(get_type_name(), "**packet_matched**\tWrite Transaction", UVM_NONE);end
+      else begin
         `uvm_error(get_type_name(), "**packet_mismatched**\tWrite Transaction");
-      end
-    end else begin // read
-      exp_tr.apb_read_data_out = ref_mem.exists(exp_tr.apb_read_paddr) ? ref_mem[exp_tr.apb_read_paddr] :'x;
-      if ((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) && (exp_tr.apb_read_data_out == act_tr.apb_read_data_out)) begin
+     end
+    end else begin
+      if ((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) &&
+          (exp_tr.apb_read_data_out == act_tr.apb_read_data_out))begin
         `uvm_info(get_type_name(), "**packet_matched**\tRead Transaction", UVM_NONE);
-      end else begin
-        `uvm_error(get_type_name(), "**packet_mismatched**\tRead Transaction");
       end
+      else begin
+        `uvm_error(get_type_name(), "**packet_mismatched**\tRead Transaction");
+    end
     end
 
     display(exp_tr, act_tr);
@@ -89,4 +110,3 @@ class apb_scoreboard extends uvm_scoreboard;
   endfunction
 
 endclass
-
