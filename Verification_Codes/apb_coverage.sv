@@ -21,17 +21,36 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
 
   //Input coverage group
   covergroup fun_cov_ip;
-    coverpoint TRANSFER_CP:
-    coverpoint READ_WRITE_CP:
-    coverpoint APB_WRITE_PADDR_CP:
-    coverpoint APB_READ_PADDR_CP:
-    coverpoint APB_WRITE_DATA_CP:
+  // Coverpoint for transfer signal 
+    TRANSFER_CP:coverpoint seq_item_ip.transfer {
+      bins no_transfer = {0};
+      bins valid_transfer = {1};
+    }
+  // Coverpoint for read_write signal 
+    READ_WRITE_CP:coverpoint seq_item_ip.read_write {
+      bins read_op = {0};
+      bins write_op = {1};
+    }
+  // Coverpoint for write address 
+    APB_WRITE_PADDR_CP:coverpoint seq_item_ip.apb_write_paddr {
+      bins addr_bins = {[9'h000:9'h1FF]};
+    }
+  // Coverpoint for read address  
+    APB_READ_PADDR_CP:coverpoint seq_item_ip.apb_read_paddr {
+      bins addr_bins = {[9'h000:9'h1FF]};
+    }
+  // Coverpoint for write data  
+    APB_WRITE_DATA_CP: coverpoint seq_item_ip.apb_write_data {
+      bins data_bins = {[9'h000:9'h1FF]};
+    }
+      
   endgroup
 
   READ_WRITE_X_APB_WRITE_PADDR: cross READ_WRITE_CP,APB_WRITE_PADDR_CP;
   //Output coverage group
   covergroup fun_cov_op;
-    coverpoint APB_READ_DATA_OUT_CP:
+    APB_READ_DATA_OUT_CP: coverpoint seq_item_op.apb_read_data_out {
+      bins data_bins = {[9'h000:9'h1FF]};
   endgroup
 
   //Coverage percentage variables
