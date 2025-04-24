@@ -46,3 +46,30 @@ class apb_test extends uvm_test;
 endclass
 
 
+
+
+class apb_read_sequence extends apb_test;
+  `uvm_component_utils(apb_read_sequence)
+ 
+ apb_read_sequence read_seq;
+ 
+  function new (string name = "apb_read_sequence", uvm_component parent);
+    super.new (name, parent);
+  endfunction: new
+ 
+  virtual function void build_phase (uvm_phase phase);
+    super.build_phase (phase);
+    read_seq = apb_read_sequence::type_id::create("read_seq");
+  endfunction: build_phase
+ 
+ 
+  task run_phase (uvm_phase phase);
+    
+    phase.raise_objection (this);
+    repeat(5)begin
+    read_seq(env.a_agent_h.sequencer_h);
+    end
+    phase.drop_objection (this);
+  endtask: run_phase
+ 
+endclass:apb_read_sequence
