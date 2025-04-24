@@ -18,6 +18,8 @@ class apb_scoreboard extends uvm_scoreboard;
   uvm_tlm_fifo #(apb_seq_item) exp_op_fifo;
   uvm_tlm_fifo #(apb_seq_item) act_op_fifo;
 
+  bit [`DW-1:0] ref_mem [bit [`AW-1:0]];
+
   function new(string name, uvm_component parent);
     super.new(name, parent);
   endfunction
@@ -61,15 +63,15 @@ class apb_scoreboard extends uvm_scoreboard;
     end
 
     if (exp_tr.read_write) begin // write
-      if ((exp_tr.apb_write_paddr == act_tr.apb_write_paddr) &&
-          (exp_tr.apb_write_data  == act_tr.apb_write_data)) begin
+      ref_mem[exp_tr.apb_write_paddr] = exp_tr.apb_write_data;
+      if ((exp_tr.apb_write_paddr == act_tr.apb_write_paddr) && (exp_tr.apb_write_data  == act_tr.apb_write_data)) begin
         `uvm_info(get_type_name(), "**packet_matched**\tWrite Transaction", UVM_NONE);
       end else begin
         `uvm_error(get_type_name(), "**packet_mismatched**\tWrite Transaction");
       end
     end else begin // read
-      if ((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) &&
-          (exp_tr.apb_read_data_out == act_tr.apb_read_data_out)) begin
+      exp_tr.apb_read_data_out = ref_mem.exists(exp_tr.apb_read_paddr) ? ref_mem[exp_tr.apb_read_paddr] :'x;
+      if ((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) && (exp_tr.apb_read_data_out == act_tr.apb_read_data_out)) begin
         `uvm_info(get_type_name(), "**packet_matched**\tRead Transaction", UVM_NONE);
       end else begin
         `uvm_error(get_type_name(), "**packet_mismatched**\tRead Transaction");
