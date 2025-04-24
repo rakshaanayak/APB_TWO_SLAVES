@@ -79,8 +79,8 @@ class apb_alternate_write_read_sequence extends apb_sequence;
     send_request(req);
     wait_for_item_done();
 
-    write_sequence wr_seq;
-    read_sequence  rd_seq;
+    apb_write_sequence wr_seq;
+    apb_read_sequence  rd_seq;
     repeat(2) begin
       `uvm_do(wr_seq)
     end
