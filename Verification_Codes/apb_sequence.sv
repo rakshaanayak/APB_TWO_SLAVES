@@ -24,3 +24,108 @@ class apb_sequence extends uvm_sequence #(apb_seq_item);
 
 endclass
 
+ass apb_write_sequence extends apb_sequence;
+ 
+  `uvm_object_utils(apb_write_sequence)
+ 
+  function new(string name = "apb_write_sequence");
+   super.new(name);
+  endfunction
+ 
+ 
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+    req.randomize()with{read_write == 1;apb_write_paddr inside{[0:`AW-1]};};
+    send_request(req);
+    wait_for_item_done();
+  endtask
+endclass
+ 
+ 
+endclass
+ 
+
+class apb_read_sequence extends apb_sequence;
+ 
+  `uvm_object_utils(apb_read_sequence)
+ 
+  function new(string name = "apb_read_sequence");
+   super.new(name);
+  endfunction
+ 
+ 
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+    req.randomize()with{read_write == 0;apb_read_paddr inside{[0:`AW-1]};};
+    send_request(req);
+    wait_for_item_done();
+  endtask
+endclass
+ 
+ 
+endclass
+
+class apb_alternate_write_read_sequence extends apb_sequence;
+ 
+  `uvm_object_utils(apb_alternate_write_read_sequence)
+ 
+  function new(string name = "apb_alternate_write_read_sequence");
+   super.new(name);
+  endfunction
+ 
+ 
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+    req.randomize()with{apb_write_paddr inside{[0:`AW-1]};apb_read_paddr inside{[0:`AW-1]};};
+    send_request(req);
+    wait_for_item_done();
+  endtask
+  
+  virtual task body();
+    write_sequence wr_seq;
+    read_sequence  rd_seq;
+    repeat(2) begin
+      `uvm_do(wr_seq)
+    end
+    repeat(2) begin
+      `uvm_do(rd_seq)
+    end
+  endtask
+
+
+endclass
+
+
+class apb_repeated_write_access_sequence extends apb_sequence;
+ 
+  `uvm_object_utils(apb_repeated_write_access_sequence)
+ 
+  function new(string name = "apb_repeated_write_access_sequence");
+   super.new(name);
+  endfunction
+ 
+ 
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+    req.randomize()with{apb_write_paddr inside{[0:`AW-1]};apb_read_paddr inside{[0:`AW-1]};};
+    send_request(req);
+    wait_for_item_done();
+  endtask
+  
+  virtual task body();
+    write_sequence wr_seq;
+    repeat(5) begin
+      `uvm_do(wr_seq)
+    end
+      `uvm_do(rd_seq)
+  endtask
+
+
+endclass
+ 
+ 
+ 
