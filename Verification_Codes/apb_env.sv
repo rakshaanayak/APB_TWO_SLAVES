@@ -9,6 +9,7 @@
 
 //import uvm_pkg::*;
 //`include "uvm_macros.svh"
+
 class apb_env extends uvm_env;
 
   `uvm_component_utils(apb_env)
@@ -25,7 +26,7 @@ class apb_env extends uvm_env;
     super.build_phase(phase);
     a_agent_h = apb_active_agent::type_id::create("a_agent_h", this);
     p_agent_h = apb_passive_agent::type_id::create("p_agent_h", this);
-    sb_h = apb_scoreboard::type_id::create("sb_h", this);
+    sb_h      = apb_scoreboard::type_id::create("sb_h", this);
   endfunction
 
   function void connect_phase(uvm_phase phase);

@@ -24,7 +24,7 @@ class apb_sequence extends uvm_sequence #(apb_seq_item);
 
 endclass
 
-ass apb_write_sequence extends apb_sequence;
+class apb_write_sequence extends apb_sequence;
  
   `uvm_object_utils(apb_write_sequence)
  
@@ -40,9 +40,6 @@ ass apb_write_sequence extends apb_sequence;
     send_request(req);
     wait_for_item_done();
   endtask
-endclass
- 
- 
 endclass
  
 
@@ -64,8 +61,7 @@ class apb_read_sequence extends apb_sequence;
   endtask
 endclass
  
- 
-endclass
+
 
 class apb_alternate_write_read_sequence extends apb_sequence;
  
@@ -82,9 +78,7 @@ class apb_alternate_write_read_sequence extends apb_sequence;
     req.randomize()with{apb_write_paddr inside{[0:`AW-1]};apb_read_paddr inside{[0:`AW-1]};};
     send_request(req);
     wait_for_item_done();
-  endtask
-  
-  virtual task body();
+
     write_sequence wr_seq;
     read_sequence  rd_seq;
     repeat(2) begin
@@ -114,10 +108,9 @@ class apb_repeated_write_access_sequence extends apb_sequence;
     req.randomize()with{apb_write_paddr inside{[0:`AW-1]};apb_read_paddr inside{[0:`AW-1]};};
     send_request(req);
     wait_for_item_done();
-  endtask
-  
-  virtual task body();
+ 
     write_sequence wr_seq;
+    read_sequence  rd_seq;
     repeat(5) begin
       `uvm_do(wr_seq)
     end

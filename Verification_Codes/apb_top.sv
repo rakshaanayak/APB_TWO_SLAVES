@@ -6,9 +6,11 @@
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
-
+import uvm_pkg::*;
 `include "apb_package.sv"
 `include "define.svh"
+`include "uvm_macros.svh"
+
 module apb_top;
 
   logic pclk;

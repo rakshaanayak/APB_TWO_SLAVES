@@ -36,9 +36,8 @@ interface apb_inf
   modport DRV(clocking drv_cb);
   modport MON(clocking mon_cb);
 
-endinterface
   
-  property CheckWrite;
+ /* property checkWrite;
     @(posedge pclk) disable iff (!presetn)
   endproperty
 
@@ -47,7 +46,7 @@ endinterface
   endproperty
 
   property checkReadAddressValidity;
-    @(posedge pclk) disable iff (!prestn)
+    @(posedge pclk) disable iff (!presetn)
   endproperty
 
   property checkWriteDataValidity;
@@ -57,9 +56,10 @@ endinterface
   property checkReadDataValidity;
     @(posedge pclk) disable iff (!presetn)
   endproperty  
+ 
+endinterface
 
-
-
+*/
 
 
 

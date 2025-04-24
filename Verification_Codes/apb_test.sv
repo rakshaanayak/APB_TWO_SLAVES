@@ -90,7 +90,7 @@ class ApbReadTest extends apb_test;
   virtual function void build_phase(uvm_phase phase);
      super.build_phase(phase);
      //create sequences
-    read_seq = ApbReadTest::type_id::create("read_seq");
+    read_seq = apb_read_sequence::type_id::create("read_seq");
     `uvm_info("ApbReadTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
   endfunction :build_phase
 
@@ -113,7 +113,7 @@ endclass:ApbReadTest
 class ApbAlternateWriteReadTest extends apb_test;
   `uvm_component_utils(ApbAlternateWriteReadTest)
 
-  apb_alternatewriteread_sequence alternatewriteread_seq;
+  apb_alternate_write_read_sequence alternatewriteread_seq;
 
   function new(string name = "ApbAlternateWriteReadTest", uvm_component parent = null);
     super.new(name,parent);
@@ -122,7 +122,7 @@ class ApbAlternateWriteReadTest extends apb_test;
   virtual function void build_phase(uvm_phase phase);
      super.build_phase(phase);
      //create sequences
-    alternatewriteread_seq = ApbAlternateWriteReadTest::type_id::create("read_seq");
+    alternatewriteread_seq = apb_alternate_write_read_sequence::type_id::create("read_seq");
     `uvm_info("ApbAlternateWriteReadTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
   endfunction :build_phase
 
