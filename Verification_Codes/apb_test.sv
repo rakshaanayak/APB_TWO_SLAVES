@@ -71,6 +71,7 @@ class ApbWriteTest extends apb_test;
     //repeat(1) begin
       write_seq.start(env.a_agent_h.sequencer_h);
     //end
+    #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
 
@@ -103,6 +104,7 @@ class ApbReadTest extends apb_test;
     //repeat(1) begin
       read_seq.start(env.a_agent_h.sequencer_h);
     //end
+     #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! READ ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
   endtask
@@ -135,6 +137,7 @@ class ApbAlternateWriteReadTest extends apb_test;
     //repeat(1) begin
       alternatewriteread_seq.start(env.a_agent_h.sequencer_h);
     //end
+     #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
   endtask
@@ -167,6 +170,7 @@ class RepeatedWriteAccessTest extends apb_test;
     //repeat(1) begin
      repeat_write_seq.start(env.a_agent_h.sequencer_h);
     //end
+    #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
     

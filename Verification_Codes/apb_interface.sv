@@ -37,31 +37,35 @@ interface apb_inf
   modport MON(clocking mon_cb);
 
   
- /* property checkWrite;
-    @(posedge pclk) disable iff (!presetn)
-  endproperty
+ property checkWrite;
+  @(posedge pclk) disable iff (!presetn)
+  (transfer && read_write) |-> !$isunknown(apb_write_data);
+endproperty
 
-  property checkWriteAddressValidity;
-    @(posedge pclk) disable iff (!presetn)
-  endproperty
 
-  property checkReadAddressValidity;
-    @(posedge pclk) disable iff (!presetn)
-  endproperty
+property checkWriteAddressValidity;
+  @(posedge pclk) disable iff (!presetn)
+  (transfer && read_write && !$isunknown(apb_write_paddr)) |-> (apb_write_paddr inside {[0 : (1 << `AW) - 1]});
+endproperty
 
-  property checkWriteDataValidity;
-    @(posedge pclk) disable iff (!presetn)
-  endproperty
+property checkReadAddressValidity;
+  @(posedge pclk) disable iff (!presetn)
+  (transfer && !read_write) |-> !$isunknown(apb_read_paddr) && $stable(apb_read_paddr);
+endproperty
 
-  property checkReadDataValidity;
-    @(posedge pclk) disable iff (!presetn)
-  endproperty  
- 
+property checkWriteDataValidity;
+  @(posedge pclk) disable iff (!presetn)
+  (transfer && read_write) |-> !$isunknown(apb_write_data);
+endproperty
+
+
+property checkReadDataValidity;
+  @(posedge pclk) disable iff (!presetn)
+  (transfer && !read_write) |-> !$isunknown(apb_read_data_out);
+endproperty
+
+
 endinterface
-
-*/
-
-
 
 
 

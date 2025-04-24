@@ -6,10 +6,11 @@
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
+ import uvm_pkg::*;
 
 `include "define.svh"
 `include "uvm_macros.svh"
- import uvm_pkg::*;
+ 
 class apb_seq_item extends uvm_sequence_item;
 
   //signals declared as rand

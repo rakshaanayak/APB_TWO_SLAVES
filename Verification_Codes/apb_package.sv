@@ -1,6 +1,4 @@
 
-
-
 `include "apb_interface.sv"
 `include "apb_seq_item.sv"
 `include "apb_sequence.sv"
@@ -13,4 +11,4 @@
 `include "apb_scoreboard.sv"
 `include "apb_env.sv"
 `include "apb_test.sv"
-`include "define.svh"
+

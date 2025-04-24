@@ -36,7 +36,10 @@ class apb_write_sequence extends apb_sequence;
   virtual task body();
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
-    req.randomize()with{read_write == 1;apb_write_paddr inside{[0:`AW-1]};};
+    //req.randomize()with{read_write == 1;apb_write_paddr inside{[0:`AW-1]};};
+    void'(req.randomize()with{read_write == 1;});
+    
+    
     send_request(req);
     wait_for_item_done();
   endtask
@@ -55,7 +58,10 @@ class apb_read_sequence extends apb_sequence;
   virtual task body();
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
-    req.randomize()with{read_write == 0;apb_read_paddr inside{[0:`AW-1]};};
+   // req.randomize()with{read_write == 0;apb_read_paddr inside{[0:`AW-1]};};
+    void'(req.randomize()with{read_write == 0;});
+    
+
     send_request(req);
     wait_for_item_done();
   endtask

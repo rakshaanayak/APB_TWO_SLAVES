@@ -20,7 +20,7 @@ module apb_top;
     .presetn(presetn)
 );
 
-  apb_slave #(
+ /* apb_slave #(
     .AW(`AW),
     .DW(`DW)
   ) dut (
@@ -33,6 +33,7 @@ module apb_top;
     .apb_read_paddr(apb_if.apb_read_paddr),
     .apb_read_data_out(apb_if.apb_read_data_out)
   );
+   */
 
   initial begin
     $dumpfile("dump.vcd");
@@ -49,10 +50,10 @@ module apb_top;
 
   initial begin
 
-    `uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
+    uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
   end
   initial begin
-    run_test();
+    run_test("ApbWriteTest");
   end
 endmodule
 

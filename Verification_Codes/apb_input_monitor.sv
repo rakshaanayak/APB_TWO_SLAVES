@@ -6,7 +6,7 @@
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
-`define MON_if vif.MON.mon_cb
+`define MON_ip_if vif.MON.mon_cb
 
 class apb_input_monitor extends uvm_monitor;
 
@@ -31,18 +31,20 @@ class apb_input_monitor extends uvm_monitor;
   endfunction
 
   virtual task run_phase(uvm_phase phase);
+  
     forever begin
       @(posedge vif.pclk);
       
-      if((`MON_if.transfer && `MON_if.read_write && (!vif.presetn))) begin
+      if((`MON_ip_if.transfer && `MON_ip_if.read_write && (vif.presetn))) begin
       
-          ip_mon_seq.apb_write__paddr = `MON_if.apb_write_paddr;
-          ip_mon_seq.apb_write_data = `MON_if.apb_write_data;
+          ip_mon_seq.apb_write_paddr = `MON_ip_if.apb_write_paddr;
+          ip_mon_seq.apb_write_data = `MON_ip_if.apb_write_data;
        
       ip_mon_port.write(ip_mon_seq);
        `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %b, apb_write_data = %b",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data),UVM_LOW);
        // `uvm_info("in_monitor","in_monitor",UVM_LOW);
       ip_mon_seq.print();
+      $display("helllo");
       end
     end
   endtask
