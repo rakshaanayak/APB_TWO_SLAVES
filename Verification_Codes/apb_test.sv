@@ -73,7 +73,6 @@ class ApbWriteTest extends apb_test;
     //end
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
-    phase.phase_done.set_drain_time(this);
 
   endtask
 endclass
@@ -103,3 +102,34 @@ class apb_read_sequence extends apb_test;
   endtask: run_phase
  
 endclass:apb_read_sequence
+
+class RepeatedWriteAccessTest extends apb_test;
+  `uvm_component_utils(RepeatedWriteAccessTest)
+
+  apb_repeated_write_access_sequence repeat_write_seq;
+
+  function new(string name = "RepeatedWriteAccessTest", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+    repeat_write_seq = apb_repeated_write_access_sequence::type_id::create(" repeat_write_seq ");
+    `uvm_info("RepeatedWriteAccessTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+    
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE BEGINS !!!-------------------------------\n",UVM_LOW)
+    //repeat(1) begin
+     repeat_write_seq.start(env.a_agent_h.sequencer_h);
+    //end
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+    
+  endtask
+endclass
