@@ -35,6 +35,18 @@ class apb_seq_item extends uvm_sequence_item;
   function new(string name="apb_seq_item");
     super.new(name);
   endfunction
+  
+
+   constraint transfer_c{transfer==1;}
+
+   constraint slave_select_c{apb_write_paddr[8] inside {0,1};}
+
+   constraint write_address_range_c{apb_write_paddr inside {[0:(2**`AW)-1]};}
+
+   constraint read_address_range_c{apb_read_paddr inside {[0:(2**`AW)-1]};}
+
+   constraint write_data_range_c{apb_write_data inside {[0:(2**`DW)-1]};}
+
 
 endclass
 
