@@ -77,31 +77,70 @@ class ApbWriteTest extends apb_test;
   endtask
 endclass
 
-class apb_read_sequence extends apb_test;
-  `uvm_component_utils(apb_read_sequence)
- 
- apb_read_sequence read_seq;
- 
-  function new (string name = "apb_read_sequence", uvm_component parent);
-    super.new (name, parent);
-  endfunction: new
- 
-  virtual function void build_phase (uvm_phase phase);
-    super.build_phase (phase);
-    read_seq = apb_read_sequence::type_id::create("read_seq");
-  endfunction: build_phase
- 
- 
-  task run_phase (uvm_phase phase);
-    
-    phase.raise_objection (this);
-    repeat(5)begin
-    read_seq(env.a_agent_h.sequencer_h);
-    end
-    phase.drop_objection (this);
-  endtask: run_phase
- 
-endclass:apb_read_sequence
+
+class ApbReadTest extends apb_test;
+  `uvm_component_utils(ApbReadTest)
+
+  apb_read_sequence read_seq;
+
+  function new(string name = "ApbReadTest", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+    read_seq = ApbReadTest::type_id::create("read_seq");
+    `uvm_info("ApbReadTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! READ BEGINS !!!-------------------------------\n",UVM_LOW)
+    //repeat(1) begin
+      read_seq.start(env.a_agent_h.sequencer_h);
+    //end
+    `uvm_info("SEQUENCE","\n----------------------------!!! READ ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+  endtask
+endclass:ApbReadTest
+
+
+
+class ApbAlternateWriteReadTest extends apb_test;
+  `uvm_component_utils(ApbAlternateWriteReadTest)
+
+  apb_alternatewriteread_sequence alternatewriteread_seq;
+
+  function new(string name = "ApbAlternateWriteReadTest", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+    alternatewriteread_seq = ApbAlternateWriteReadTest::type_id::create("read_seq");
+    `uvm_info("ApbAlternateWriteReadTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ BEGINS !!!-------------------------------\n",UVM_LOW)
+    //repeat(1) begin
+      alternatewriteread_seq.start(env.a_agent_h.sequencer_h);
+    //end
+    `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+  endtask
+endclass:ApbAlternateWriteReadTest
+
+
 
 class RepeatedWriteAccessTest extends apb_test;
   `uvm_component_utils(RepeatedWriteAccessTest)
