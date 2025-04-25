@@ -39,12 +39,13 @@ class apb_input_monitor extends uvm_monitor;
       
           ip_mon_seq.apb_write_paddr = `MON_ip_if.apb_write_paddr;
           ip_mon_seq.apb_write_data = `MON_ip_if.apb_write_data;
+          ip_mon_seq.apb_read_paddr =  `MON_ip_if.apb_read_paddr;
        
       ip_mon_port.write(ip_mon_seq);
-       `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %b, apb_write_data = %b",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data),UVM_LOW);
+        `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %h, apb_write_data = %b, apb_read_paddr = %h",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data,ip_mon_seq.apb_read_paddr),UVM_LOW);
        // `uvm_info("in_monitor","in_monitor",UVM_LOW);
       ip_mon_seq.print();
-      $display("helllo");
+    
       end
     end
   endtask
