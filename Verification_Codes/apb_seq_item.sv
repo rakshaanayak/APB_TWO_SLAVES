@@ -21,7 +21,7 @@ class apb_seq_item extends uvm_sequence_item;
   rand bit       [`AW-1:0] apb_read_paddr  ;
   bit       [`DW-1:0] apb_read_data_out;
    
-//factory and field registration
+
   `uvm_object_utils_begin(apb_seq_item)
      `uvm_field_int (transfer,UVM_ALL_ON)
      `uvm_field_int (read_write,UVM_ALL_ON)
