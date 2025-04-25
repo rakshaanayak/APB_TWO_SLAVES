@@ -13,12 +13,12 @@
  
 class apb_seq_item extends uvm_sequence_item;
 
-  //signals declared as rand
+
   rand bit            transfer;
   rand bit            read_write;
   rand bit  [`AW-1:0] apb_write_paddr   ;
   rand bit  [`DW-1:0] apb_write_data  ;
-  rand bit       [`AW-1:0] apb_read_paddr  ;
+  rand bit  [`AW-1:0] apb_read_paddr  ;
   bit       [`DW-1:0] apb_read_data_out;
    
 
