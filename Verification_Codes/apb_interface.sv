@@ -25,7 +25,7 @@ interface apb_inf
   clocking drv_cb @(posedge pclk or negedge presetn);
     default input #0 output #0;
     output transfer,read_write,apb_write_paddr,apb_read_paddr,apb_write_data;
-    input presetn,apb_read_data_out;
+    input presetn;
   endclocking
 
   clocking mon_cb @(posedge pclk or negedge presetn);
