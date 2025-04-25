@@ -53,21 +53,21 @@ class apb_scoreboard extends uvm_scoreboard;
       exp_op_fifo.get(exp_tr);
       act_op_fifo.get(act_tr);
 
-      preprocess_expected_output(exp_tr, act_tr);
+      ref_model_logic(exp_tr, act_tr);
       compare(exp_tr, act_tr);
     end
   endtask
 
-  task preprocess_expected_output(apb_seq_item exp_tr, apb_seq_item act_tr);
+  task ref_model_logic(apb_seq_item exp_tr, apb_seq_item act_tr);
     if (vif.presetn == 0) begin
-      exp_tr.apb_read_data_out = act_tr.apb_read_data_out; // Simulate default
+      exp_tr.apb_read_data_out = act_tr.apb_read_data_out; 
     end
     else if (exp_tr.read_write) begin // Write
       ref_mem[exp_tr.apb_write_paddr] = exp_tr.apb_write_data;
     end
-    else begin // Read
-      exp_tr.apb_read_data_out = ref_mem.exists(exp_tr.apb_read_paddr) ? ref_mem[exp_tr.apb_read_paddr] : 'x;
-    end
+    else if (!exp_tr.read_write)) begin
+         exp_tr.apb_read_data_out = ref_mem[exp_tr.apb_read_paddr];
+      end
   endtask
 
   function void compare(apb_seq_item exp_tr, apb_seq_item act_tr);
