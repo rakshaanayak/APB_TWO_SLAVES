@@ -33,15 +33,15 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
     }
   // Coverpoint for write address 
     APB_WRITE_PADDR_CP:coverpoint seq_item_ip.apb_write_paddr {
-      bins addr_bins = {[9'h000:9'h1FF]};
+      bins addr_bins = {[`AW'h000:  `AW'h1FF]};
     }
   // Coverpoint for read address  
     APB_READ_PADDR_CP:coverpoint seq_item_ip.apb_read_paddr {
-      bins addr_bins = {[9'h000:9'h1FF]};
+      bins addr_bins = {[`AW'h000:`AW'h1FF]};
     }
   // Coverpoint for write data  
     APB_WRITE_DATA_CP: coverpoint seq_item_ip.apb_write_data {
-      bins data_bins = {[9'h000:9'h1FF]};
+      bins data_bins = {[`AW'h000:`AW'h1FF]};
     }
       
   endgroup
@@ -50,7 +50,7 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
   //Output coverage group
   covergroup fun_cov_op;
     APB_READ_DATA_OUT_CP: coverpoint seq_item_op.apb_read_data_out {
-      bins data_bins = {[9'h000:9'h1FF]};
+      bins data_bins = {[`AW'h000:`AW'h1FF]};
   endgroup
 
   //Coverage percentage variables
