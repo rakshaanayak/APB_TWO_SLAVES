@@ -1,8 +1,6 @@
 # vsim -c apb_top 
-# Start time: 16:44:00 on May 02,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: apb_top.sv(29): (vopt-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 9, found 8.
-# ** Warning: apb_top.sv(29): (vopt-2718) [TFMPC] - Missing connection for port 'PSLVERR'.
+# Start time: 16:58:55 on May 02,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
 # //
@@ -886,5 +884,5 @@
 # [out_monitor]     1
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 155 ns  Iteration: 54  Instance: /apb_top
-# End time: 16:44:06 on May 02,2025, Elapsed time: 0:00:06
-# Errors: 0, Warnings: 22
+# End time: 16:58:59 on May 02,2025, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 20
