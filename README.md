@@ -249,8 +249,9 @@ the interface
 • Use build_phase, and retrieve the interface handle from the configuration table 
 • Create transactions by implementing run_phase to a sample DUT interface using a virtual 
 interface handle 
-• The write() method sends transactions to the collector component 
-• In apb_op_mon, DUT signals are captured
+• The write() method sends transactions to the collector component
+• In apb_ip_mon, input signals are captured
+
 ```
 
 
@@ -265,7 +266,7 @@ interface handle
 • Create transactions by implementing run_phase to a sample DUT interface using a virtual 
 interface handle 
 • The write() method sends transactions to the collector component 
-• In apb_ip_mon, input signals are captured
+• In apb_op_mon, DUT signals are captured
 ```
 
 ```
@@ -284,7 +285,7 @@ to the analysis component of the apb_scoreboard.
 
 ```
 2.4.9 Coverage(apb_coverage.sv): 
-• Class name:apb_cov 
+• Class name:apb_coverage 
 • This class extended from uvm_subscriber  
 • Define a coverage group that contains coverpoints and cross coverage 
 • Coverage group constructor is created to initialize the coverage group 
