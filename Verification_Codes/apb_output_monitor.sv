@@ -39,22 +39,34 @@ class apb_output_monitor extends uvm_monitor;
       @(posedge vif.pclk);
       if(!vif.presetn) begin
         //repeat(1) @(posedge vif.pclk);
-        op_mon_seq.apb_read_paddr = `MON_op_if.apb_read_paddr;
-        op_mon_seq.apb_read_data_out= `MON_op_if.apb_read_data_out;
-        op_mon_port.write(op_mon_seq);
+       // op_mon_seq.apb_read_paddr = `MON_op_if.apb_read_paddr;
+       //op_mon_seq.apb_read_data_out= `MON_op_if.apb_read_data_out;
+        
+        op_mon_seq.apb_read_paddr = vif.apb_read_paddr;
+        op_mon_seq.apb_read_data_out= vif.apb_read_data_out;
+        
+
+   
+
+         op_mon_port.write(op_mon_seq);
         `uvm_info("out_monitor","out_monitor",UVM_LOW);
       end
       
       else begin
 		if(vif.transfer && !vif.read_write) begin
-                    op_mon_seq.apb_read_paddr = `MON_op_if.apb_read_paddr;
-                    op_mon_seq.apb_read_data_out = `MON_op_if.apb_read_data_out;
-                    op_mon_port.write(op_mon_seq);
-             `uvm_info(get_type_name(),$sformatf("apb_read_paddr = %b, apb_read_data_out = %b",op_mon_seq.apb_read_paddr, op_mon_seq.apb_read_data_out),UVM_LOW);
+                    //op_mon_seq.apb_read_paddr = `MON_op_if.apb_read_paddr;
+                    //op_mon_seq.apb_read_data_out = `MON_op_if.apb_read_data_out;
+                   
+                     op_mon_seq.apb_read_paddr = vif.apb_read_paddr;
+                    op_mon_seq.apb_read_data_out = vif.apb_read_data_out;
+                    
+
+                     op_mon_port.write(op_mon_seq);
+             `uvm_info(get_type_name(),$sformatf("apb_read_paddr = %h, apb_read_data_out = %h",op_mon_seq.apb_read_paddr, op_mon_seq.apb_read_data_out),UVM_LOW);
        
       end
       
-          `uvm_info("out_monitor","out_monitor",UVM_LOW);
+          //`uvm_info("out_monitor","out_monitor",UVM_LOW);
 	       op_mon_seq.print();
         end
 end

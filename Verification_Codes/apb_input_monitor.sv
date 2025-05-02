@@ -35,17 +35,32 @@ class apb_input_monitor extends uvm_monitor;
     forever begin
       @(posedge vif.pclk);
       
-      if((`MON_ip_if.transfer&& (vif.presetn))) begin
-        if( `MON_ip_if.read_write ) begin
+     // if((`MON_ip_if.transfer && (vif.presetn))) begin
+     
+       if((vif.transfer && (vif.presetn))) begin
       
-          ip_mon_seq.apb_write_paddr = `MON_ip_if.apb_write_paddr;
-          ip_mon_seq.apb_write_data = `MON_ip_if.apb_write_data;
-        end
+     
+        // if( `MON_ip_if.read_write ) begin
+          if( vif.read_write ) begin
+      
+    
+       //   ip_mon_seq.apb_write_paddr = `MON_ip_if.apb_write_paddr;
+         //ip_mon_seq.apb_write_data = `MON_ip_if.apb_write_data;
+       
+          ip_mon_seq.apb_write_paddr =vif.apb_write_paddr;
+          ip_mon_seq.apb_write_data = vif.apb_write_data;
+        
+
+         end
         else begin
-          ip_mon_seq.apb_read_paddr =  `MON_ip_if.apb_read_paddr;
+         // ip_mon_seq.apb_read_paddr =  `MON_ip_if.apb_read_paddr;
+
+
+           ip_mon_seq.apb_read_paddr =  vif.apb_read_paddr;
+        
         end
       ip_mon_port.write(ip_mon_seq);
-        `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %h, apb_write_data = %b, apb_read_paddr = %h",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data,ip_mon_seq.apb_read_paddr),UVM_LOW);
+        `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %h, apb_write_data = %h, apb_read_paddr = %h",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data,ip_mon_seq.apb_read_paddr),UVM_LOW);
        // `uvm_info("in_monitor","in_monitor",UVM_LOW);
       ip_mon_seq.print();
     

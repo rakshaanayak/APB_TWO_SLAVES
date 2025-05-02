@@ -64,16 +64,18 @@ class ApbWriteTest extends apb_test;
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
+    
     phase.raise_objection(this);
     //#20;
     
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE BEGINS !!!-------------------------------\n",UVM_LOW)
-    //repeat(1) begin
+    repeat(5) begin
       write_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    end
     #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
+   
 
   endtask
 endclass
@@ -101,9 +103,9 @@ class ApbReadTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! READ BEGINS !!!-------------------------------\n",UVM_LOW)
-    //repeat(1) begin
+    repeat(5) begin
       read_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    end
      #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! READ ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);

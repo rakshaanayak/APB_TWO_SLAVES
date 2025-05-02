@@ -65,7 +65,7 @@ class apb_scoreboard extends uvm_scoreboard;
     else if (exp_tr.read_write) begin // Write
       ref_mem[exp_tr.apb_write_paddr] = exp_tr.apb_write_data;
     end
-    else if (!exp_tr.read_write)) begin
+    else if (!exp_tr.read_write) begin
          exp_tr.apb_read_data_out = ref_mem[exp_tr.apb_read_paddr];
       end
   endtask
