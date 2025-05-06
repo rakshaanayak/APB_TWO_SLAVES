@@ -10,7 +10,7 @@
 `include "apb_package.sv"
 `include "define.svh"
 `include "uvm_macros.svh"
-`include "top.v"
+//`include "top.v"
 import uvm_pkg::*;
 module apb_top;
 
@@ -56,7 +56,7 @@ APB_Protocol dut (
     uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
   end
   initial begin
-    run_test("ApbReadTest");
+    run_test("ApbAlternateWriteReadTest");
   end
 endmodule
 

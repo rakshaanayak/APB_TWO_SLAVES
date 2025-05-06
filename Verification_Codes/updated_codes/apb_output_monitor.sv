@@ -67,7 +67,7 @@ class apb_output_monitor extends uvm_monitor;
       end
       
           //`uvm_info("out_monitor","out_monitor",UVM_LOW);
-	       op_mon_seq.print();
+//	       op_mon_seq.print();
         end
 end
   endtask

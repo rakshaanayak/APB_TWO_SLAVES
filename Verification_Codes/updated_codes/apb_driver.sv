@@ -47,7 +47,7 @@ class apb_driver extends uvm_driver #(apb_seq_item);
     `DRV_if.apb_write_paddr<= req.apb_write_paddr;
     `DRV_if.apb_write_data <= req.apb_write_data;
         `uvm_info(get_type_name(),$sformatf("Driver driving logic: transfer = %b, read_write = %b, apb_write_paddr = %h, apb_read_paddr = %h, apb_write_data=%h",req.transfer, req.read_write,req.apb_write_paddr,req.apb_read_paddr,req.apb_write_data ),UVM_LOW);
-req.print();
+//req.print();
     
   endtask    
 

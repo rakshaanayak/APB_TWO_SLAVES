@@ -6,7 +6,7 @@
 // Copyright    : 2024(c) Manipal Center of Excellence. All rights reserved.
 //------------------------------------------------------------------------------
 
-`define MON_ip_if vif.MON.mon_cb
+//`define MON_ip_if vif.MON.mon_cb
 
 class apb_input_monitor extends uvm_monitor;
 
@@ -27,21 +27,25 @@ class apb_input_monitor extends uvm_monitor;
     super.build_phase(phase);
     if(!(uvm_config_db #(virtual apb_inf)::get(this,"","vif",vif)))
       `uvm_fatal("Input monitor","unable to get interface handle");
-    ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
+    //ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
   endfunction
 
   virtual task run_phase(uvm_phase phase);
+     repeat(2) @(vif.mon_cb);
   
     forever begin
-      @(posedge vif.pclk);
-      
+      @(vif.mon_cb);
+     ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
+ 
      // if((`MON_ip_if.transfer && (vif.presetn))) begin
-     
+      ip_mon_seq.transfer = vif.transfer;
+      ip_mon_seq.read_write = vif.read_write;
+      
        if((vif.transfer && (vif.presetn))) begin
       
      
-        // if( `MON_ip_if.read_write ) begin
-          if( vif.read_write ) begin
+        // if(! `MON_ip_if.read_write ) begin
+          if(! vif.read_write ) begin
       
     
        //   ip_mon_seq.apb_write_paddr = `MON_ip_if.apb_write_paddr;

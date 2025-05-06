@@ -33,8 +33,8 @@ interface apb_inf
     input transfer,read_write,apb_write_paddr,apb_read_paddr,apb_write_data,apb_read_data_out;
   endclocking
 
-  modport DRV(clocking drv_cb);
-  modport MON(clocking mon_cb);
+  modport DRV(clocking drv_cb,input pclk,presetn);
+  modport MON(clocking mon_cb,input pclk,presetn);
 endinterface
 
 

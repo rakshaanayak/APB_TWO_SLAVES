@@ -36,8 +36,8 @@ class apb_write_sequence extends apb_sequence;
   virtual task body();
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
-    //req.randomize()with{read_write == 1;apb_write_paddr inside{[0:`AW-1]};};
-    void'(req.randomize()with{read_write == 1;});
+    //req.randomize()with{read_write == 0;apb_write_paddr inside{[0:`AW-1]};};
+    void'(req.randomize()with{read_write == 0;});
     
     
     send_request(req);
@@ -58,8 +58,8 @@ class apb_read_sequence extends apb_sequence;
   virtual task body();
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
-   // req.randomize()with{read_write == 0;apb_read_paddr inside{[0:`AW-1]};};
-    void'(req.randomize()with{read_write == 0;});
+   // req.randomize()with{read_write == 1;apb_read_paddr inside{[0:`AW-1]};};
+    void'(req.randomize()with{read_write == 1;});
     
 
     send_request(req);
@@ -81,12 +81,12 @@ class apb_alternate_write_read_sequence extends apb_sequence;
   virtual task body();
     apb_write_sequence wr_seq;
     apb_read_sequence  rd_seq;  
-    repeat(2) begin
+//    repeat(2) begin
       `uvm_do(wr_seq)
-    end
-    repeat(2) begin
+  //  end
+   // repeat(2) begin
       `uvm_do(rd_seq)
-    end
+   // end
   endtask
 
 

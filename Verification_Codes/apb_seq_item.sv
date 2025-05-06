@@ -14,12 +14,12 @@
 class apb_seq_item extends uvm_sequence_item;
 
 
-  rand bit            transfer;
-  rand bit            read_write;
-  rand bit  [`AW-1:0] apb_write_paddr   ;
-  rand bit  [`DW-1:0] apb_write_data  ;
-  rand bit  [`AW-1:0] apb_read_paddr  ;
-  bit       [`DW-1:0] apb_read_data_out;
+  rand logic            transfer;
+  rand logic            read_write;
+  rand logic  [`AW-1:0] apb_write_paddr   ;
+  rand logic  [`DW-1:0] apb_write_data  ;
+  rand logic  [`AW-1:0] apb_read_paddr  ;
+  logic       [`DW-1:0] apb_read_data_out;
    
 
   `uvm_object_utils_begin(apb_seq_item)
@@ -40,14 +40,14 @@ class apb_seq_item extends uvm_sequence_item;
 
    constraint transfer_c{transfer==1;}
 
-   constraint slave_select_c{apb_write_paddr[8] inside {0,1};}
+   constraint slave_select_c{apb_write_paddr[8] dist {0:=1,1:=1};}
 
-   constraint write_address_range_c{apb_write_paddr inside {[0:(2**`AW)-1]};}
+   /*constraint write_address_range_c{apb_write_paddr inside {[0:(2**`AW)-1]};}
 
    constraint read_address_range_c{apb_read_paddr inside {[0:(2**`AW)-1]};}
 
    constraint write_data_range_c{apb_write_data inside {[0:(2**`DW)-1]};}
-
+*/
 
 endclass
 

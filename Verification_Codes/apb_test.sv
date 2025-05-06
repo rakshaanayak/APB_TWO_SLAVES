@@ -103,6 +103,7 @@ class ApbReadTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! READ BEGINS !!!-------------------------------\n",UVM_LOW)
+        //env.sb_h.ref_mem[9'h108] = 8'hA5;  // Preload expected data at address 108
     repeat(5) begin
       read_seq.start(env.a_agent_h.sequencer_h);
     end
@@ -136,9 +137,9 @@ class ApbAlternateWriteReadTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ BEGINS !!!-------------------------------\n",UVM_LOW)
-    //repeat(1) begin
+    repeat(10) begin
       alternatewriteread_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    end
      #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
