@@ -26,13 +26,12 @@ class apb_driver extends uvm_driver #(apb_seq_item);
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    //repeat(1) @(posedge vif.drv_cb);
+    
     forever begin
-//      wait(vif.presetn);
       seq_item_port.get_next_item(req);
       drive();
       seq_item_port.item_done();
-   //    @(posedge vif.pclk);
+   
     end
   endtask
 
@@ -40,8 +39,6 @@ class apb_driver extends uvm_driver #(apb_seq_item);
 
       @(vif.drv_cb) begin
     
-   
-      //@(posedge vif.pclk);
     //  driving logic 
     if(!vif.presetn) begin
     vif.drv_cb.transfer       <= 0;
@@ -50,9 +47,6 @@ class apb_driver extends uvm_driver #(apb_seq_item);
     vif.drv_cb.apb_write_paddr<= 0;
     vif.drv_cb.apb_write_data <= 0;
 
-    /*  `uvm_info(get_type_name(),$sformatf("Driver driving logic: transfer = %b, read_write = %b, apb_write_paddr = %h, apb_read_paddr = %h, apb_write_data=%h",req.transfer, req.read_write,req.apb_write_paddr,req.apb_read_paddr,req.apb_write_data ),UVM_LOW);
-req.print();
-    */
     end
       
    else begin

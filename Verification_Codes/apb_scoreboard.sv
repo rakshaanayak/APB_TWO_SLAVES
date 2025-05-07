@@ -87,11 +87,15 @@ class apb_scoreboard extends uvm_scoreboard;
       if (exp_tr.apb_read_data_out == act_tr.apb_read_data_out)begin
         `uvm_info(get_type_name(), "**packet_matched**\tReset condition", UVM_NONE);
          MATCH++;
+
+         display_match(exp_tr,act_tr);
       end
 
       else begin
         `uvm_error(get_type_name(), "**packet_mismatched**\tReset condition");
          MISMATCH++;
+
+         display_mismatch(exp_tr,act_tr);
        end
       display(exp_tr, act_tr);
       return;
@@ -103,20 +107,27 @@ class apb_scoreboard extends uvm_scoreboard;
           (exp_tr.apb_write_data == act_tr.apb_write_data))begin
         `uvm_info(get_type_name(), "**packet_matched**\tWrite Transaction", UVM_NONE);
         MATCH++;
+
+        display_match(exp_tr,act_tr);
       end
       else begin
         `uvm_error(get_type_name(), "**packet_mismatched**\tWrite Transaction");
         MISMATCH++;
+
+        display_mismatch(exp_tr,act_tr);
      end
     end else begin
       if ((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) &&
           (exp_tr.apb_read_data_out == act_tr.apb_read_data_out))begin
         `uvm_info(get_type_name(), "**packet_matched**\tRead Transaction", UVM_NONE);
         MATCH++;
+
+       display_match(exp_tr,act_tr);
       end
       else begin
         `uvm_error(get_type_name(), "**packet_mismatched**\tRead Transaction");
         MISMATCH++;
+        display_mismatch(exp_tr,act_tr);
     end
     end
 end
@@ -128,6 +139,24 @@ end
     exp_tr.print();
     act_tr.print();
   endfunction
+
+
+  function void display_match(apb_seq_item exp_tr, apb_seq_item act_tr);
+    `uvm_info("Check_start", "---Start Check---", UVM_LOW);
+    `uvm_info("expected", "---Expected---", UVM_LOW); exp_tr.print();
+    `uvm_info("actual", "---Actual---", UVM_LOW); act_tr.print();
+    `uvm_info("MATCH", $sformatf("Match count = %0d", MATCH), UVM_LOW);
+    `uvm_info("Check_stop", "---Stop Check---", UVM_LOW);
+  endfunction
+ 
+  function void display_mismatch(apb_seq_item exp_tr, apb_seq_item act_tr);
+    `uvm_info("Check_start", "---Start Check---", UVM_LOW);
+    `uvm_info("expected", "---Expected---", UVM_LOW); exp_tr.print();
+    `uvm_info("actual", "---Actual---", UVM_LOW); act_tr.print();
+    `uvm_info("MISMATCH", $sformatf("Mismatch count = %0d", MISMATCH), UVM_LOW);
+    `uvm_info("Check_stop", "---Stop Check---", UVM_LOW);
+  endfunction
+
 
 endclass
 

@@ -1,8 +1,3 @@
-# vsim -c apb_top 
-# Start time: 11:47:06 on May 06,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: apb_top.sv(29): (vopt-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 9, found 8.
-# ** Warning: apb_top.sv(29): (vopt-2718) [TFMPC] - Missing connection for port 'PSLVERR'.
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
 # //
@@ -17,13 +12,61 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
+# vsim $ 
+# Start time: 11:17:31 on May 07,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: (vopt-13130) Failed to find design unit $.
+#         Searched libraries:
+#             work
+# Optimization failed
+# Error loading design
+# End time: 11:17:32 on May 07,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vlog apb_top.sv
+# QuestaSim vlog 10.6c Compiler 2017.07 Jul 25 2017
+# Start time: 11:17:58 on May 07,2025
+# vlog -reportprogress 300 apb_top.sv 
+# -- Compiling module master_bridge
+# -- Compiling module slave1
+# -- Compiling module slave2
+# -- Compiling module APB_Protocol
+# -- Compiling interface apb_inf
+# ** Note: (vlog-2286) apb_seq_item.sv(12): Using implicit +incdir+/tools/mentor/questasim_10.6c/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# -- Compiling package apb_top_sv_unit
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# -- Compiling module apb_top
+# 
+# Top level modules:
+# 	apb_top
+# End time: 11:17:58 on May 07,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -novopt -suppress 12110 apb_top
+# vsim -novopt -suppress 12110 apb_top 
+# Start time: 11:18:15 on May 07,2025
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.apb_top
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.apb_top_sv_unit
 # Loading sv_std.std
 # Loading mtiUvm.uvm_pkg
-# Loading work.apb_top_sv_unit(fast)
-# Loading work.apb_top(fast)
-# Loading mtiUvm.questa_uvm_pkg(fast)
-# Loading work.apb_inf(fast)
+# Loading work.apb_top_sv_unit
+# Loading work.apb_top
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.apb_inf
+# Loading work.apb_inf
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.APB_Protocol
+# Loading work.APB_Protocol
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.master_bridge
+# Loading work.master_bridge
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.slave1
+# Loading work.slave1
+# Refreshing /home/rakshanayak/APB_TWO_SLAVES/Verification_Codes/work.slave2
+# Loading work.slave2
+# Loading mtiUvm.questa_uvm_pkg
+# ** Warning: (vsim-3017) apb_top.sv(31): [TFMPC] - Too few port connections. Expected 9, found 8.
+#    Time: 0 ns  Iteration: 0  Instance: /apb_top/dut File: top.v
+# ** Warning: (vsim-3722) apb_top.sv(31): [TFMPC] - Missing connection for port 'PSLVERR'.
 # Loading /tools/mentor/questasim_10.6c/questasim/uvm-1.1d/linux/uvm_dpi.so
+add wave -position insertpoint sim:/apb_top/dut/*
+run -all
 # ----------------------------------------------------------------
 # UVM-1.1d
 # (C) 2007-2013 Mentor Graphics Corporation
@@ -46,81 +89,81 @@
 # 
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# UVM_INFO @ 0: reporter [RNTST] Running test ApbAlternateWriteReadTest...
+# UVM_INFO @ 0: reporter [RNTST] Running test ApbReadTest...
 # UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
-# -----------------------------------------------------------------
-# Name                       Type                       Size  Value
-# -----------------------------------------------------------------
-# uvm_test_top               ApbAlternateWriteReadTest  -     @471 
-#   env                      apb_env                    -     @478 
-#     a_agent_h              apb_active_agent           -     @489 
-#       driver_h             apb_driver                 -     @511 
-#         rsp_port           uvm_analysis_port          -     @526 
-#         seq_item_port      uvm_seq_item_pull_port     -     @518 
-#       ip_mon_h             apb_input_monitor          -     @643 
-#         ip_mon_port        uvm_analysis_port          -     @650 
-#       sequencer_h          apb_sequencer              -     @534 
-#         rsp_export         uvm_analysis_export        -     @541 
-#         seq_item_export    uvm_seq_item_pull_imp      -     @635 
-#         arbitration_queue  array                      0     -    
-#         lock_queue         array                      0     -    
-#         num_last_reqs      integral                   32    'd1  
-#         num_last_rsps      integral                   32    'd1  
-#     p_agent_h              apb_passive_agent          -     @496 
-#       op_mon_h             apb_output_monitor         -     @666 
-#         op_mon_port        uvm_analysis_port          -     @673 
-#     sb_h                   apb_scoreboard             -     @503 
-#       act_op_fifo          uvm_tlm_fifo #(T)          -     @737 
-#         get_ap             uvm_analysis_port          -     @768 
-#         get_peek_export    uvm_get_peek_imp           -     @752 
-#         put_ap             uvm_analysis_port          -     @760 
-#         put_export         uvm_put_imp                -     @744 
-#       aport_ip             uvm_analysis_imp_ip        -     @682 
-#       aport_op             uvm_analysis_imp_op        -     @690 
-#       exp_op_fifo          uvm_tlm_fifo #(T)          -     @698 
-#         get_ap             uvm_analysis_port          -     @729 
-#         get_peek_export    uvm_get_peek_imp           -     @713 
-#         put_ap             uvm_analysis_port          -     @721 
-#         put_export         uvm_put_imp                -     @705 
-# -----------------------------------------------------------------
+# --------------------------------------------------------------
+# Name                       Type                    Size  Value
+# --------------------------------------------------------------
+# uvm_test_top               ApbReadTest             -     @471 
+#   env                      apb_env                 -     @478 
+#     a_agent_h              apb_active_agent        -     @489 
+#       driver_h             apb_driver              -     @511 
+#         rsp_port           uvm_analysis_port       -     @526 
+#         seq_item_port      uvm_seq_item_pull_port  -     @518 
+#       ip_mon_h             apb_input_monitor       -     @643 
+#         ip_mon_port        uvm_analysis_port       -     @650 
+#       sequencer_h          apb_sequencer           -     @534 
+#         rsp_export         uvm_analysis_export     -     @541 
+#         seq_item_export    uvm_seq_item_pull_imp   -     @635 
+#         arbitration_queue  array                   0     -    
+#         lock_queue         array                   0     -    
+#         num_last_reqs      integral                32    'd1  
+#         num_last_rsps      integral                32    'd1  
+#     p_agent_h              apb_passive_agent       -     @496 
+#       op_mon_h             apb_output_monitor      -     @666 
+#         op_mon_port        uvm_analysis_port       -     @673 
+#     sb_h                   apb_scoreboard          -     @503 
+#       act_op_fifo          uvm_tlm_fifo #(T)       -     @737 
+#         get_ap             uvm_analysis_port       -     @768 
+#         get_peek_export    uvm_get_peek_imp        -     @752 
+#         put_ap             uvm_analysis_port       -     @760 
+#         put_export         uvm_put_imp             -     @744 
+#       aport_ip             uvm_analysis_imp_ip     -     @682 
+#       aport_op             uvm_analysis_imp_op     -     @690 
+#       exp_op_fifo          uvm_tlm_fifo #(T)       -     @698 
+#         get_ap             uvm_analysis_port       -     @729 
+#         get_peek_export    uvm_get_peek_imp        -     @713 
+#         put_ap             uvm_analysis_port       -     @721 
+#         put_export         uvm_put_imp             -     @705 
+# --------------------------------------------------------------
 # 
-# UVM_INFO apb_test.sv(139) @ 0: uvm_test_top [SEQUENCE] 
-# ----------------------------!!! ALTERNATE WRITE READ BEGINS !!!-------------------------------
+# UVM_INFO apb_test.sv(105) @ 0: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! READ BEGINS !!!-------------------------------
 # 
-# UVM_INFO apb_driver.sv(65) @ 0: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 0, apb_write_paddr = 1e0, apb_read_paddr = 08f, apb_write_data=d1
+# UVM_INFO apb_driver.sv(59) @ 0: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 1cb, apb_read_paddr = 0f5, apb_write_data=b0
 # ----------------------------------------------
 # Name                 Type          Size  Value
 # ----------------------------------------------
-# req                  apb_seq_item  -     @784 
+# req                  apb_seq_item  -     @780 
 #   transfer           integral      1     'h1  
-#   read_write         integral      1     'h0  
-#   apb_write_paddr    integral      9     'h1e0
-#   apb_write_data     integral      8     'hd1 
-#   apb_read_paddr     integral      9     'h8f 
+#   read_write         integral      1     'h1  
+#   apb_write_paddr    integral      9     'h1cb
+#   apb_write_data     integral      8     'hb0 
+#   apb_read_paddr     integral      9     'hf5 
 #   apb_read_data_out  integral      8     'h0xx
 # ----------------------------------------------
-# UVM_INFO apb_driver.sv(65) @ 5: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 0, apb_write_paddr = 1eb, apb_read_paddr = 191, apb_write_data=01
+# UVM_INFO apb_driver.sv(59) @ 5: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 116, apb_read_paddr = 108, apb_write_data=d3
+# ----------------------------------------------
+# Name                 Type          Size  Value
+# ----------------------------------------------
+# req                  apb_seq_item  -     @809 
+#   transfer           integral      1     'h1  
+#   read_write         integral      1     'h1  
+#   apb_write_paddr    integral      9     'h116
+#   apb_write_data     integral      8     'hd3 
+#   apb_read_paddr     integral      9     'h108
+#   apb_read_data_out  integral      8     'h0xx
+# ----------------------------------------------
+# UVM_INFO apb_driver.sv(59) @ 15: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 0bf, apb_read_paddr = 152, apb_write_data=7d
 # ----------------------------------------------
 # Name                 Type          Size  Value
 # ----------------------------------------------
 # req                  apb_seq_item  -     @817 
 #   transfer           integral      1     'h1  
-#   read_write         integral      1     'h0  
-#   apb_write_paddr    integral      9     'h1eb
-#   apb_write_data     integral      8     'h1  
-#   apb_read_paddr     integral      9     'h191
-#   apb_read_data_out  integral      8     'h0xx
-# ----------------------------------------------
-# UVM_INFO apb_driver.sv(65) @ 15: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 167, apb_read_paddr = 008, apb_write_data=7b
-# ----------------------------------------------
-# Name                 Type          Size  Value
-# ----------------------------------------------
-# req                  apb_seq_item  -     @829 
-#   transfer           integral      1     'h1  
 #   read_write         integral      1     'h1  
-#   apb_write_paddr    integral      9     'h167
-#   apb_write_data     integral      8     'h7b 
-#   apb_read_paddr     integral      9     'h8  
+#   apb_write_paddr    integral      9     'hbf 
+#   apb_write_data     integral      8     'h7d 
+#   apb_read_paddr     integral      9     'h152
 #   apb_read_data_out  integral      8     'h0xx
 # ----------------------------------------------
 # -----------------------------------------------
@@ -134,20 +177,148 @@
 #   apb_read_paddr     integral      9     'h0Xxx
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# UVM_INFO apb_driver.sv(65) @ 25: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 1bd, apb_read_paddr = 07a, apb_write_data=25
+# UVM_INFO apb_driver.sv(59) @ 25: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 139, apb_read_paddr = 195, apb_write_data=88
 # ----------------------------------------------
 # Name                 Type          Size  Value
 # ----------------------------------------------
-# req                  apb_seq_item  -     @845 
+# req                  apb_seq_item  -     @825 
 #   transfer           integral      1     'h1  
 #   read_write         integral      1     'h1  
-#   apb_write_paddr    integral      9     'h1bd
-#   apb_write_data     integral      8     'h25 
-#   apb_read_paddr     integral      9     'h7a 
+#   apb_write_paddr    integral      9     'h139
+#   apb_write_data     integral      8     'h88 
+#   apb_read_paddr     integral      9     'h195
 #   apb_read_data_out  integral      8     'h0xx
 # ----------------------------------------------
-# write_addr=xxx,read_addr=008,time=                  25
-# UVM_INFO apb_output_monitor.sv(84) @ 25: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 008, apb_read_data_out = xx
+# write_addr=xxx,read_addr=152,time=                  25
+# UVM_INFO apb_output_monitor.sv(75) @ 25: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 152, apb_read_data_out = xx
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @829  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# write_addr=xxx,read_addr=152,time=                  25
+# UVM_INFO apb_input_monitor.sv(57) @ 25: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 152
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 25: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @829  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# Display after comparing
+# UVM_ERROR apb_scoreboard.sv(128) @ 25: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 25: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 25: uvm_test_top.env.sb_h [expected] ---Expected---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 25: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @829  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 25: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 1
+# UVM_INFO apb_scoreboard.sv(157) @ 25: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 25: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @829  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h152 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_driver.sv(59) @ 35: uvm_test_top.env.a_agent_h.driver_h [apb_driver] Driver driving logic: transfer = 1, read_write = 1, apb_write_paddr = 092, apb_read_paddr = 144, apb_write_data=00
+# ----------------------------------------------
+# Name                 Type          Size  Value
+# ----------------------------------------------
+# req                  apb_seq_item  -     @833 
+#   transfer           integral      1     'h1  
+#   read_write         integral      1     'h1  
+#   apb_write_paddr    integral      9     'h92 
+#   apb_write_data     integral      8     'h0  
+#   apb_read_paddr     integral      9     'h144
+#   apb_read_data_out  integral      8     'h0xx
+# ----------------------------------------------
+# write_addr=xxx,read_addr=195,time=                  35
+# UVM_INFO apb_input_monitor.sv(57) @ 35: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 195
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h195 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# write_addr=xxx,read_addr=195,time=                  35
+# UVM_INFO apb_output_monitor.sv(75) @ 35: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 195, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
@@ -156,34 +327,21 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h8   
+#   apb_read_paddr     integral      9     'h195 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=008,time=                  25
-# UVM_INFO apb_input_monitor.sv(67) @ 25: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 008
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @853  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h8   
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
 # Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 25: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_INFO apb_scoreboard.sv(138) @ 35: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @853  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h8   
+#   apb_read_paddr     integral      9     'h195 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -194,21 +352,48 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h8   
+#   apb_read_paddr     integral      9     'h195 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
 # Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 25: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 25: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_ERROR apb_scoreboard.sv(128) @ 35: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 35: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 35: uvm_test_top.env.sb_h [expected] ---Expected---
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @853  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h8   
+#   apb_read_paddr     integral      9     'h195 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 35: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @837  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h195 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 35: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 2
+# UVM_INFO apb_scoreboard.sv(157) @ 35: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 35: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h195 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -219,24 +404,217 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h8   
+#   apb_read_paddr     integral      9     'h195 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  35
-# UVM_INFO apb_input_monitor.sv(67) @ 35: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
+# write_addr=xxx,read_addr=144,time=                  45
+# UVM_INFO apb_output_monitor.sv(75) @ 45: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @857  
+# op_mon_seq           apb_seq_item  -     @841  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  35
-# UVM_INFO apb_output_monitor.sv(84) @ 35: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
+# write_addr=xxx,read_addr=144,time=                  45
+# UVM_INFO apb_input_monitor.sv(57) @ 45: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 45: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @841  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# Display after comparing
+# UVM_ERROR apb_scoreboard.sv(128) @ 45: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 45: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 45: uvm_test_top.env.sb_h [expected] ---Expected---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 45: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @841  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 45: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 3
+# UVM_INFO apb_scoreboard.sv(157) @ 45: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 45: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @841  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  55
+# UVM_INFO apb_input_monitor.sv(57) @ 55: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  55
+# UVM_INFO apb_output_monitor.sv(75) @ 55: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @845  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 55: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @845  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# Display after comparing
+# UVM_ERROR apb_scoreboard.sv(128) @ 55: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 55: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 55: uvm_test_top.env.sb_h [expected] ---Expected---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 55: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @845  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 55: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 4
+# UVM_INFO apb_scoreboard.sv(157) @ 55: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 55: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @845  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  65
+# UVM_INFO apb_output_monitor.sv(75) @ 65: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
@@ -245,21 +623,34 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
-# Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 35: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# write_addr=xxx,read_addr=144,time=                  65
+# UVM_INFO apb_input_monitor.sv(57) @ 65: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @857  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 65: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -270,21 +661,48 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
 # Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 35: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 35: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_ERROR apb_scoreboard.sv(128) @ 65: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 65: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 65: uvm_test_top.env.sb_h [expected] ---Expected---
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @857  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 65: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @849  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 65: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 5
+# UVM_INFO apb_scoreboard.sv(157) @ 65: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 65: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -295,11 +713,230 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  45
-# UVM_INFO apb_output_monitor.sv(84) @ 45: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
+# write_addr=xxx,read_addr=144,time=                  75
+# UVM_INFO apb_input_monitor.sv(57) @ 75: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  75
+# UVM_INFO apb_output_monitor.sv(75) @ 75: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @853  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 75: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @853  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# Display after comparing
+# UVM_ERROR apb_scoreboard.sv(128) @ 75: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 75: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 75: uvm_test_top.env.sb_h [expected] ---Expected---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 75: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @853  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 75: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 6
+# UVM_INFO apb_scoreboard.sv(157) @ 75: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 75: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @853  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  85
+# UVM_INFO apb_output_monitor.sv(75) @ 85: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @857  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  85
+# UVM_INFO apb_input_monitor.sv(57) @ 85: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 85: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @857  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# Display after comparing
+# UVM_ERROR apb_scoreboard.sv(128) @ 85: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 85: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 85: uvm_test_top.env.sb_h [expected] ---Expected---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 85: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @857  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 85: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 7
+# UVM_INFO apb_scoreboard.sv(157) @ 85: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 85: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @857  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  95
+# UVM_INFO apb_input_monitor.sv(57) @ 95: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# write_addr=xxx,read_addr=144,time=                  95
+# UVM_INFO apb_output_monitor.sv(75) @ 95: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
@@ -308,34 +945,21 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  45
-# UVM_INFO apb_input_monitor.sv(67) @ 45: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @869  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
 # Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 45: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_INFO apb_scoreboard.sv(138) @ 95: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @869  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -346,21 +970,48 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
 # Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 45: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 45: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_ERROR apb_scoreboard.sv(128) @ 95: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 95: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 95: uvm_test_top.env.sb_h [expected] ---Expected---
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @869  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 95: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @861  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 95: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 8
+# UVM_INFO apb_scoreboard.sv(157) @ 95: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 95: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -371,24 +1022,11 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  55
-# UVM_INFO apb_input_monitor.sv(67) @ 55: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @873  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  55
-# UVM_INFO apb_output_monitor.sv(84) @ 55: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
+# write_addr=xxx,read_addr=144,time=                 105
+# UVM_INFO apb_output_monitor.sv(75) @ 105: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
@@ -397,46 +1035,34 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
-# Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 55: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# write_addr=xxx,read_addr=144,time=                 105
+# UVM_INFO apb_input_monitor.sv(57) @ 105: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @873  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
+# Displaying before comparing
+# UVM_INFO apb_scoreboard.sv(138) @ 105: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @865  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 55: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 55: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @873  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
@@ -447,492 +1073,299 @@
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  65
-# UVM_INFO apb_output_monitor.sv(84) @ 65: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @877  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  65
-# UVM_INFO apb_input_monitor.sv(67) @ 65: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @885  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
-# Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 65: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @885  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @877  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
 # Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 65: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 65: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_ERROR apb_scoreboard.sv(128) @ 105: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 105: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 105: uvm_test_top.env.sb_h [expected] ---Expected---
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @885  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 105: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @865  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 105: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 9
+# UVM_INFO apb_scoreboard.sv(157) @ 105: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 105: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @877  
+# op_mon_seq           apb_seq_item  -     @865  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  75
-# UVM_INFO apb_input_monitor.sv(67) @ 75: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
+# write_addr=xxx,read_addr=144,time=                 115
+# UVM_INFO apb_input_monitor.sv(57) @ 115: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @889  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  75
-# UVM_INFO apb_output_monitor.sv(84) @ 75: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
+# write_addr=xxx,read_addr=144,time=                 115
+# UVM_INFO apb_output_monitor.sv(75) @ 115: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @881  
+# op_mon_seq           apb_seq_item  -     @869  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
 # Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 75: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_INFO apb_scoreboard.sv(138) @ 115: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @889  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @881  
+# op_mon_seq           apb_seq_item  -     @869  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
 # Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 75: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 75: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_ERROR apb_scoreboard.sv(128) @ 115: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 115: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 115: uvm_test_top.env.sb_h [expected] ---Expected---
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @889  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 115: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @869  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 115: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 10
+# UVM_INFO apb_scoreboard.sv(157) @ 115: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 115: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @881  
+# op_mon_seq           apb_seq_item  -     @869  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  85
-# UVM_INFO apb_output_monitor.sv(84) @ 85: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
+# write_addr=xxx,read_addr=144,time=                 125
+# UVM_INFO apb_output_monitor.sv(75) @ 125: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 144, apb_read_data_out = xx
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @893  
+# op_mon_seq           apb_seq_item  -     @873  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  85
-# UVM_INFO apb_input_monitor.sv(67) @ 85: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
+# write_addr=xxx,read_addr=144,time=                 125
+# UVM_INFO apb_input_monitor.sv(57) @ 125: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 144
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @901  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
+# ** Warning: (vsim-3829) apb_scoreboard.sv(80): Non-existent associative array entry. Returning default value.
 # Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 85: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_INFO apb_scoreboard.sv(138) @ 125: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @901  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @893  
+# op_mon_seq           apb_seq_item  -     @873  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
 # Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 85: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 85: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# UVM_ERROR apb_scoreboard.sv(128) @ 125: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
+# UVM_INFO apb_scoreboard.sv(153) @ 125: uvm_test_top.env.sb_h [Check_start] ---Start Check---
+# UVM_INFO apb_scoreboard.sv(154) @ 125: uvm_test_top.env.sb_h [expected] ---Expected---
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @901  
+# ip_mon_seq           apb_seq_item  -     @813  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0   
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(155) @ 125: uvm_test_top.env.sb_h [actual] ---Actual---
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# op_mon_seq           apb_seq_item  -     @873  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
+#   apb_read_data_out  integral      8     'h0xx 
+# -----------------------------------------------
+# UVM_INFO apb_scoreboard.sv(156) @ 125: uvm_test_top.env.sb_h [MISMATCH] Mismatch count = 11
+# UVM_INFO apb_scoreboard.sv(157) @ 125: uvm_test_top.env.sb_h [Check_stop] ---Stop Check---
+# UVM_INFO apb_scoreboard.sv(138) @ 125: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
+# -----------------------------------------------
+# Name                 Type          Size  Value 
+# -----------------------------------------------
+# ip_mon_seq           apb_seq_item  -     @813  
+#   transfer           integral      1     'h1   
+#   read_write         integral      1     'h1   
+#   apb_write_paddr    integral      9     'h0Xxx
+#   apb_write_data     integral      8     'h0xx 
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0   
 # -----------------------------------------------
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @893  
+# op_mon_seq           apb_seq_item  -     @873  
 #   transfer           integral      1     'h1   
 #   read_write         integral      1     'h1   
 #   apb_write_paddr    integral      9     'h0Xxx
 #   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
+#   apb_read_paddr     integral      9     'h144 
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  95
-# UVM_INFO apb_input_monitor.sv(67) @ 95: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @905  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                  95
-# UVM_INFO apb_output_monitor.sv(84) @ 95: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @897  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
-# Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 95: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @905  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @897  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 95: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 95: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @905  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @897  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                 105
-# UVM_INFO apb_output_monitor.sv(84) @ 105: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @909  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                 105
-# UVM_INFO apb_input_monitor.sv(67) @ 105: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @917  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
-# Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 105: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @917  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @909  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 105: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 105: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @917  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @909  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                 115
-# UVM_INFO apb_input_monitor.sv(67) @ 115: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = 07a
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @921  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# write_addr=xxx,read_addr=07a,time=                 115
-# UVM_INFO apb_output_monitor.sv(84) @ 115: uvm_test_top.env.p_agent_h.op_mon_h [apb_output_monitor] apb_read_paddr = 07a, apb_read_data_out = xx
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @913  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# ** Warning: (vsim-3829) apb_scoreboard.sv(77): Non-existent associative array entry. Returning default value.
-# Displaying before comparing
-# UVM_INFO apb_scoreboard.sv(117) @ 115: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @921  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @913  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# Display after comparing
-# UVM_ERROR apb_scoreboard.sv(109) @ 115: uvm_test_top.env.sb_h [apb_scoreboard] **packet_mismatched**	Read Transaction
-# UVM_INFO apb_scoreboard.sv(117) @ 115: uvm_test_top.env.sb_h [apb_scoreboard] Displaying Expected vs Actual Transaction
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# ip_mon_seq           apb_seq_item  -     @921  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0   
-# -----------------------------------------------
-# -----------------------------------------------
-# Name                 Type          Size  Value 
-# -----------------------------------------------
-# op_mon_seq           apb_seq_item  -     @913  
-#   transfer           integral      1     'h1   
-#   read_write         integral      1     'h1   
-#   apb_write_paddr    integral      9     'h0Xxx
-#   apb_write_data     integral      8     'h0xx 
-#   apb_read_paddr     integral      9     'h7a  
-#   apb_read_data_out  integral      8     'h0xx 
-# -----------------------------------------------
-# UVM_INFO apb_test.sv(144) @ 125: uvm_test_top [SEQUENCE] 
-# ----------------------------!!! ALTERNATE WRITE READ ENDS !!!----------------------------------
+# UVM_INFO apb_test.sv(111) @ 135: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! READ ENDS !!!----------------------------------
 # 
-# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 125: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO apb_test.sv(35) @ 125: uvm_test_top [ApbAlternateWriteReadTest] ---------------------------------------
-# UVM_INFO apb_test.sv(36) @ 125: uvm_test_top [ApbAlternateWriteReadTest] ----            TEST FAIL          ----
-# UVM_INFO apb_test.sv(37) @ 125: uvm_test_top [ApbAlternateWriteReadTest] ---------------------------------------
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 135: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO apb_test.sv(35) @ 135: uvm_test_top [ApbReadTest] ---------------------------------------
+# UVM_INFO apb_test.sv(36) @ 135: uvm_test_top [ApbReadTest] ----            TEST FAIL          ----
+# UVM_INFO apb_test.sv(37) @ 135: uvm_test_top [ApbReadTest] ---------------------------------------
 # 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :   54
+# UVM_INFO :  114
 # UVM_WARNING :    0
-# UVM_ERROR :   10
+# UVM_ERROR :   11
 # UVM_FATAL :    0
 # ** Report counts by id
-# [ApbAlternateWriteReadTest]     3
+# [ApbReadTest]     3
+# [Check_start]    11
+# [Check_stop]    11
+# [MISMATCH]    11
 # [Questa UVM]     2
 # [RNTST]     1
 # [SEQUENCE]     2
 # [TEST_DONE]     1
 # [UVMTOP]     1
-# [apb_driver]     4
-# [apb_input_monitor]    10
-# [apb_output_monitor]    10
-# [apb_scoreboard]    30
+# [actual]    11
+# [apb_driver]     5
+# [apb_input_monitor]    11
+# [apb_output_monitor]    11
+# [apb_scoreboard]    33
+# [expected]    11
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 125 ns  Iteration: 54  Instance: /apb_top
-# End time: 11:47:12 on May 06,2025, Elapsed time: 0:00:06
-# Errors: 0, Warnings: 12
+#    Time: 135 ns  Iteration: 55  Instance: /apb_top
+# 1
+# Break in Task uvm_pkg/uvm_root::run_test at /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh line 430

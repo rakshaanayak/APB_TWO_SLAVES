@@ -16,6 +16,8 @@ module apb_top;
 
   logic pclk;
   logic presetn;
+
+
    apb_inf  apb_if (
     .pclk(pclk),
     .presetn(presetn)
@@ -56,7 +58,7 @@ APB_Protocol dut (
     uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
   end
   initial begin
-    run_test("ApbAlternateWriteReadTest");
+    run_test("ApbReadTest");
   end
 endmodule
 

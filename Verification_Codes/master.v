@@ -45,7 +45,7 @@
 		     IDLE: begin 
 		              PENABLE =0;
 
-		            if(transfer)   ///! transfer ut should be
+		            if(!transfer)   ///! transfer ut should be
 	        	      next_state = IDLE ;
 	                    else
 			      next_state = SETUP;
@@ -63,7 +63,7 @@
                                   PADDR = apb_write_paddr;
 				  PWDATA = apb_write_data;  end
 			    
-			    if(transfer && PSLVERR)//// ! pslverr
+			    if(!transfer && PSLVERR)//// ! pslverr
 			      next_state = ENABLE;
 		            else
            	              next_state = IDLE;
@@ -72,7 +72,7 @@
 	       	ENABLE: 
 		     begin if(PSEL1 || PSEL2)
 		           PENABLE =1;
-			   if(transfer & !PSLVERR)
+			   if(!transfer & !PSLVERR)
 			   begin
 				   if(PREADY)
 				   begin

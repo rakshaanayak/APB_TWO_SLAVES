@@ -27,45 +27,35 @@ class apb_input_monitor extends uvm_monitor;
     super.build_phase(phase);
     if(!(uvm_config_db #(virtual apb_inf)::get(this,"","vif",vif)))
       `uvm_fatal("Input monitor","unable to get interface handle");
-    //ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
+  
   endfunction
 
   virtual task run_phase(uvm_phase phase);
      repeat(2) @(vif.mon_cb);
+      ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
   
     forever begin
-      @(vif.mon_cb);
-     ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
- 
-     // if((`MON_ip_if.transfer && (vif.presetn))) begin
-      ip_mon_seq.transfer = vif.transfer;
-      ip_mon_seq.read_write = vif.read_write;
+      @(vif.mon_cb); 
+      ip_mon_seq.transfer = vif.mon_cb.transfer;
+      ip_mon_seq.read_write = vif.mon_cb.read_write;
       
-       if((vif.transfer && (vif.presetn))) begin
+       if((vif.mon_cb.transfer && (vif.presetn))) begin
       
-     
-        // if(! `MON_ip_if.read_write ) begin
-          if(! vif.read_write ) begin
-      
-    
-       //   ip_mon_seq.apb_write_paddr = `MON_ip_if.apb_write_paddr;
-         //ip_mon_seq.apb_write_data = `MON_ip_if.apb_write_data;
+          if(! vif.mon_cb.read_write ) begin
        
-          ip_mon_seq.apb_write_paddr =vif.apb_write_paddr;
-          ip_mon_seq.apb_write_data = vif.apb_write_data;
+          ip_mon_seq.apb_write_paddr =vif.mon_cb.apb_write_paddr;
+          ip_mon_seq.apb_write_data = vif.mon_cb.apb_write_data;
         
 
          end
         else begin
-         // ip_mon_seq.apb_read_paddr =  `MON_ip_if.apb_read_paddr;
-
-
-           ip_mon_seq.apb_read_paddr =  vif.apb_read_paddr;
+   
+           ip_mon_seq.apb_read_paddr =  vif.mon_cb.apb_read_paddr;
         
         end
       ip_mon_port.write(ip_mon_seq);
         `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %h, apb_write_data = %h, apb_read_paddr = %h",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data,ip_mon_seq.apb_read_paddr),UVM_LOW);
-       // `uvm_info("in_monitor","in_monitor",UVM_LOW);
+    
       ip_mon_seq.print();
     
       end
