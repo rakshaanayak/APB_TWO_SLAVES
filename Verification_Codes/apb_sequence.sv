@@ -131,7 +131,7 @@ class apb_alternate_write_read_sequence extends apb_sequence;
   function new(string name = "apb_alternate_write_read_sequence");
     super.new(name);
   endfunction
-
+/*
   virtual task body();
     apb_seq_item wr_req, rd_req;
 
@@ -149,14 +149,30 @@ class apb_alternate_write_read_sequence extends apb_sequence;
     `uvm_info(get_type_name(), "Starting READ transaction", UVM_MEDIUM)
     rd_req = apb_seq_item::type_id::create("rd_req");
     rd_req.apb_read_paddr   = 9'h0A2;
+    rd_req.apb_write_paddr  = 9'h0A2;
     rd_req.read_write       = 1'b1;
     rd_req.transfer         = 1'b1;
     start_item(rd_req);
     finish_item(rd_req);
   endtask
+*/
+// req = apb_seq_item::type_id::create("req");
+
+bit [8:0]addr;
+ 
+virtual task body();
+req = apb_seq_item::type_id::create("req");
+
+    repeat(2)begin
+     `uvm_do_with(req, {req.transfer == 1; req.read_write == 0;req.apb_write_paddr[8] == 0;})
+     `uvm_send(req);
+      addr = req.apb_write_paddr;
+     `uvm_do_with(req, {req.transfer == 1; req.read_write == 1; req.apb_read_paddr == addr;})
+     `uvm_send(req);
+    end
+  endtask
 
 endclass
-
 
 
 class apb_repeated_write_access_sequence extends apb_sequence;

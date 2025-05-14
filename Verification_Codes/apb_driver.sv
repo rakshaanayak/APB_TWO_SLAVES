@@ -26,8 +26,10 @@ class apb_driver extends uvm_driver #(apb_seq_item);
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    
-    forever begin
+   repeat(5)@(vif.drv_cb); 
+   forever begin
+     req = apb_seq_item::type_id::create("req");
+
       seq_item_port.get_next_item(req);
       drive();
       seq_item_port.item_done();

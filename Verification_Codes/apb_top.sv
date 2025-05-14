@@ -59,6 +59,7 @@ APB_Protocol dut (
   end
   initial begin
     run_test("ApbAlternateWriteReadTest");
+    $finish();
   end
 endmodule
 
