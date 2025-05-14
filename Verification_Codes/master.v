@@ -63,7 +63,7 @@
                                   PADDR = apb_write_paddr;
 				  PWDATA = apb_write_data;  end
 			    
-			    if(!transfer && PSLVERR)//// ! pslverr
+			    if(!transfer && !PSLVERR)//// ! pslverr
 			      next_state = ENABLE;
 		            else
            	              next_state = IDLE;
@@ -169,7 +169,11 @@
 		             end
 	      endcase
       end */
-     assign {PSEL1,PSEL2} = ((state == IDLE) ? (PADDR[8] ? {1'b0,1'b1} : {1'b1,1'b0}) : 2'd0);// state 1=idle it should be
+     //assign {PSEL1,PSEL2} = ((state == IDLE) ? (PADDR[8] ? {1'b0,1'b1} : {1'b1,1'b0}) : 2'd0);// state 1=idle it should be
+         
+
+       assign {PSEL1,PSEL2} = ((state ==SETUP ) ?(PADDR[8] ? {1'b0,1'b1} : {1'b1,1'b0}):2'd0);
+
 
   // PSLVERR LOGIC
   

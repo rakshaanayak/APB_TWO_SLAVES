@@ -29,7 +29,7 @@ module slave2(
 	     begin  PREADY = 1;
                     reg_addr =  PADDR; 
 	       end
-          else if(PSEL && PENABLE && PWRITE)  //!penable
+          else if(PSEL && !PENABLE && PWRITE)  //!penable
 	     begin  PREADY = 0; end
 
 	  else if(PSEL && PENABLE && PWRITE)

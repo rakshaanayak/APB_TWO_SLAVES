@@ -1,0 +1,19 @@
+Mon May 12 14:24:08 IST 2025
+Trace back: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c.nlv.timebar"
+    while executing
+"$timebar IsNowOnly"
+    (procedure "::vsimwidgets::TimeBar::WaveCursorDragChange" body line 13)
+    invoked from within
+"::vsimwidgets::TimeBar::WaveCursorDragChange vsimPriv dragging_cursor write"
+    (write trace on "vsimPriv(dragging_cursor)")
+    invoked from within
+"set vsimPriv(dragging_cursor) 1"
+    (procedure "Wave::1Down" line 115)
+    invoked from within
+"Wave::1Down $widget $x $y $shift $X $Y"
+    (procedure "Wave::SelectDown" line 6)
+    invoked from within
+"Wave::SelectDown   .main_pane.wave1.interior.cs.body.pw.wf.grid.row0,wave.data 348 271 619 488 0 "
+    (command bound to event)
+  <2:/tools/mentor/questasim_10.6c/questasim/linux/tk8.6/bgerror.tcl:106: ::tkerror {can't set "vsimPriv(dragging_cursor)": invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c.nlv.timebar"}
+  <1:eval:1: ::tk::dialog::error::bgerror {can't set "vsimPriv(dragging_cursor)": invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c.nlv.timebar"}
