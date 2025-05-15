@@ -10,7 +10,7 @@ module slave1(
         output reg PREADY );
     
      reg [7:0]reg_addr;
-     reg [7:0] mem [0:63];
+     reg [7:0] mem [0:255];
 
     assign PRDATA1 =  mem[reg_addr];
 

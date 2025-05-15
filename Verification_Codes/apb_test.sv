@@ -137,7 +137,7 @@ class ApbAlternateWriteReadTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(1) begin
+    repeat(10) begin
       alternatewriteread_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;

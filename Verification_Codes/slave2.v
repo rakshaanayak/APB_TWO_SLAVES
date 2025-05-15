@@ -11,7 +11,7 @@ module slave2(
     
      reg [7:0]reg_addr;
 
-     reg [7:0] mem2 [0:63];
+     reg [7:0] mem2 [0:255];
 
     assign PRDATA2 =  mem2[reg_addr];
 
