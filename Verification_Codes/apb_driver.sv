@@ -26,7 +26,7 @@ class apb_driver extends uvm_driver #(apb_seq_item);
 
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-   repeat(5)@(vif.drv_cb); 
+//   repeat(3)@(vif.drv_cb); 
    forever begin
      req = apb_seq_item::type_id::create("req");
 
@@ -38,7 +38,7 @@ class apb_driver extends uvm_driver #(apb_seq_item);
   endtask
 
   virtual task drive();
-
+    repeat(2)@(vif.drv_cb);
       @(vif.drv_cb) begin
     
     //  driving logic 

@@ -1,0 +1,24 @@
+var g_data = {
+a14:{
+scopes:[{s:'11',b:'0',val:'apb_top'},{link:'z.htm?f=0&s=14',val:'apb_if'}]
+,assertions:[{dummy:0},{cr:'m',c:'F',z:'assert__checkReadDataValidity',fc:'Rr',pc:'Gr',h0:'14',h1:'7',h2:'47',h3:'25',h4:'1',h5:'0',h6:'1'}
+,{cr:'c',c:'g',z:'assert__checkWriteDataValidity',fc:'Gr',pc:'Gr',h0:'0',h1:'24',h2:'47',h3:'22',h4:'1',h5:'0',h6:'1'}
+,{cr:'m',c:'F',z:'assert__checkReadAddressValidity',fc:'Rr',pc:'Gr',h0:'6',h1:'15',h2:'47',h3:'25',h4:'1',h5:'0',h6:'1'}
+,{cr:'c',c:'g',z:'assert__checkWriteAddressValidity',fc:'Gr',pc:'Gr',h0:'0',h1:'24',h2:'47',h3:'22',h4:'1',h5:'0',h6:'1'}
+,{cr:'m',c:'F',z:'assert__checkRead',fc:'Rr',pc:'Gr',h0:'24',h1:'21',h2:'47',h3:'1',h4:'1',h5:'0',h6:'1'}
+,{cr:'m',c:'F',z:'assert__checkWrite',fc:'Rr',pc:'Gr',h0:'21',h1:'24',h2:'47',h3:'1',h4:'1',h5:'0',h6:'1'}
+],
+},
+a5:{
+scopes:[{link:'z.htm?f=0&s=5',val:'work.apb_inf'}]
+,assertions:[{dummy:0},{cr:'m',c:'F',z:'assert__checkReadDataValidity',fc:'Rr',pc:'Gr',h0:'14',h1:'7',h2:'47',h3:'25',h4:'1',h5:'0',h6:'1'}
+,{cr:'c',c:'g',z:'assert__checkWriteDataValidity',fc:'Gr',pc:'Gr',h0:'0',h1:'24',h2:'47',h3:'22',h4:'1',h5:'0',h6:'1'}
+,{cr:'m',c:'F',z:'assert__checkReadAddressValidity',fc:'Rr',pc:'Gr',h0:'6',h1:'15',h2:'47',h3:'25',h4:'1',h5:'0',h6:'1'}
+,{cr:'c',c:'g',z:'assert__checkWriteAddressValidity',fc:'Gr',pc:'Gr',h0:'0',h1:'24',h2:'47',h3:'22',h4:'1',h5:'0',h6:'1'}
+,{cr:'m',c:'F',z:'assert__checkRead',fc:'Rr',pc:'Gr',h0:'24',h1:'21',h2:'47',h3:'1',h4:'1',h5:'0',h6:'1'}
+,{cr:'m',c:'F',z:'assert__checkWrite',fc:'Rr',pc:'Gr',h0:'21',h1:'24',h2:'47',h3:'1',h4:'1',h5:'0',h6:'1'}
+],
+},
+dummyEnd:0
+};
+processAssertionsData(g_data,1);

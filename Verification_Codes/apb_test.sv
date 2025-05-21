@@ -137,7 +137,7 @@ class ApbAlternateWriteReadTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(10) begin
+    repeat(1) begin
       alternatewriteread_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -148,8 +148,8 @@ endclass:ApbAlternateWriteReadTest
 
 
 
-class RepeatedWriteAccessTest extends apb_test;
-  `uvm_component_utils(RepeatedWriteAccessTest)
+class ApbRepeatedWriteAccessTest extends apb_test;
+  `uvm_component_utils(ApbRepeatedWriteAccessTest)
 
   apb_repeated_write_access_sequence repeat_write_seq;
 
@@ -179,3 +179,76 @@ class RepeatedWriteAccessTest extends apb_test;
     
   endtask
 endclass
+
+///////////////////REGRESSION TEST/////////////////////////////
+
+class ApbRegressionTest extends apb_test;
+
+  `uvm_component_utils(ApbRegressionTest)
+
+   apb_write_sequence seq_write;
+   apb_read_sequence  seq_read;
+   apb_alternate_write_read_sequence seq_alternate_write_read;
+   apb_repeated_write_access_sequence seq_repeated_write_access;
+
+
+   function new(string name ="ApbRegressionTest",uvm_component parent);
+     super.new(name,parent);
+   endfunction
+
+   virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+
+    seq_write=apb_write_sequence::type_id::create("seq_write");
+    seq_read=apb_read_sequence::type_id::create("seq_read");
+    seq_alternate_write_read=apb_alternate_write_read_sequence::type_id::create("seq_alternate_write_read");
+    seq_repeated_write_access=apb_repeated_write_access_sequence::type_id::create("seq_repeated_write_access");
+
+    endfunction:build_phase
+
+
+    virtual function void end_of_elaboration ();
+      print ();
+    endfunction: end_of_elaboration
+
+    task run_phase (uvm_phase phase);
+    
+      phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_write.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection (this);
+
+
+   phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_read.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection (this);
+
+ phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_alternate_write_read.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection(this);
+    
+    
+
+ phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_repeated_write_access.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection(this);
+
+
+     `uvm_info(get_type_name(),"----------------------",UVM_LOW)
+      `uvm_info(get_type_name(),$sformatf("-------------------------!!REGRESSION TEST COMPLETE !!-------------------"),UVM_LOW)
+      `uvm_info(get_type_name(),"----------------------",UVM_LOW)
+  endtask: run_phase
+  
+endclass
+

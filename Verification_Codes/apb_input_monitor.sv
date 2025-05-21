@@ -31,7 +31,7 @@ class apb_input_monitor extends uvm_monitor;
   endfunction
 
   virtual task run_phase(uvm_phase phase);
-     repeat(2) @(vif.mon_cb);
+//     repeat(2) @(vif.mon_cb);
       ip_mon_seq = apb_seq_item ::type_id::create("ip_mon_seq");
   
     forever begin
