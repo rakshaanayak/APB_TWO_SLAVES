@@ -82,10 +82,10 @@ req = apb_seq_item::type_id::create("req");
 
 //    repeat(2)begin
      `uvm_do_with(req, {req.transfer == 1; req.read_write == 0;req.apb_write_paddr[8] == 1;})
-     `uvm_send(req);
+ //    `uvm_send(req);
       addr = req.apb_write_paddr;
      `uvm_do_with(req, {req.transfer == 1; req.read_write == 1; req.apb_read_paddr == addr;})
-     `uvm_send(req);
+   //  `uvm_send(req);
   //  end
   endtask
 

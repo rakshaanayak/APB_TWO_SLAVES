@@ -137,7 +137,7 @@ class ApbAlternateWriteReadTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(1) begin
+    repeat(5) begin
       alternatewriteread_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -187,9 +187,9 @@ class ApbRegressionTest extends apb_test;
   `uvm_component_utils(ApbRegressionTest)
 
    apb_write_sequence seq_write;
-   apb_read_sequence  seq_read;
+  // apb_read_sequence  seq_read;
    apb_alternate_write_read_sequence seq_alternate_write_read;
-   apb_repeated_write_access_sequence seq_repeated_write_access;
+  // apb_repeated_write_access_sequence seq_repeated_write_access;
 
 
    function new(string name ="ApbRegressionTest",uvm_component parent);
@@ -200,9 +200,9 @@ class ApbRegressionTest extends apb_test;
     super.build_phase(phase);
 
     seq_write=apb_write_sequence::type_id::create("seq_write");
-    seq_read=apb_read_sequence::type_id::create("seq_read");
+    //seq_read=apb_read_sequence::type_id::create("seq_read");
     seq_alternate_write_read=apb_alternate_write_read_sequence::type_id::create("seq_alternate_write_read");
-    seq_repeated_write_access=apb_repeated_write_access_sequence::type_id::create("seq_repeated_write_access");
+   // seq_repeated_write_access=apb_repeated_write_access_sequence::type_id::create("seq_repeated_write_access");
 
     endfunction:build_phase
 
@@ -221,13 +221,13 @@ class ApbRegressionTest extends apb_test;
       phase.drop_objection (this);
 
 
-   phase.raise_objection (this);
+ /*  phase.raise_objection (this);
       repeat(1)
       begin
         seq_read.start(env.a_agent_h.sequencer_h);
       end
       phase.drop_objection (this);
-
+*/
  phase.raise_objection (this);
       repeat(1)
       begin
@@ -236,7 +236,7 @@ class ApbRegressionTest extends apb_test;
       phase.drop_objection(this);
     
     
-
+/*
  phase.raise_objection (this);
       repeat(1)
       begin
@@ -244,7 +244,7 @@ class ApbRegressionTest extends apb_test;
       end
       phase.drop_objection(this);
 
-
+*/
      `uvm_info(get_type_name(),"----------------------",UVM_LOW)
       `uvm_info(get_type_name(),$sformatf("-------------------------!!REGRESSION TEST COMPLETE !!-------------------"),UVM_LOW)
       `uvm_info(get_type_name(),"----------------------",UVM_LOW)

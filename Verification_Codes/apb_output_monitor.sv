@@ -34,7 +34,7 @@ class apb_output_monitor extends uvm_monitor;
   endfunction
 
    task run_phase(uvm_phase phase);
-//   repeat(2) @(vif.mon_cb);
+   repeat(2) @(vif.mon_cb);
    forever begin
      @( vif.mon_cb);
  
@@ -67,7 +67,7 @@ class apb_output_monitor extends uvm_monitor;
 		else if(vif.mon_cb.transfer && vif.mon_cb.read_write) begin
             
                    
-                     op_mon_seq.apb_read_paddr = vif.mon_cb.apb_read_paddr;
+                    op_mon_seq.apb_read_paddr = vif.mon_cb.apb_read_paddr;
                     op_mon_seq.apb_read_data_out = vif.mon_cb.apb_read_data_out;
                     
 
