@@ -38,7 +38,7 @@ class apb_seq_item extends uvm_sequence_item;
   endfunction
   
 
-   constraint transfer_c{transfer==1;}
+   constraint transfer_c{soft transfer==1;}
 
    constraint slave_select_c{apb_write_paddr[8] dist {0:=1,1:=1};}
 

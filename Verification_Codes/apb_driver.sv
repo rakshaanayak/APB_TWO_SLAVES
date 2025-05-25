@@ -43,11 +43,11 @@ class apb_driver extends uvm_driver #(apb_seq_item);
     
     //  driving logic 
     if(!vif.presetn) begin
-    vif.drv_cb.transfer       <= 0;
-    vif.drv_cb.read_write     <= 0;
-    vif.drv_cb.apb_read_paddr <= 0;
-    vif.drv_cb.apb_write_paddr<= 0;
-    vif.drv_cb.apb_write_data <= 0;
+    vif.drv_cb.transfer        <= 0;
+    vif.drv_cb.read_write      <= 0;
+    vif.drv_cb.apb_read_paddr  <= 0;
+    vif.drv_cb.apb_write_paddr <= 0;
+    vif.drv_cb.apb_write_data  <= 0;
 
     end
       
