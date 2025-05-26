@@ -136,40 +136,7 @@ req = apb_seq_item::type_id::create("req");
 
 endclass
 
-/*
 
-class apb_repeated_write_access_sequence extends apb_sequence;
- 
-  `uvm_object_utils(apb_repeated_write_access_sequence)
- 
-  function new(string name = "apb_repeated_write_access_sequence");
-   super.new(name);
-  endfunction
-  
- bit [8:0]addr;
- 
- 
-  virtual task body();
- req = apb_seq_item::type_id::create("req");
-
-//    repeat(2)begin
-     `uvm_do_with(req, {req.transfer == 1; req.read_write == 0;req.apb_write_paddr[8] == 0;})
- //    `uvm_send(req);
-      addr = req.apb_write_paddr;
-     
-     `uvm_do_with(req, {req.transfer == 1; req.read_write == 0;req.apb_write_paddr == addr;req.apb_write_paddr[8] == 0;}) 
-     // addr = req.apb_write_paddr;
-     `uvm_do_with(req, {req.transfer == 1; req.read_write == 1; req.apb_read_paddr == addr;})
-   //  `uvm_send(req);
-  //  end
- 
-    
-  endtask
-
-
-endclass
- 
-*/
 class apb_repeated_write_access_sequence extends apb_sequence;
 
   `uvm_object_utils(apb_repeated_write_access_sequence)
@@ -250,8 +217,8 @@ class apb_boundary_address_check_sequence extends apb_sequence;
 
    // void'(req.randomize()with{apb_write_paddr inside {[0:(2**`AW)-1]};apb_read_paddr inside {[0:(2**`AW)-1]};});
      void'(req.randomize() with {
-    apb_write_paddr inside {0, (2**`AW)-1};
-    apb_read_paddr  inside {0, (2**`AW)-1};
+    apb_write_paddr inside {[0:255]};
+    apb_read_paddr  inside {[0:255]};
   });
 
     send_request(req);
