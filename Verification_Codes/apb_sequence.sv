@@ -24,11 +24,11 @@ class apb_sequence extends uvm_sequence #(apb_seq_item);
 
 endclass
 
-class apb_write_sequence extends apb_sequence;
+class apb_write_to_slave1_sequence extends apb_sequence;
  
-  `uvm_object_utils(apb_write_sequence)
+  `uvm_object_utils(apb_write_to_slave1_sequence)
  
-  function new(string name = "apb_write_sequence");
+  function new(string name = "apb_write_to_slave1_sequence");
    super.new(name);
   endfunction
  
@@ -37,7 +37,7 @@ class apb_write_sequence extends apb_sequence;
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
     //req.randomize()with{read_write == 0;apb_write_paddr inside{[0:`AW-1]};};
-    void'(req.randomize()with{transfer==1;read_write == 0;});
+    void'(req.randomize()with{transfer==1;read_write == 0;apb_write_paddr[8]==0;});
     
     
     send_request(req);
@@ -46,6 +46,27 @@ class apb_write_sequence extends apb_sequence;
 endclass
  
 
+class apb_write_to_slave2_sequence extends apb_sequence;
+ 
+  `uvm_object_utils(apb_write_to_slave2_sequence)
+ 
+  function new(string name = "apb_write_to_slave2_sequence");
+   super.new(name);
+  endfunction
+ 
+ 
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+    //req.randomize()with{read_write == 0;apb_write_paddr inside{[0:`AW-1]};};
+    void'(req.randomize()with{transfer==1;read_write == 0;apb_write_paddr[8]==1;});
+    
+    
+    send_request(req);
+    wait_for_item_done();
+  endtask
+endclass
+ 
 class apb_read_sequence extends apb_sequence;
  
   `uvm_object_utils(apb_read_sequence)
@@ -213,6 +234,31 @@ class apb_transfer_disable_sequence extends apb_sequence;
     wait_for_item_done();
   endtask
 endclass
+
+class apb_boundary_address_check_sequence extends apb_sequence;
+
+  `uvm_object_utils(apb_boundary_address_check_sequence)
+
+  function new(string name = "apb_boundary_address_check_sequence");
+   super.new(name);
+  endfunction
+
+
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+    wait_for_grant();
+
+   // void'(req.randomize()with{apb_write_paddr inside {[0:(2**`AW)-1]};apb_read_paddr inside {[0:(2**`AW)-1]};});
+     void'(req.randomize() with {
+    apb_write_paddr inside {0, (2**`AW)-1};
+    apb_read_paddr  inside {0, (2**`AW)-1};
+  });
+
+    send_request(req);
+    wait_for_item_done();
+  endtask
+endclass
+
 
 
 class apb_slave_toggle_sequence extends apb_sequence;

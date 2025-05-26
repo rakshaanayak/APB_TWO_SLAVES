@@ -58,7 +58,7 @@ APB_Protocol dut (
     uvm_config_db #(virtual apb_inf)::set(null,"*","vif",apb_if);
   end
   initial begin
-    run_test("ApbAlternateWriteReadForSlave1Test");
+    run_test("ApbWriteToSlave1Test");
     $finish();
   end
 endmodule

@@ -68,7 +68,7 @@ class apb_output_monitor extends uvm_monitor;
 
 		else if(vif.mon_cb.transfer && vif.mon_cb.read_write) begin
             
-               //    @(posedge vif.pclk);  // wait for one clock cycle
+                   //@(posedge vif.pclk);  // wait for one clock cycle
 
                     op_mon_seq.apb_read_paddr = vif.mon_cb.apb_read_paddr;
                     op_mon_seq.apb_read_data_out = vif.mon_cb.apb_read_data_out;
