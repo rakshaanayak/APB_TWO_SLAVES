@@ -17,3 +17,23 @@ Trace back: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c
     (command bound to event)
   <2:/tools/mentor/questasim_10.6c/questasim/linux/tk8.6/bgerror.tcl:106: ::tkerror {can't set "vsimPriv(dragging_cursor)": invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c.nlv.timebar"}
   <1:eval:1: ::tk::dialog::error::bgerror {can't set "vsimPriv(dragging_cursor)": invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c.nlv.timebar"}
+Tue May 27 17:11:26 IST 2025
+Trace back: can't read "_clients(.main_pane.wave15)": no such element in array
+    while executing
+"set co $_clients($client)"
+    (object "::.bookmarkmgr" method "::vsimwidgets::bookmarkmgr::_client_restore" body line 4)
+    invoked from within
+"::.bookmarkmgr _client_restore .main_pane.wave15"
+    (in namespace inscope "::vsimwidgets::bookmarkmgr" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::bookmarkmgr {::.bookmarkmgr _client_restore .main_pane.wave15}"
+    ("after" script)
+  <2:/tools/mentor/questasim_10.6c/questasim/linux/tk8.6/bgerror.tcl:106: ::tkerror {can't read "_clients(.main_pane.wave15)": no such element in array}
+  <1:eval:1: ::tk::dialog::error::bgerror {can't read "_clients(.main_pane.wave15)": no such element in array}
+Tue May 27 17:11:56 IST 2025
+Trace back: invalid command name ".main_pane.wave15.interior.cs.body.pw.wf.tree.tree2"
+    while executing
+".main_pane.wave15.interior.cs.body.pw.wf.tree.tree2 update"
+    ("after" script)
+  <2:/tools/mentor/questasim_10.6c/questasim/linux/tk8.6/bgerror.tcl:106: ::tkerror {invalid command name ".main_pane.wave15.interior.cs.body.pw.wf.tree.tree2"}
+  <1:proc:14: ::tk::dialog::error::bgerror {invalid command name ".main_pane.wave15.interior.cs.body.pw.wf.tree.tree2"}

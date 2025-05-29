@@ -137,12 +137,12 @@ req = apb_seq_item::type_id::create("req");
 endclass
 
 
-class apb_repeated_write_access_sequence extends apb_sequence;
+class apb_repeated_write_access_to_slave1_sequence extends apb_sequence;
 
-  `uvm_object_utils(apb_repeated_write_access_sequence)
+  `uvm_object_utils(apb_repeated_write_access_to_slave1_sequence)
   //`uvm_declare_p_sequencer(apb_sequencer)
 
-  function new(string name = "apb_repeated_write_access_sequence");
+  function new(string name = "apb_repeated_write_access_to_slave1_sequence");
     super.new(name);
   endfunction
 
@@ -156,6 +156,48 @@ class apb_repeated_write_access_sequence extends apb_sequence;
       transfer == 1;
       read_write == 0;
       apb_write_paddr[8] == 0;
+    })
+    addr = req.apb_write_paddr;
+
+    // Second write (another random data) to same address
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+      apb_write_paddr == addr;
+    })
+    #100;
+//     repeat (2) @(posedge pclk);
+
+    //  repeat(2) @(posedge p_sequencer.vif.pclk);
+    // Read from same address
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 1;
+      apb_read_paddr == addr;
+    })
+  endtask
+
+endclass
+
+class apb_repeated_write_access_to_slave2_sequence extends apb_sequence;
+
+  `uvm_object_utils(apb_repeated_write_access_to_slave2_sequence)
+  //`uvm_declare_p_sequencer(apb_sequencer)
+
+  function new(string name = "apb_repeated_write_access_to_slave2_sequence");
+    super.new(name);
+  endfunction
+
+  bit [8:0] addr;
+
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+
+    // First write (random data) to Slave 2
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+      apb_write_paddr[8] == 1;
     })
     addr = req.apb_write_paddr;
 
@@ -202,6 +244,38 @@ class apb_transfer_disable_sequence extends apb_sequence;
   endtask
 endclass
 
+class apb_write_read_different_address_sequence extends apb_sequence;
+
+  `uvm_object_utils(apb_write_read_different_address_sequence)
+
+  function new(string name = "apb_write_read_different_address_sequence");
+    super.new(name);
+  endfunction
+
+  bit [8:0] addr;
+
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+
+    // First write (random data) to Slave 1
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+      apb_write_paddr[8] == 0;
+    })
+    addr = req.apb_write_paddr;
+
+    // Read from another address
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 1;
+      apb_read_paddr != addr;
+    })
+  endtask
+
+endclass
+
+
 class apb_boundary_address_check_sequence extends apb_sequence;
 
   `uvm_object_utils(apb_boundary_address_check_sequence)
@@ -227,6 +301,67 @@ class apb_boundary_address_check_sequence extends apb_sequence;
 endclass
 
 
+class apb_write_read_for_alternate_slaves_sequence extends apb_sequence;
+
+  `uvm_object_utils(apb_write_read_for_alternate_slaves_sequence)
+
+  function new(string name = "apb_write_read_for_alternate_slaves_sequence");
+    super.new(name);
+  endfunction
+
+  bit [8:0] addr_s1,addr_s2;
+
+  virtual task body();
+    req = apb_seq_item::type_id::create("req");
+
+    // Cycle 1: Slave 1, write
+   //addr = {1'b0, 8'b0000_0100};
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+   //   req.apb_write_paddr == addr;
+     apb_write_paddr[8] == 0;
+    })
+    addr_s1=req.apb_write_paddr;
+
+    #100;
+    // Cycle 2: Slave 2, write
+    //addr = {1'b1, 8'b0000_0100};
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+      //req.apb_write_paddr == addr;
+      apb_write_paddr[8] == 1;
+    })
+    addr_s2=req.apb_write_paddr;
+
+    #100;
+    // Cycle 3: Slave 1, read
+    //addr = {1'b0, 8'b0000_0100};
+    //req.apb_read_paddr=addr_s1;
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 1;
+      apb_read_paddr == addr_s1;
+      apb_write_paddr[8] == 0;
+    })
+
+    #100;
+    // Cycle 4: Slave 2, read
+    //addr = {1'b1, 8'b0000_0100};
+     //req.apb_read_paddr=addr_s2;
+    `uvm_do_with(req, {
+     transfer == 1;
+      read_write == 1;
+      apb_read_paddr == addr_s2;
+    apb_write_paddr[8] == 1;
+    })
+    //#100;
+  endtask
+
+endclass
+
+
 
 class apb_slave_toggle_sequence extends apb_sequence;
 
@@ -242,43 +377,46 @@ class apb_slave_toggle_sequence extends apb_sequence;
     req = apb_seq_item::type_id::create("req");
 
     // Cycle 1: Slave 1, write
-   addr = {1'b0, 8'b0000_0100};
+   //addr = {1'b0, 8'b0000_0100};
     `uvm_do_with(req, {
       req.transfer == 1;
       req.read_write == 0;
-      req.apb_write_paddr == addr;
-   //   apb_write_paddr[8] == 0;
+   //   req.apb_write_paddr == addr;
+     req.apb_write_paddr[8] == 0;
     })
+    addr=req.apb_write_paddr;
 
+    #100;
     // Cycle 2: Slave 2, write
-    addr = {1'b1, 8'b0000_0100};
+    //addr = {1'b1, 8'b0000_0100};
     `uvm_do_with(req, {
       req.transfer == 1;
       req.read_write == 0;
-      req.apb_write_paddr == addr;
-   //   apb_write_paddr[8] == 1;
+      //req.apb_write_paddr == addr;
+      req.apb_write_paddr[8] == 1;
     })
+    addr=req.apb_write_paddr;
 
+    #100;
     // Cycle 3: Slave 1, write
-    addr = {1'b0, 8'b0000_0100};
+    //addr = {1'b0, 8'b0000_0100};
     `uvm_do_with(req, {
       req.transfer == 1;
       req.read_write == 0;
       req.apb_write_paddr == addr;
-   //   apb_write_paddr[8] == 0;
+      req.apb_write_paddr[8] == 0;
     })
 
+    #100;
     // Cycle 4: Slave 2, read
-    addr = {1'b1, 8'b0000_0100};
+    //addr = {1'b1, 8'b0000_0100};
     `uvm_do_with(req, {
      req.transfer == 1;
       req.read_write == 1;
       req.apb_read_paddr == addr;
- //     apb_write_paddr[8] == 1;
+     req.apb_write_paddr[8] == 1;
     })
   endtask
 
 endclass
-
-
 

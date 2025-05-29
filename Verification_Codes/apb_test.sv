@@ -171,9 +171,9 @@ class ApbAlternateWriteReadForSlave1Test extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+  //  repeat(5) begin
       alternate_write_read_for_slave1_seq.start(env.a_agent_h.sequencer_h);
-    end
+    //end
      #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1  ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
@@ -213,20 +213,20 @@ endclass:ApbAlternateWriteReadForSlave2Test
 
 
 
-class ApbRepeatedWriteAccessTest extends apb_test;
-  `uvm_component_utils(ApbRepeatedWriteAccessTest)
+class ApbRepeatedWriteAccessToSlave1Test extends apb_test;
+  `uvm_component_utils(ApbRepeatedWriteAccessToSlave1Test)
 
-  apb_repeated_write_access_sequence repeated_write_access_seq;
+  apb_repeated_write_access_to_slave1_sequence repeated_write_access_to_slave1_seq;
 
-  function new(string name = "RepeatedWriteAccessTest", uvm_component parent = null);
+  function new(string name = "RepeatedWriteAccessToSlave1Test", uvm_component parent = null);
     super.new(name,parent);
   endfunction
 
   virtual function void build_phase(uvm_phase phase);
      super.build_phase(phase);
      //create sequences
-    repeated_write_access_seq = apb_repeated_write_access_sequence::type_id::create(" repeated_write_access_seq ");
-    `uvm_info("RepeatedWriteAccessTest","Inside wr_rd_test BULID_PHASE",UVM_HIGH);
+    repeated_write_access_to_slave1_seq = apb_repeated_write_access_to_slave1_sequence::type_id::create(" repeated_write_access_to_slave1_seq ");
+    `uvm_info("RepeatedWriteAccessToSlave1Test","Inside repeated_write_access_to_slave1_test BULID_PHASE",UVM_HIGH);
   endfunction :build_phase
 
   task run_phase(uvm_phase phase);
@@ -234,16 +234,54 @@ class ApbRepeatedWriteAccessTest extends apb_test;
     phase.raise_objection(this);
     //#20;
     
-    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE BEGINS !!!-------------------------------\n",UVM_LOW)
-    //repeat(5) begin
-     repeated_write_access_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+    repeat(5) begin
+     repeated_write_access_to_slave1_seq.start(env.a_agent_h.sequencer_h);
+    end
     #100;
-    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ENDS !!!----------------------------------\n",UVM_LOW)
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE TO SLAVE1 ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
     
   endtask
 endclass
+
+
+
+
+class ApbRepeatedWriteAccessToSlave2Test extends apb_test;
+  `uvm_component_utils(ApbRepeatedWriteAccessToSlave2Test)
+
+  apb_repeated_write_access_to_slave2_sequence repeated_write_access_to_slave2_seq;
+
+  function new(string name = "RepeatedWriteAccessToSlave2Test", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+    repeated_write_access_to_slave2_seq = apb_repeated_write_access_to_slave2_sequence::type_id::create(" repeated_write_access_to_slave2_seq ");
+    `uvm_info("RepeatedWriteAccessToSlave2Test","Inside repeated_write_access_to_slave2_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+    
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+    repeat(5) begin
+     repeated_write_access_to_slave2_seq.start(env.a_agent_h.sequencer_h);
+    end
+    #100;
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE TO SLAVE2 ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+    
+  endtask
+endclass
+
+
+
 
 class ApbTransferDisableTest extends apb_test;
   `uvm_component_utils(ApbTransferDisableTest)
@@ -278,6 +316,39 @@ class ApbTransferDisableTest extends apb_test;
 endclass:ApbTransferDisableTest
 
 
+class ApbWriteReadDifferentAddressTest extends apb_test;
+  `uvm_component_utils(ApbWriteReadDifferentAddressTest )
+
+ apb_write_read_different_address_sequence write_read_different_address_seq;
+
+  function new(string name = "ApbWriteReadDifferentAddressTest ", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+    write_read_different_address_seq = apb_write_read_different_address_sequence::type_id::create(" write_read_different_address_seq ");
+    `uvm_info("ApbWriteReadDifferentAddressTest","Inside  write_read_different_address_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+
+    `uvm_info("SEQUENCE","\n----------------------------!!!  WRITE READ DIFFERENT ADDRESS BEGINS !!!-------------------------------\n",UVM_LOW)
+    //repeat(5) begin
+     write_read_different_address_seq.start(env.a_agent_h.sequencer_h);
+    //end
+    #100;
+    `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ DIFFERENT ADDRESS ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+
+  endtask
+endclass
+
+
 class ApbBoundaryAddressCheckTest extends apb_test;
   `uvm_component_utils( ApbBoundaryAddressCheckTest)
 
@@ -309,6 +380,40 @@ class ApbBoundaryAddressCheckTest extends apb_test;
     phase.drop_objection(this);
   endtask
 endclass:ApbBoundaryAddressCheckTest
+
+
+class ApbWriteReadForAlternateSlavesTest extends apb_test;
+  `uvm_component_utils(ApbWriteReadForAlternateSlavesTest )
+
+ apb_write_read_for_alternate_slaves_sequence write_read_for_alternate_slaves_seq;
+
+  function new(string name = "ApbWriteReadForAlternateSlavesTest ", uvm_component parent = null);
+    super.new(name,parent);
+  endfunction
+
+  virtual function void build_phase(uvm_phase phase);
+     super.build_phase(phase);
+     //create sequences
+   write_read_for_alternate_slaves_seq = apb_write_read_for_alternate_slaves_sequence::type_id::create(" write_read_for_alternate_slaves_seq ");
+    `uvm_info("ApbWriteReadForAlternateSlavesTest","Inside  write_read_for_alternate_slaves_test BULID_PHASE",UVM_HIGH);
+  endfunction :build_phase
+
+  task run_phase(uvm_phase phase);
+    super.run_phase(phase);
+    phase.raise_objection(this);
+    //#20;
+
+    `uvm_info("SEQUENCE","\n----------------------------!!!  WRITE READ FOR ALTERNATE SLAVES BEGINS !!!-------------------------------\n",UVM_LOW)
+    //repeat(5) begin
+     write_read_for_alternate_slaves_seq.start(env.a_agent_h.sequencer_h);
+    //end
+    #100;
+    `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ FOR ALTERNATE SLAVES  ENDS !!!----------------------------------\n",UVM_LOW)
+    phase.drop_objection(this);
+
+  endtask
+endclass
+
 
 
 class ApbSlaveToggleTest extends apb_test;
@@ -358,9 +463,14 @@ class ApbRegressionTest extends apb_test;
    apb_alternate_write_read_for_slave1_sequence seq_alternate_write_read_for_slave1;
    apb_alternate_write_read_for_slave2_sequence seq_alternate_write_read_for_slave2;
      
-   apb_repeated_write_access_sequence seq_repeated_write_access;
+   apb_repeated_write_access_to_slave1_sequence seq_repeated_write_access_to_slave1;
+   apb_repeated_write_access_to_slave2_sequence seq_repeated_write_access_to_slave2;
+  
    apb_transfer_disable_sequence seq_transfer_disable;
-  // apb_slave_toggle_sequence seq_slave_toggle;
+  // apb_boundary_address_check_sequence seq_boundary_address_check;
+  // apb_write_read_different_address_sequence seq_write_read_different_address;
+  // apb_write_read_for_alternate_slaves_sequence seq_write_read_for_alternate_slaves;
+   apb_slave_toggle_sequence seq_slave_toggle;
 
    function new(string name ="ApbRegressionTest",uvm_component parent);
      super.new(name,parent);
@@ -378,10 +488,21 @@ class ApbRegressionTest extends apb_test;
 
    seq_alternate_write_read_for_slave2=apb_alternate_write_read_for_slave2_sequence::type_id::create("seq_alternate_write_read_for_slave2");
  
-   seq_repeated_write_access=apb_repeated_write_access_sequence::type_id::create("seq_repeated_write_access");
+   seq_repeated_write_access_to_slave1=apb_repeated_write_access_to_slave1_sequence::type_id::create("seq_repeated_write_access_to_slave1");
+
+   seq_repeated_write_access_to_slave2=apb_repeated_write_access_to_slave2_sequence::type_id::create("seq_repeated_write_access_to_slave2");
+
 
    seq_transfer_disable =apb_transfer_disable_sequence::type_id::create("seq_transfer_disable");
-  // seq_slave_toggle= apb_slave_toggle_sequence::type_id::create("seq_slave_toggle");
+  
+   //seq_boundary_address_check =apb_boundary_address_check_sequence::type_id::create("seq_boundary_address_check");
+
+
+   //seq_write_read_different_address =apb_write_read_different_address_sequence::type_id::create("seq_write_read_different_address");
+
+   //seq_write_read_for_alternate_slaves =apb_write_read_for_alternate_slaves_sequence::type_id::create("seq_write_read_for_alternate_slaves");
+  
+   seq_slave_toggle= apb_slave_toggle_sequence::type_id::create("seq_slave_toggle");
     endfunction:build_phase
 
 
@@ -433,9 +554,17 @@ class ApbRegressionTest extends apb_test;
  phase.raise_objection (this);
       repeat(1)
       begin
-        seq_repeated_write_access.start(env.a_agent_h.sequencer_h);
+        seq_repeated_write_access_to_slave1.start(env.a_agent_h.sequencer_h);
       end
       phase.drop_objection(this);
+
+  phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_repeated_write_access_to_slave2.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection(this);
+
 
 
     phase.raise_objection (this);
@@ -444,8 +573,35 @@ class ApbRegressionTest extends apb_test;
         seq_transfer_disable.start(env.a_agent_h.sequencer_h);
       end
       phase.drop_objection(this);
- 
+
+
+  /*  phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_boundary_address_check.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection(this);
+*/
+
 /*
+     
+    phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_write_read_different_address.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection(this);
+
+*/
+
+ /*
+     phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_write_read_for_alternate_slaves.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection(this);
+ */
 
 
     phase.raise_objection (this);
@@ -455,7 +611,7 @@ class ApbRegressionTest extends apb_test;
       end
       phase.drop_objection(this);
  
-*/
+
      `uvm_info(get_type_name(),"----------------------",UVM_LOW)
       `uvm_info(get_type_name(),$sformatf("-------------------------!!REGRESSION TEST COMPLETE !!-------------------"),UVM_LOW)
       `uvm_info(get_type_name(),"----------------------",UVM_LOW)

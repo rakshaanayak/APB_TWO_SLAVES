@@ -93,7 +93,7 @@ endproperty
 
 property checkReadDataValidity;
   @(posedge pclk) disable iff (!presetn)
-  (transfer && read_write) |-> !$isunknown(apb_read_data_out);
+  (transfer && read_write) |=> !$isunknown(apb_read_data_out);
 endproperty
 
   assert property (checkReadDataValidity)
