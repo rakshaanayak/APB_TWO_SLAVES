@@ -1,4 +1,5 @@
 apb_active_agent.sv
+apb_coverage.sv
 apb_driver.sv
 apb_env.sv
 apb_input_monitor.sv

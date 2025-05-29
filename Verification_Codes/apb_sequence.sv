@@ -275,30 +275,42 @@ class apb_write_read_different_address_sequence extends apb_sequence;
 
 endclass
 
-
 class apb_boundary_address_check_sequence extends apb_sequence;
 
   `uvm_object_utils(apb_boundary_address_check_sequence)
 
   function new(string name = "apb_boundary_address_check_sequence");
-   super.new(name);
+    super.new(name);
   endfunction
 
-
   virtual task body();
+
+
     req = apb_seq_item::type_id::create("req");
-    wait_for_grant();
+    //start_item(req);
+    `uvm_do_with(req,{
+      transfer         == 1;
+      read_write       == 0;
+      apb_write_paddr  == (2**`AW) - 1;
+    });
+//    req.apb_write_data = 8'hB0;
+    //finish_item(req);
 
-   // void'(req.randomize()with{apb_write_paddr inside {[0:(2**`AW)-1]};apb_read_paddr inside {[0:(2**`AW)-1]};});
-     void'(req.randomize() with {
-    apb_write_paddr inside {[0:255]};
-    apb_read_paddr  inside {[0:255]};
-  });
+    req = apb_seq_item::type_id::create("req");
+//    start_item(req);
+    `uvm_do_with(req,{
+      transfer        == 1;
+      read_write      == 1;
+      apb_read_paddr  == (2**`AW) - 1;
+    });
+  //  finish_item(req);
 
-    send_request(req);
-    wait_for_item_done();
   endtask
+
 endclass
+ 
+
+
 
 
 class apb_write_read_for_alternate_slaves_sequence extends apb_sequence;

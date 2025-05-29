@@ -38,7 +38,7 @@ class apb_driver extends uvm_driver #(apb_seq_item);
   endtask
 
   virtual task drive();
-    repeat(2)@(vif.drv_cb);
+   repeat(2)@(vif.drv_cb);
       @(vif.drv_cb) begin
     
     //  driving logic 
@@ -52,9 +52,12 @@ class apb_driver extends uvm_driver #(apb_seq_item);
     end
       
    else begin
+//    repeat(2)@(vif.drv_cb);
+    
     vif.drv_cb.transfer       <= req.transfer;
     vif.drv_cb.read_write     <= req.read_write;
    
+
     if(vif.drv_cb.transfer ) begin
     if(vif.drv_cb.read_write) begin
     vif.drv_cb.apb_read_paddr <= req.apb_read_paddr;

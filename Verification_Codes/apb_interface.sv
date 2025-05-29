@@ -41,17 +41,17 @@ interface apb_inf
 
 
 //assertions
-/*property checkWrite;
+property checkTransfer;
   @(posedge pclk) disable iff (!presetn)
-  transfer |-> !read_write ;
+  transfer |->read_write ? !$isunknown(apb_read_paddr):!$isunknown(apb_write_paddr);
 endproperty
 
- assert property (checkWrite)
-    $info("Valid Write ");
-  else $error("Invalid Write!");
- */
-
-/*property checkRead;
+ assert property (checkTransfer)
+    $info("Valid Transfer ");
+  else $error("Invalid Transfer!");
+ 
+/*
+property checkReset;
   @(posedge pclk) disable iff (!presetn)
   transfer |-> read_write ;
 endproperty

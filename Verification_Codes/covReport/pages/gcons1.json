@@ -1,0 +1,7 @@
+var g_db_data = [
+{dummy:0},
+{name:'fun_cov_ip',f:1,type:6,id:1561,tb:'17',h:'14',m:'3',hp:'82.35%',cov:['88.88%','Y'],g:'100.00%',gp:['88.88%','Y'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/apb_top_sv_unit/apb_coverage',parent:'1556'},
+{name:'fun_cov_op',f:1,type:6,id:1571,tb:'7',h:'7',m:'0',hp:'100.00%',cov:['100.00%','G'],g:'100.00%',gp:['100.00%','G'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/apb_top_sv_unit/apb_coverage',parent:'1556'},
+{name:'fun_cov_ip',f:1,type:6,id:2194,tb:'17',h:'14',m:'3',hp:'82.35%',cov:['88.88%','Y'],g:'100.00%',gp:['88.88%','Y'],opts:[[],['merge_instance','true']],hdlPath:'work.apb_top_sv_unit::apb_coverage',parent:'2189'},
+{name:'fun_cov_op',f:1,type:6,id:2204,tb:'7',h:'7',m:'0',hp:'100.00%',cov:['100.00%','G'],g:'100.00%',gp:['100.00%','G'],opts:[[],['merge_instance','true']],hdlPath:'work.apb_top_sv_unit::apb_coverage',parent:'2189'}];
+processConsCovergroupsData(g_db_data);

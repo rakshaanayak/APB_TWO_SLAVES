@@ -21,18 +21,22 @@ class apb_env extends uvm_env;
   apb_active_agent  a_agent_h;
   apb_passive_agent p_agent_h;
   apb_scoreboard    sb_h;
+  apb_coverage cov_h;
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     a_agent_h = apb_active_agent::type_id::create("a_agent_h", this);
     p_agent_h = apb_passive_agent::type_id::create("p_agent_h", this);
     sb_h      = apb_scoreboard::type_id::create("sb_h", this);
+    cov_h    = apb_coverage::type_id::create("cov_h",this);
   endfunction
 
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
     a_agent_h.ip_mon_h.ip_mon_port.connect(sb_h.aport_ip);
     p_agent_h.op_mon_h.op_mon_port.connect(sb_h.aport_op);
+    a_agent_h.ip_mon_h.ip_mon_port.connect(cov_h.ip_mon_imp);
+    p_agent_h.op_mon_h.op_mon_port.connect(cov_h.op_mon_imp);
   endfunction
 
 endclass

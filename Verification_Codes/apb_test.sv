@@ -171,9 +171,9 @@ class ApbAlternateWriteReadForSlave1Test extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
-  //  repeat(5) begin
+    repeat(5) begin
       alternate_write_read_for_slave1_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    end
      #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1  ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
@@ -338,9 +338,9 @@ class ApbWriteReadDifferentAddressTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!!  WRITE READ DIFFERENT ADDRESS BEGINS !!!-------------------------------\n",UVM_LOW)
-    //repeat(5) begin
+    repeat(5) begin
      write_read_different_address_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    end
     #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ DIFFERENT ADDRESS ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
@@ -404,9 +404,9 @@ class ApbWriteReadForAlternateSlavesTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!!  WRITE READ FOR ALTERNATE SLAVES BEGINS !!!-------------------------------\n",UVM_LOW)
-    //repeat(5) begin
+    repeat(5) begin
      write_read_for_alternate_slaves_seq.start(env.a_agent_h.sequencer_h);
-    //end
+    end
     #100;
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ FOR ALTERNATE SLAVES  ENDS !!!----------------------------------\n",UVM_LOW)
     phase.drop_objection(this);
@@ -467,7 +467,7 @@ class ApbRegressionTest extends apb_test;
    apb_repeated_write_access_to_slave2_sequence seq_repeated_write_access_to_slave2;
   
    apb_transfer_disable_sequence seq_transfer_disable;
-  // apb_boundary_address_check_sequence seq_boundary_address_check;
+   apb_boundary_address_check_sequence seq_boundary_address_check;
   // apb_write_read_different_address_sequence seq_write_read_different_address;
   // apb_write_read_for_alternate_slaves_sequence seq_write_read_for_alternate_slaves;
    apb_slave_toggle_sequence seq_slave_toggle;
@@ -495,7 +495,7 @@ class ApbRegressionTest extends apb_test;
 
    seq_transfer_disable =apb_transfer_disable_sequence::type_id::create("seq_transfer_disable");
   
-   //seq_boundary_address_check =apb_boundary_address_check_sequence::type_id::create("seq_boundary_address_check");
+   seq_boundary_address_check =apb_boundary_address_check_sequence::type_id::create("seq_boundary_address_check");
 
 
    //seq_write_read_different_address =apb_write_read_different_address_sequence::type_id::create("seq_write_read_different_address");
@@ -575,13 +575,13 @@ class ApbRegressionTest extends apb_test;
       phase.drop_objection(this);
 
 
-  /*  phase.raise_objection (this);
+    phase.raise_objection (this);
       repeat(1)
       begin
         seq_boundary_address_check.start(env.a_agent_h.sequencer_h);
       end
       phase.drop_objection(this);
-*/
+
 
 /*
      
@@ -593,16 +593,16 @@ class ApbRegressionTest extends apb_test;
       phase.drop_objection(this);
 
 */
-
- /*
+/*
+ 
      phase.raise_objection (this);
       repeat(1)
       begin
         seq_write_read_for_alternate_slaves.start(env.a_agent_h.sequencer_h);
       end
       phase.drop_objection(this);
- */
-
+ 
+*/
 
     phase.raise_objection (this);
       repeat(1)
