@@ -69,7 +69,7 @@ class ApbWriteToSlave1Test extends apb_test;
     //#20;
     
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
       write_to_slave1_seq.start(env.a_agent_h.sequencer_h);
     end
     #100;
@@ -104,7 +104,7 @@ class ApbWriteToSlave2Test extends apb_test;
     //#20;
     
     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
       write_to_slave2_seq.start(env.a_agent_h.sequencer_h);
     end
     #100;
@@ -138,7 +138,7 @@ class ApbReadTest extends apb_test;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! READ BEGINS !!!-------------------------------\n",UVM_LOW)
         //env.sb_h.ref_mem[9'h108] = 8'hA5;  // Preload expected data at address 108
-    repeat(5) begin
+    repeat(10) begin
       read_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -171,7 +171,7 @@ class ApbAlternateWriteReadForSlave1Test extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
       alternate_write_read_for_slave1_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -202,7 +202,7 @@ class ApbAlternateWriteReadForSlave2Test extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
       alternate_write_read_for_slave2_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -235,7 +235,7 @@ class ApbRepeatedWriteAccessToSlave1Test extends apb_test;
     //#20;
     
     `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
      repeated_write_access_to_slave1_seq.start(env.a_agent_h.sequencer_h);
     end
     #100;
@@ -270,7 +270,7 @@ class ApbRepeatedWriteAccessToSlave2Test extends apb_test;
     //#20;
     
     `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
      repeated_write_access_to_slave2_seq.start(env.a_agent_h.sequencer_h);
     end
     #100;
@@ -306,7 +306,7 @@ class ApbTransferDisableTest extends apb_test;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! DISABLING OF TRANSFER BEGINS !!!-------------------------------\n",UVM_LOW)
       
-    repeat(5) begin
+    repeat(10) begin
       transfer_disable_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -338,7 +338,7 @@ class ApbWriteReadDifferentAddressTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!!  WRITE READ DIFFERENT ADDRESS BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
      write_read_different_address_seq.start(env.a_agent_h.sequencer_h);
     end
     #100;
@@ -372,7 +372,7 @@ class ApbBoundaryAddressCheckTest extends apb_test;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! BOUNDARY ADDRESS CHECK BEGINS !!!-------------------------------\n",UVM_LOW)
 
-    repeat(5) begin
+    repeat(10) begin
       boundary_address_check_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;
@@ -404,7 +404,7 @@ class ApbWriteReadForAlternateSlavesTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!!  WRITE READ FOR ALTERNATE SLAVES BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
      write_read_for_alternate_slaves_seq.start(env.a_agent_h.sequencer_h);
     end
     #100;
@@ -438,7 +438,7 @@ class ApbSlaveToggleTest extends apb_test;
     //#20;
 
     `uvm_info("SEQUENCE","\n----------------------------!!! SLAVE TOGGLE BEGINS !!!-------------------------------\n",UVM_LOW)
-    repeat(5) begin
+    repeat(10) begin
       apb_slave_toggle_seq.start(env.a_agent_h.sequencer_h);
     end
      #100;

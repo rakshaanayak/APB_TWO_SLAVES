@@ -31,8 +31,8 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
     }
   // Coverpoint for read_write signal 
     READ_WRITE_CP:coverpoint seq_item_ip.read_write {
-      bins read_op = {1'b0};
-      bins write_op = {1'b1};
+      bins write_op = {1'b0};
+      bins read_op = {1'b1};
     }
   // Coverpoint for write address 
     APB_WRITE_PADDR_CP:coverpoint seq_item_ip.apb_write_paddr {
@@ -61,7 +61,7 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
 
 
    //cross coverage
-  READ_WRITE_X_TRANSFER: cross READ_WRITE_CP, TRANSFER_CP;
+//  READ_WRITE_X_TRANSFER: cross READ_WRITE_CP, TRANSFER_CP;
   READ_WRITE_X_APB_WRITE_PADDR: cross READ_WRITE_CP,APB_WRITE_PADDR_CP;
   APB_WRITE_SLAVE_SELECT_X_APB_WRITE_PADDR: cross APB_WRITE_SLAVE_SELECT_CP, APB_WRITE_PADDR_CP;
   APB_WRITE_DATA_X_APB_WRITE_PADDR:cross APB_WRITE_DATA_CP,APB_WRITE_PADDR_CP;

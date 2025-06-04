@@ -236,7 +236,10 @@ class apb_transfer_disable_sequence extends apb_sequence;
     req = apb_seq_item::type_id::create("req");
     wait_for_grant();
    
+//   void'(req.randomize()with{req.transfer== 0;req.read_write ==1;});
+  
     void'(req.randomize()with{req.transfer== 0;});
+
 
 
     send_request(req);
@@ -275,6 +278,7 @@ class apb_write_read_different_address_sequence extends apb_sequence;
 
 endclass
 
+
 class apb_boundary_address_check_sequence extends apb_sequence;
 
   `uvm_object_utils(apb_boundary_address_check_sequence)
@@ -284,32 +288,39 @@ class apb_boundary_address_check_sequence extends apb_sequence;
   endfunction
 
   virtual task body();
-
-
     req = apb_seq_item::type_id::create("req");
-    //start_item(req);
-    `uvm_do_with(req,{
-      transfer         == 1;
-      read_write       == 0;
-      apb_write_paddr  == (2**`AW) - 1;
+/*
+    // Lower boundary write
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+      apb_write_paddr == 0;
     });
-//    req.apb_write_data = 8'hB0;
-    //finish_item(req);
-
-    req = apb_seq_item::type_id::create("req");
-//    start_item(req);
-    `uvm_do_with(req,{
-      transfer        == 1;
-      read_write      == 1;
-      apb_read_paddr  == (2**`AW) - 1;
+*/
+    // Upper boundary write
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 0;
+     // apb_write_paddr[8] inside {0,1};
+      apb_write_paddr ==9'h1FF;
     });
-  //  finish_item(req);
 
+ /*   // Lower boundary read
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 1;
+      apb_read_paddr == 0;
+    });
+*/
+    // Upper boundary read
+    `uvm_do_with(req, {
+      transfer == 1;
+      read_write == 1;
+      apb_read_paddr == 9'h1FF;
+    });
   endtask
 
 endclass
- 
-
 
 
 

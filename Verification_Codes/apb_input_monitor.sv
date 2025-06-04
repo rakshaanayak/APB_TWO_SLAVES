@@ -53,12 +53,13 @@ class apb_input_monitor extends uvm_monitor;
            ip_mon_seq.apb_read_paddr =  vif.mon_cb.apb_read_paddr;
         
         end
+     end
       ip_mon_port.write(ip_mon_seq);
         `uvm_info(get_type_name(),$sformatf("apb_write_paddr = %h, apb_write_data = %h, apb_read_paddr = %h",ip_mon_seq.apb_write_paddr, ip_mon_seq.apb_write_data,ip_mon_seq.apb_read_paddr),UVM_LOW);
     
       ip_mon_seq.print();
     
-      end
+     // end
     end
   endtask
 endclass

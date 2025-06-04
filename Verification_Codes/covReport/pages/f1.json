@@ -3,14 +3,14 @@ f7:{
 scopes:[{link:'z.htm?f=0&s=7',val:'work.master_bridge'}]
 ,FSMs:[{dummy:0}
 ,{anchor:'cvg207',items:[{c:'G',p:'100.00',z:'state'}
-,{cr:'c',s:'1',z:'IDLE',h:'11',c:'g'}
-,{cr:'c',z:'IDLE -> SETUP',h:'9',c:'g'}
-,{cr:'c',s:'1',z:'SETUP',h:'45',c:'g'}
-,{cr:'c',z:'SETUP -> IDLE',h:'6',c:'g'}
-,{cr:'c',z:'SETUP -> ENABLE',h:'38',c:'g'}
-,{cr:'c',s:'1',z:'ENABLE',h:'38',c:'g'}
+,{cr:'c',s:'1',z:'IDLE',h:'12',c:'g'}
+,{cr:'c',z:'IDLE -> SETUP',h:'10',c:'g'}
+,{cr:'c',s:'1',z:'SETUP',h:'48',c:'g'}
+,{cr:'c',z:'SETUP -> IDLE',h:'7',c:'g'}
+,{cr:'c',z:'SETUP -> ENABLE',h:'40',c:'g'}
+,{cr:'c',s:'1',z:'ENABLE',h:'40',c:'g'}
 ,{cr:'c',z:'ENABLE -> IDLE',h:'2',c:'g'}
-,{cr:'c',z:'ENABLE -> SETUP',h:'36',c:'g'}
+,{cr:'c',z:'ENABLE -> SETUP',h:'38',c:'g'}
 ]}
 
 ],
@@ -19,14 +19,14 @@ f165:{
 scopes:[{s:'11',b:'1',val:'apb_top'},{s:'63',b:'0',val:'dut'},{link:'z.htm?f=0&s=165',val:'dut_mas'}]
 ,FSMs:[{dummy:0}
 ,{anchor:'cvg207',items:[{c:'G',p:'100.00',z:'state'}
-,{cr:'c',s:'1',z:'IDLE',h:'11',c:'g'}
-,{cr:'c',z:'IDLE -> SETUP',h:'9',c:'g'}
-,{cr:'c',s:'1',z:'SETUP',h:'45',c:'g'}
-,{cr:'c',z:'SETUP -> IDLE',h:'6',c:'g'}
-,{cr:'c',z:'SETUP -> ENABLE',h:'38',c:'g'}
-,{cr:'c',s:'1',z:'ENABLE',h:'38',c:'g'}
+,{cr:'c',s:'1',z:'IDLE',h:'12',c:'g'}
+,{cr:'c',z:'IDLE -> SETUP',h:'10',c:'g'}
+,{cr:'c',s:'1',z:'SETUP',h:'48',c:'g'}
+,{cr:'c',z:'SETUP -> IDLE',h:'7',c:'g'}
+,{cr:'c',z:'SETUP -> ENABLE',h:'40',c:'g'}
+,{cr:'c',s:'1',z:'ENABLE',h:'40',c:'g'}
 ,{cr:'c',z:'ENABLE -> IDLE',h:'2',c:'g'}
-,{cr:'c',z:'ENABLE -> SETUP',h:'36',c:'g'}
+,{cr:'c',z:'ENABLE -> SETUP',h:'38',c:'g'}
 ]}
 
 ],

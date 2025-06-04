@@ -87,13 +87,13 @@ c7:[{dummy:0}
 ,{anchor:'cvg202',cr:'m',items:[{s:'3',x:'FC',z:'(((apb_read_paddr === x) && READ_WRITE) && ((state == 2) || (state == 4)))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(apb_read_paddr === x)',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
-,{z:'READ_WRITE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
+,{z:'READ_WRITE',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
 ,{z:'(state == 2)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
 ,{z:'(state == 4)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
 ,{}
 ,{n:'1',z:'(apb_read_paddr === x)_0',h1:'1',t:'c',c1:'-'}
 ,{n:'2',z:'(apb_read_paddr === x)_1',h1:'0',t:'c',c1:'(((state == 2) || (state == 4)) && READ_WRITE)'}
-,{n:'3',z:'READ_WRITE_0',h1:'0',t:'c',c1:'(apb_read_paddr === x)'}
+,{n:'3',z:'READ_WRITE_0',h1:'1',t:'c',c1:'(apb_read_paddr === x)'}
 ,{n:'4',z:'READ_WRITE_1',h1:'0',t:'c',c1:'(((state == 2) || (state == 4)) && (apb_read_paddr === x))'}
 ,{n:'5',z:'(state == 2)_0',h1:'0',t:'c',c1:'(((apb_read_paddr === x) && READ_WRITE) && ~(state == 4))'}
 ,{n:'6',z:'(state == 2)_1',h1:'0',t:'c',c1:'((apb_read_paddr === x) && READ_WRITE)'}
@@ -215,13 +215,13 @@ c165:[{dummy:0}
 ,{anchor:'cvg202',cr:'m',items:[{s:'3',x:'FC',z:'(((apb_read_paddr === x) && READ_WRITE) && ((state == 2) || (state == 4)))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(apb_read_paddr === x)',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
-,{z:'READ_WRITE',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
+,{z:'READ_WRITE',c:'r',r:'\'_1\' not hit',i:'Hit \'_1\''}
 ,{z:'(state == 2)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
 ,{z:'(state == 4)',c:'r',r:'No hits',i:'Hit \'_0\' and \'_1\''}
 ,{}
 ,{n:'1',z:'(apb_read_paddr === x)_0',h1:'1',t:'c',c1:'-'}
 ,{n:'2',z:'(apb_read_paddr === x)_1',h1:'0',t:'c',c1:'(((state == 2) || (state == 4)) && READ_WRITE)'}
-,{n:'3',z:'READ_WRITE_0',h1:'0',t:'c',c1:'(apb_read_paddr === x)'}
+,{n:'3',z:'READ_WRITE_0',h1:'1',t:'c',c1:'(apb_read_paddr === x)'}
 ,{n:'4',z:'READ_WRITE_1',h1:'0',t:'c',c1:'(((state == 2) || (state == 4)) && (apb_read_paddr === x))'}
 ,{n:'5',z:'(state == 2)_0',h1:'0',t:'c',c1:'(((apb_read_paddr === x) && READ_WRITE) && ~(state == 4))'}
 ,{n:'6',z:'(state == 2)_1',h1:'0',t:'c',c1:'((apb_read_paddr === x) && READ_WRITE)'}
@@ -579,8 +579,8 @@ c1521:[{dummy:0}
 ,{n:'4',z:'(exp_tr.apb_read_data_out == act_tr.apb_read_data_out)_1',h1:'1',t:'c',c1:'(exp_tr.apb_read_paddr == act_tr.apb_read_paddr)'}
 ]}
 ],
-c2094:[{dummy:0}
-,{anchor:'cvg2099',items:[{s:'3',x:'FC',z:'(vif.mon_cb.transfer && vif.presetn)',c:'Y',p:'50.00',d:'0',F:'1'}
+c2093:[{dummy:0}
+,{anchor:'cvg2098',items:[{s:'3',x:'FC',z:'(vif.mon_cb.transfer && vif.presetn)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.mon_cb.transfer',c:'g',r:'',i:''}
 ,{z:'vif.presetn',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -591,8 +591,8 @@ c2094:[{dummy:0}
 ,{n:'4',z:'vif.presetn_1',h1:'1',t:'c',c1:'vif.mon_cb.transfer'}
 ]}
 ],
-c2108:[{dummy:0}
-,{anchor:'cvg2115',cr:'c',items:[{s:'3',x:'FC',z:'(vif.mon_cb.transfer && ~vif.mon_cb.read_write)',c:'G',p:'100.00',d:'0',F:'1'}
+c2107:[{dummy:0}
+,{anchor:'cvg2114',cr:'c',items:[{s:'3',x:'FC',z:'(vif.mon_cb.transfer && ~vif.mon_cb.read_write)',c:'G',p:'100.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.mon_cb.transfer',c:'g',r:'',i:''}
 ,{z:'vif.mon_cb.read_write',c:'g',r:'',i:''}
@@ -602,7 +602,7 @@ c2108:[{dummy:0}
 ,{n:'3',z:'vif.mon_cb.read_write_0',h1:'1',t:'c',c1:'vif.mon_cb.transfer'}
 ,{n:'4',z:'vif.mon_cb.read_write_1',h1:'1',t:'c',c1:'vif.mon_cb.transfer'}
 ]}
-,{anchor:'cvg2117',items:[{s:'3',x:'FC',z:'(vif.mon_cb.transfer && vif.mon_cb.read_write)',c:'Y',p:'50.00',d:'0',F:'1'}
+,{anchor:'cvg2116',items:[{s:'3',x:'FC',z:'(vif.mon_cb.transfer && vif.mon_cb.read_write)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
 ,{z:'vif.mon_cb.transfer',c:'g',r:'',i:''}
 ,{z:'vif.mon_cb.read_write',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -613,8 +613,8 @@ c2108:[{dummy:0}
 ,{n:'4',z:'vif.mon_cb.read_write_1',h1:'1',t:'c',c1:'vif.mon_cb.transfer'}
 ]}
 ],
-c2148:[{dummy:0}
-,{anchor:'cvg2151',items:[{s:'3',x:'FC',z:'(exp_tr.transfer && ~exp_tr.read_write)',c:'Y',p:'50.00',d:'0',F:'1'}
+c2147:[{dummy:0}
+,{anchor:'cvg2150',items:[{s:'3',x:'FC',z:'(exp_tr.transfer && ~exp_tr.read_write)',c:'Y',p:'50.00',d:'0',F:'1'}
 ,{}
 ,{z:'exp_tr.transfer',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'exp_tr.read_write',c:'g',r:'',i:''}
@@ -624,7 +624,7 @@ c2148:[{dummy:0}
 ,{n:'3',z:'exp_tr.read_write_0',h1:'1',t:'c',c1:'exp_tr.transfer'}
 ,{n:'4',z:'exp_tr.read_write_1',h1:'1',t:'c',c1:'exp_tr.transfer'}
 ]}
-,{anchor:'cvg2153',cr:'m',items:[{s:'3',x:'FC',z:'(exp_tr.transfer && exp_tr.read_write)',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg2152',cr:'m',items:[{s:'3',x:'FC',z:'(exp_tr.transfer && exp_tr.read_write)',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'exp_tr.transfer',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'exp_tr.read_write',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -635,8 +635,8 @@ c2148:[{dummy:0}
 ,{n:'4',z:'exp_tr.read_write_1',h1:'1',t:'c',c1:'exp_tr.transfer'}
 ]}
 ],
-c2154:[{dummy:0}
-,{anchor:'cvg2168',cr:'m',items:[{s:'3',x:'FC',z:'((exp_tr.apb_write_paddr == act_tr.apb_write_paddr) && (exp_tr.apb_write_data == act_tr.apb_write_data))',c:'R',p:'0.00',d:'0',F:'1'}
+c2153:[{dummy:0}
+,{anchor:'cvg2167',cr:'m',items:[{s:'3',x:'FC',z:'((exp_tr.apb_write_paddr == act_tr.apb_write_paddr) && (exp_tr.apb_write_data == act_tr.apb_write_data))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(exp_tr.apb_write_paddr == act_tr.apb_write_paddr)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'(exp_tr.apb_write_data == act_tr.apb_write_data)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
@@ -646,7 +646,7 @@ c2154:[{dummy:0}
 ,{n:'3',z:'(exp_tr.apb_write_data == act_tr.apb_write_data)_0',h1:'0',t:'c',c1:'(exp_tr.apb_write_paddr == act_tr.apb_write_paddr)'}
 ,{n:'4',z:'(exp_tr.apb_write_data == act_tr.apb_write_data)_1',h1:'1',t:'c',c1:'(exp_tr.apb_write_paddr == act_tr.apb_write_paddr)'}
 ]}
-,{anchor:'cvg2170',cr:'m',items:[{s:'3',x:'FC',z:'((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) && (exp_tr.apb_read_data_out == act_tr.apb_read_data_out))',c:'R',p:'0.00',d:'0',F:'1'}
+,{anchor:'cvg2169',cr:'m',items:[{s:'3',x:'FC',z:'((exp_tr.apb_read_paddr == act_tr.apb_read_paddr) && (exp_tr.apb_read_data_out == act_tr.apb_read_data_out))',c:'R',p:'0.00',d:'0',F:'1'}
 ,{}
 ,{z:'(exp_tr.apb_read_paddr == act_tr.apb_read_paddr)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}
 ,{z:'(exp_tr.apb_read_data_out == act_tr.apb_read_data_out)',c:'r',r:'\'_0\' not hit',i:'Hit \'_0\''}

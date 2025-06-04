@@ -23,18 +23,20 @@ interface apb_inf
   logic [`AW-1:0] apb_read_paddr  ;
   logic [`DW-1:0] apb_read_data_out;
 
-
+//driver clocking block
   clocking drv_cb @(posedge pclk or negedge presetn);
     default input #0 output #0;
     output transfer,read_write,apb_write_paddr,apb_read_paddr,apb_write_data;
     input presetn;
   endclocking
 
+//monitor clocking block
   clocking mon_cb @(posedge pclk or negedge presetn);
     default input #0 output #0;
     input transfer,read_write,apb_write_paddr,apb_read_paddr,apb_write_data,apb_read_data_out;
   endclocking
 
+//modports
   modport DRV(clocking drv_cb,input pclk,presetn);
   modport MON(clocking mon_cb,input pclk,presetn);
 
@@ -50,16 +52,6 @@ endproperty
     $info("Valid Transfer ");
   else $error("Invalid Transfer!");
  
-/*
-property checkReset;
-  @(posedge pclk) disable iff (!presetn)
-  transfer |-> read_write ;
-endproperty
-
- assert property (checkRead)
-    $info("Valid Read");
-  else $error("Invalid Read!");
-*/
 
 property checkWriteAddressValidity;
   @(posedge pclk) disable iff (!presetn)
