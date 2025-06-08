@@ -468,6 +468,415 @@ class ApbRegressionTest extends apb_test;
   
    apb_transfer_disable_sequence seq_transfer_disable;
    apb_boundary_address_check_sequence seq_boundary_address_check;
+   //apb_write_read_different_address_sequence seq_write_read_different_address;
+  // apb_write_read_for_alternate_slaves_sequence seq_write_read_for_alternate_slaves;
+   apb_slave_toggle_sequence seq_slave_toggle;
+
+   function new(string name ="ApbRegressionTest",uvm_component parent);
+     super.new(name,parent);
+   endfunction
+
+   virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+
+    seq_write_to_slave1=apb_write_to_slave1_sequence::type_id::create("seq_write_to_slave1");
+  
+    seq_write_to_slave2=apb_write_to_slave2_sequence::type_id::create("seq_write_to_slave2");
+   
+   //seq_read=apb_read_sequence::type_id::create("seq_read");
+   seq_alternate_write_read_for_slave1=apb_alternate_write_read_for_slave1_sequence::type_id::create("seq_alternate_write_read_for_slave1");
+
+   seq_alternate_write_read_for_slave2=apb_alternate_write_read_for_slave2_sequence::type_id::create("seq_alternate_write_read_for_slave2");
+ 
+   seq_repeated_write_access_to_slave1=apb_repeated_write_access_to_slave1_sequence::type_id::create("seq_repeated_write_access_to_slave1");
+
+   seq_repeated_write_access_to_slave2=apb_repeated_write_access_to_slave2_sequence::type_id::create("seq_repeated_write_access_to_slave2");
+
+
+   seq_transfer_disable =apb_transfer_disable_sequence::type_id::create("seq_transfer_disable");
+  
+   seq_boundary_address_check =apb_boundary_address_check_sequence::type_id::create("seq_boundary_address_check");
+
+
+  // seq_write_read_different_address =apb_write_read_different_address_sequence::type_id::create("seq_write_read_different_address");
+
+   //seq_write_read_for_alternate_slaves =apb_write_read_for_alternate_slaves_sequence::type_id::create("seq_write_read_for_alternate_slaves");
+  
+   seq_slave_toggle= apb_slave_toggle_sequence::type_id::create("seq_slave_toggle");
+    endfunction:build_phase
+
+
+    virtual function void end_of_elaboration ();
+      print ();
+    endfunction: end_of_elaboration
+
+
+     bit write_to_slave1_passed;
+     bit write_to_slave2_passed;
+     bit alternate_write_read_for_slave1_passed;
+     bit alternate_write_read_for_slave2_passed;
+     bit repeated_write_access_to_slave1_passed;
+     bit repeated_write_access_to_slave2_passed;
+     bit transfer_disable_passed;
+     bit boundary_address_check_passed;
+//     bit write_read_different_address_passed;
+     bit slave_toggle_passed;
+
+
+   
+//      task automatic print_test_pass(string test_name);
+ /* function void report_phase(uvm_phase phase);
+    uvm_report_server svr;
+    super.report_phase(phase);
+    svr=uvm_report_server::get_server();
+ 
+        if(svr.get_severity_count(UVM_FATAL)+svr.get_severity_count(UVM_ERROR)>0) begin
+    
+          `uvm_info("TEST_PASS", $sformatf("--------------------------------------- %s ---------------------------------------\n", test_name), UVM_NONE)
+          `uvm_info("TEST_PASS", $sformatf("---------------------------          TEST PASS for %s       -------------------------\n", test_name), UVM_NONE)
+          `uvm_info("TEST_PASS", $sformatf("--------------------------------------- %s ---------------------------------------\n", test_name), UVM_NONE)
+
+           end
+        else begin
+           `uvm_info("TEST_FAIL", $sformatf("--------------------------------------- %s ---------------------------------------\n", test_name), UVM_NONE)
+           `uvm_info("TEST_FAIL", $sformatf("---------------------------          TEST FAIL for %s       -------------------------\n", test_name), UVM_NONE)
+           `uvm_info("TEST_FAIL", $sformatf("--------------------------------------- %s ---------------------------------------\n", test_name), UVM_NONE)
+   
+
+           end
+//   endtask
+ endfunction
+   */ 
+/*
+
+     function void report_phase(uvm_phase phase);
+    uvm_report_server svr;
+    super.report_phase(phase);
+    svr=uvm_report_server::get_server();
+    if(svr.get_severity_count(UVM_FATAL)+svr.get_severity_count(UVM_ERROR)>0) begin
+                        `uvm_info(get_type_name(), "---------------------------------------", UVM_NONE)
+                        `uvm_info(get_type_name(), "----            TEST FAIL          ----", UVM_NONE)
+                        `uvm_info(get_type_name(), "---------------------------------------", UVM_NONE)
+                end
+                else begin
+                        `uvm_info(get_type_name(), "---------------------------------------", UVM_NONE)
+                        `uvm_info(get_type_name(), "----           TEST PASS           ----", UVM_NONE)
+                        `uvm_info(get_type_name(), "---------------------------------------", UVM_NONE)
+                end
+                `uvm_info("ALU_TEST","Inside alu_test REPORT_PHASE",UVM_HIGH)
+  endfunction
+
+*/
+
+
+    task run_phase (uvm_phase phase);
+
+     uvm_report_server svr;
+ 
+     svr = uvm_report_server::get_server();
+    
+      phase.raise_objection (this);
+
+     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_write_to_slave1.start(env.a_agent_h.sequencer_h);
+      end
+
+     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE1 ENDS !!!-------------------------------\n",UVM_LOW)
+        
+       write_to_slave1_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+  //    print_test_pass("WRITE_TO_SLAVE1");
+      phase.drop_objection (this);
+     
+      
+      phase.raise_objection (this);
+     `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_write_to_slave2.start(env.a_agent_h.sequencer_h);
+      end
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE2 ENDS !!!-------------------------------\n",UVM_LOW)
+      
+ write_to_slave2_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+    //  print_test_pass("WRITE_TO_SLAVE2");
+     
+      phase.drop_objection (this);
+
+
+
+ /*  phase.raise_objection (this);
+      repeat(1)
+      begin
+        seq_read.start(env.a_agent_h.sequencer_h);
+      end
+      phase.drop_objection (this);
+*/
+
+
+ phase.raise_objection (this);
+    `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_alternate_write_read_for_slave1.start(env.a_agent_h.sequencer_h);
+      end
+    `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 ENDS  !!!-------------------------------\n",UVM_LOW)
+ 
+ alternate_write_read_for_slave1_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+      //print_test_pass("ALTERNATE_WRITE_READ_FOR_SLAVE1");
+     
+      phase.drop_objection(this);
+    
+  phase.raise_objection (this);
+    `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_alternate_write_read_for_slave2.start(env.a_agent_h.sequencer_h);
+      end
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 ENDS !!!-------------------------------\n",UVM_LOW)
+
+ alternate_write_read_for_slave2_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+  
+     // print_test_pass("ALTERNATE_WRITE_READ_FOR_SLAVE2");
+
+
+      phase.drop_objection(this);
+    
+
+ phase.raise_objection (this);
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_repeated_write_access_to_slave1.start(env.a_agent_h.sequencer_h);
+      end
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE1 ENDS !!!-------------------------------\n",UVM_LOW)
+
+  repeated_write_access_to_slave1_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+     // print_test_pass("REPEATED_WRITE_ACCESS_TO_SLAVE1");
+      phase.drop_objection(this);
+
+  phase.raise_objection (this);
+
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_repeated_write_access_to_slave2.start(env.a_agent_h.sequencer_h);
+      end
+    `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE2 ENDS !!!-------------------------------\n",UVM_LOW)
+
+  repeated_write_access_to_slave2_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+     // print_test_pass("REPEATED_WRITE_ACCESS_TO_SLAVE2");
+     
+      phase.drop_objection(this);
+
+
+
+    phase.raise_objection (this);
+    `uvm_info("SEQUENCE","\n----------------------------!!! TRANSFER DISABLE BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_transfer_disable.start(env.a_agent_h.sequencer_h);
+      end
+
+   `uvm_info("SEQUENCE","\n----------------------------!!! TRANSFER DISABLE ENDS !!!-------------------------------\n",UVM_LOW)
+ 
+  transfer_disable_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+     // print_test_pass("TRANSFER_DISABLE");
+     
+      phase.drop_objection(this);
+
+
+    phase.raise_objection (this);
+   `uvm_info("SEQUENCE","\n----------------------------!!! BOUNDARY ADDRESS CHECK  BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+
+      repeat(1)
+      begin
+        seq_boundary_address_check.start(env.a_agent_h.sequencer_h);
+      end
+   `uvm_info("SEQUENCE","\n----------------------------!!! BOUNDARY ADDRESS CHECK  ENDS  !!!-------------------------------\n",UVM_LOW)
+ 
+  boundary_address_check_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+     // print_test_pass("BOUNDARY_ADDRESS_CHECK");
+     
+      phase.drop_objection(this);
+
+
+
+  /*   
+    phase.raise_objection (this);
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ DIFFERENT ADDRESS BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_write_read_different_address.start(env.a_agent_h.sequencer_h);
+      end
+   write_read_different_address_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ DIFFERENT ADDRESS ENDS !!!-------------------------------\n",UVM_LOW)
+ 
+      phase.drop_objection(this);
+
+
+
+ 
+     phase.raise_objection (this);
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ FOR ALTERNATE SLAVES BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+
+      repeat(1)
+      begin
+        seq_write_read_for_alternate_slaves.start(env.a_agent_h.sequencer_h);
+      end
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE READ FOR ALTERNATE SLAVES  ENDS !!!-------------------------------\n",UVM_LOW)
+   write_read_for_alternate_slaves_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+  
+
+
+      phase.drop_objection(this);
+ 
+*/
+
+
+    phase.raise_objection (this);
+   `uvm_info("SEQUENCE","\n----------------------------!!!SLAVE TOGGLE BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+      repeat(1)
+      begin
+        seq_slave_toggle.start(env.a_agent_h.sequencer_h);
+      end
+
+  `uvm_info("SEQUENCE","\n----------------------------!!!SLAVE TOGGLE ENDS !!!-------------------------------\n",UVM_LOW)
+   slave_toggle_passed = (svr.get_severity_count(UVM_ERROR) == 0) && (svr.get_severity_count(UVM_FATAL) == 0);
+ 
+     // print_test_pass("SLAVE_TOGGLE");
+     
+
+
+      phase.drop_objection(this);
+
+
+endtask:run_phase
+
+ function void report_phase(uvm_phase phase);
+  super.report_phase(phase);
+
+  `uvm_info(get_type_name(), "-------- Regression Test Summary --------", UVM_NONE)
+
+  if (write_to_slave1_passed)
+    `uvm_info(get_type_name(), "WRITE_TO_SLAVE1: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "WRITE_TO_SLAVE1: FAIL");
+
+  if (write_to_slave2_passed)
+    `uvm_info(get_type_name(), "WRITE_TO_SLAVE2: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "WRITE_TO_SLAVE2: FAIL");
+
+  if (alternate_write_read_for_slave1_passed)
+    `uvm_info(get_type_name(), "ALTERNATE_WRITE_READ_FOR_SLAVE1: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "ALTERNATE_WRITE_READ_FOR_SLAVE1: FAIL");
+
+  if (alternate_write_read_for_slave2_passed)
+    `uvm_info(get_type_name(), "ALTERNATE_WRITE_READ_FOR_SLAVE2: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "ALTERNATE_WRITE_READ_FOR_SLAVE2: FAIL");
+  
+ if (repeated_write_access_to_slave1_passed)
+    `uvm_info(get_type_name(), "REPEATED_WRITE_ACCESS_TO_SLAVE1: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "REPEATED_WRITE_ACCESS_TO_SLAVE1: FAIL");
+
+ if (repeated_write_access_to_slave2_passed)
+    `uvm_info(get_type_name(), "REPEATED_WRITE_ACCESS_TO_SLAVE2: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "REPEATED_WRITE_ACCESS_TO_SLAVE2: FAIL");
+
+ if (transfer_disable_passed)
+    `uvm_info(get_type_name(), "TRANSFER_DISABLE: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "TRANSFER_DISABLE: FAIL");
+
+ if (boundary_address_check_passed)
+    `uvm_info(get_type_name(), "BOUNDARY_ADDRESS_CHECK: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "BOUNDARY_ADDRESS_CHECK: FAIL");
+/*
+ if (write_read_different_address_passed)
+    `uvm_info(get_type_name(), "WRITE_READ_DIFFERENT_ADDRESS: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "WRITE_READ_DIFFERENT_ADDRESS: FAIL");
+*/
+
+ if (slave_toggle_passed)
+    `uvm_info(get_type_name(), "SLAVE_TOGGLE: PASS", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "SLAVE_TOGGLE: FAIL");
+
+
+
+  if (write_to_slave1_passed && write_to_slave2_passed && alternate_write_read_for_slave1_passed && alternate_write_read_for_slave2_passed && repeated_write_access_to_slave1_passed && repeated_write_access_to_slave2_passed && transfer_disable_passed && boundary_address_check_passed && slave_toggle_passed)
+    `uvm_info(get_type_name(), "REGRESSION TEST RESULT: ALL PASSED", UVM_NONE)
+  else
+    `uvm_error(get_type_name(), "REGRESSION TEST RESULT: SOME TESTS FAILED");
+
+//  `uvm_info(get_type_name(), "---------------------------------------", UVM_NONE)
+
+
+
+    `uvm_info(get_type_name(),"----------------------",UVM_LOW)
+    `uvm_info(get_type_name(),$sformatf("-------------------------!!REGRESSION TEST COMPLETE !!-------------------"),UVM_LOW)
+    `uvm_info(get_type_name(),"----------------------",UVM_LOW)
+endfunction
+
+endclass
+
+
+
+
+
+
+/*
+
+///////////////////REGRESSION TEST/////////////////////////////
+
+class ApbRegressionTest extends apb_test;
+
+  `uvm_component_utils(ApbRegressionTest)
+
+   apb_write_to_slave1_sequence seq_write_to_slave1;
+
+     apb_write_to_slave2_sequence seq_write_to_slave2;
+ 
+  // apb_read_sequence  seq_read;
+   apb_alternate_write_read_for_slave1_sequence seq_alternate_write_read_for_slave1;
+   apb_alternate_write_read_for_slave2_sequence seq_alternate_write_read_for_slave2;
+     
+   apb_repeated_write_access_to_slave1_sequence seq_repeated_write_access_to_slave1;
+   apb_repeated_write_access_to_slave2_sequence seq_repeated_write_access_to_slave2;
+  
+   apb_transfer_disable_sequence seq_transfer_disable;
+   apb_boundary_address_check_sequence seq_boundary_address_check;
   // apb_write_read_different_address_sequence seq_write_read_different_address;
   // apb_write_read_for_alternate_slaves_sequence seq_write_read_for_alternate_slaves;
    apb_slave_toggle_sequence seq_slave_toggle;
@@ -513,18 +922,28 @@ class ApbRegressionTest extends apb_test;
     task run_phase (uvm_phase phase);
     
       phase.raise_objection (this);
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
+
       repeat(1)
       begin
         seq_write_to_slave1.start(env.a_agent_h.sequencer_h);
       end
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE1 ENDS !!!-------------------------------\n",UVM_LOW)
+ 
+
       phase.drop_objection (this);
      
       
       phase.raise_objection (this);
+  `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_write_to_slave2.start(env.a_agent_h.sequencer_h);
       end
+        `uvm_info("SEQUENCE","\n----------------------------!!! WRITE TO SLAVE2 ENDS !!!-------------------------------\n",UVM_LOW)
+ 
       phase.drop_objection (this);
 
 
@@ -536,50 +955,82 @@ class ApbRegressionTest extends apb_test;
       end
       phase.drop_objection (this);
 */
+/*
  phase.raise_objection (this);
+  `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATEE WRITE READ FOR SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_alternate_write_read_for_slave1.start(env.a_agent_h.sequencer_h);
       end
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 ENDS !!!-------------------------------\n",UVM_LOW)
+ 
       phase.drop_objection(this);
     
   phase.raise_objection (this);
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_alternate_write_read_for_slave2.start(env.a_agent_h.sequencer_h);
       end
-      phase.drop_objection(this);
+      
+ `uvm_info("SEQUENCE","\n----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 ENDS !!!-------------------------------\n",UVM_LOW)
+ 
+  phase.drop_objection(this);
     
 
  phase.raise_objection (this);
+  `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE1 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_repeated_write_access_to_slave1.start(env.a_agent_h.sequencer_h);
+
       end
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE1 ENDS !!!-------------------------------\n",UVM_LOW)
+ 
       phase.drop_objection(this);
 
   phase.raise_objection (this);
+
+ `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE2 BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_repeated_write_access_to_slave2.start(env.a_agent_h.sequencer_h);
-      end
+     `uvm_info("SEQUENCE","\n----------------------------!!! REPEATED WRITE ACCESS TO SLAVE2 ENDS !!!-------------------------------\n",UVM_LOW)
+    end
+ 
       phase.drop_objection(this);
 
 
 
     phase.raise_objection (this);
+  `uvm_info("SEQUENCE","\n----------------------------!!! TRANSFER DISABLE BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_transfer_disable.start(env.a_agent_h.sequencer_h);
       end
+  `uvm_info("SEQUENCE","\n----------------------------!!! TRANSFER DISABLE ENDS !!!-------------------------------\n",UVM_LOW)
+ 
       phase.drop_objection(this);
 
 
     phase.raise_objection (this);
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! BOUNDARY ADDRESS CHECK BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_boundary_address_check.start(env.a_agent_h.sequencer_h);
       end
+  `uvm_info("SEQUENCE","\n----------------------------!!! BOUNDARY ADDRESS CHECK ENDS !!!-------------------------------\n",UVM_LOW)
+ 
       phase.drop_objection(this);
 
 
@@ -603,12 +1054,17 @@ class ApbRegressionTest extends apb_test;
       phase.drop_objection(this);
  
 */
-
+/*
     phase.raise_objection (this);
+  `uvm_info("SEQUENCE","\n----------------------------!!! SLAVE TOGGLE BEGINS !!!-------------------------------\n",UVM_LOW)
+ 
       repeat(1)
       begin
         seq_slave_toggle.start(env.a_agent_h.sequencer_h);
       end
+
+  `uvm_info("SEQUENCE","\n----------------------------!!! SLAVE TOGGLE ENDS !!!-------------------------------\n",UVM_LOW)
+ 
       phase.drop_objection(this);
  
 
@@ -619,3 +1075,4 @@ class ApbRegressionTest extends apb_test;
   
 endclass
 
+*/

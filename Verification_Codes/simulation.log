@@ -1,6 +1,7 @@
 # vsim -vopt work.apb_top -voptargs="+acc=npr" -assertdebug -l simulation.log -coverage -c -do "coverage save -onexit -assert -directive -cvg -codeAll coverage.ucdb; run -all; coverage report -detail; exit" 
-# Start time: 09:43:29 on Jun 04,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Start time: 19:32:21 on Jun 06,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Note: (vopt-143) Recognized 1 FSM in module "master_bridge(fast)".
 # ** Warning: apb_top.sv(31): (vopt-2685) [TFMPC] - Too few port connections for 'dut'.  Expected 9, found 8.
 # ** Warning: apb_top.sv(31): (vopt-2718) [TFMPC] - Missing connection for port 'PSLVERR'.
 # //  Questa Sim
@@ -140,6 +141,9 @@
 #         put_export         uvm_put_imp              -     @768 
 # ---------------------------------------------------------------
 # 
+# UVM_INFO apb_test.sv(932) @ 0: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! WRITE TO SLAVE1 BEGINS !!!-------------------------------
+# 
 # write_addr=xxx,read_addr=xxx,time=                   0
 # UVM_INFO apb_input_monitor.sv(58) @ 0: uvm_test_top.env.a_agent_h.ip_mon_h [apb_input_monitor] apb_write_paddr = xxx, apb_write_data = xx, apb_read_paddr = xxx
 # -----------------------------------------------
@@ -191,6 +195,12 @@
 #   apb_read_paddr     integral      9     'h0Xxx
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
+# UVM_INFO apb_test.sv(939) @ 15: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! WRITE TO SLAVE1 ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(946) @ 15: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! WRITE TO SLAVE2 BEGINS !!!-------------------------------
+# 
 # -----------------------------------------------
 # Name                 Type          Size  Value 
 # -----------------------------------------------
@@ -443,6 +453,12 @@
 #   apb_read_paddr     integral      9     'h0Xxx
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
+# UVM_INFO apb_test.sv(952) @ 45: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! WRITE TO SLAVE2 ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(966) @ 45: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! ALTERNATEE WRITE READ FOR SLAVE1 BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Write Data
 #    Time: 45 ns Started: 45 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 82
 # ** Info: Valid Transfer
@@ -1125,6 +1141,12 @@
 #   apb_read_paddr     integral      9     'h0Xxx
 #   apb_read_data_out  integral      8     'h0xx 
 # -----------------------------------------------
+# UVM_INFO apb_test.sv(973) @ 105: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! ALTERNATE WRITE READ FOR SLAVE1 ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(979) @ 105: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Write Data
 #    Time: 105 ns Started: 105 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 82
 # ** Info: Valid Transfer
@@ -1807,6 +1829,12 @@
 #   apb_read_paddr     integral      9     'hf8 
 #   apb_read_data_out  integral      8     'h7d 
 # ----------------------------------------------
+# UVM_INFO apb_test.sv(986) @ 165: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! ALTERNATE WRITE READ FOR SLAVE2 ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(992) @ 165: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! REPEATED WRITE ACCESS TO SLAVE1 BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Write Address
 #    Time: 165 ns Started: 165 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 62
 # ** Info: Valid Transfer
@@ -3802,6 +3830,12 @@
 #   apb_read_paddr     integral      9     'h149
 #   apb_read_data_out  integral      8     'hb5 
 # ----------------------------------------------
+# UVM_INFO apb_test.sv(1000) @ 345: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! REPEATED WRITE ACCESS TO SLAVE1 ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(1006) @ 345: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! REPEATED WRITE ACCESS TO SLAVE2 BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Write Address
 #    Time: 345 ns Started: 345 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 62
 # ** Info: Valid Transfer
@@ -5797,6 +5831,12 @@
 #   apb_read_paddr     integral      9     'hd1 
 #   apb_read_data_out  integral      8     'h2a 
 # ----------------------------------------------
+# UVM_INFO apb_test.sv(1011) @ 525: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! REPEATED WRITE ACCESS TO SLAVE2 ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(1019) @ 525: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! TRANSFER DISABLE BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Write Address
 #    Time: 525 ns Started: 525 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 62
 # ** Info: Valid Transfer
@@ -6131,6 +6171,12 @@
 #   apb_read_paddr     integral      9     'h13e
 #   apb_read_data_out  integral      8     'h65 
 # ----------------------------------------------
+# UVM_INFO apb_test.sv(1025) @ 555: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! TRANSFER DISABLE ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(1032) @ 555: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! BOUNDARY ADDRESS CHECK BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Read Data
 #    Time: 555 ns Started: 545 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 92
 # ** Info: Valid Transfer
@@ -6563,6 +6609,12 @@
 #   apb_read_paddr     integral      9     'h13e
 #   apb_read_data_out  integral      8     'h65 
 # ----------------------------------------------
+# UVM_INFO apb_test.sv(1038) @ 615: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! BOUNDARY ADDRESS CHECK ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(1065) @ 615: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! SLAVE TOGGLE BEGINS !!!-------------------------------
+# 
 # ** Info: Valid Write Data
 #    Time: 615 ns Started: 615 ns  Scope: apb_top.apb_if File: apb_interface.sv Line: 82
 # ** Info: Valid Transfer
@@ -9920,9 +9972,12 @@
 #   apb_read_paddr     integral      9     'h1ff
 #   apb_read_data_out  integral      8     'hde 
 # ----------------------------------------------
-# UVM_INFO apb_test.sv(615) @ 1005: uvm_test_top [ApbRegressionTest] ----------------------
-# UVM_INFO apb_test.sv(616) @ 1005: uvm_test_top [ApbRegressionTest] -------------------------!!REGRESSION TEST COMPLETE !!-------------------
-# UVM_INFO apb_test.sv(617) @ 1005: uvm_test_top [ApbRegressionTest] ----------------------
+# UVM_INFO apb_test.sv(1072) @ 1005: uvm_test_top [SEQUENCE] 
+# ----------------------------!!! SLAVE TOGGLE ENDS !!!-------------------------------
+# 
+# UVM_INFO apb_test.sv(1077) @ 1005: uvm_test_top [ApbRegressionTest] ----------------------
+# UVM_INFO apb_test.sv(1078) @ 1005: uvm_test_top [ApbRegressionTest] -------------------------!!REGRESSION TEST COMPLETE !!-------------------
+# UVM_INFO apb_test.sv(1079) @ 1005: uvm_test_top [ApbRegressionTest] ----------------------
 # UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 1005: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
 # UVM_INFO apb_coverage.sv(142) @ 1005: uvm_test_top.env.cov_h [COVERAGE] 
 # ----------------------------
@@ -9938,7 +9993,7 @@
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :  889
+# UVM_INFO :  907
 # UVM_WARNING :    1
 # UVM_ERROR :    0
 # UVM_FATAL :    0
@@ -9951,6 +10006,7 @@
 # [Questa UVM]     2
 # [RNDFLD]     1
 # [RNTST]     1
+# [SEQUENCE]    18
 # [TEST_DONE]     1
 # [UVMTOP]     1
 # [actual]    84
@@ -9962,5 +10018,5 @@
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 1005 ns  Iteration: 64  Instance: /apb_top
 # Saving coverage database on exit...
-# End time: 09:43:39 on Jun 04,2025, Elapsed time: 0:00:10
+# End time: 19:32:37 on Jun 06,2025, Elapsed time: 0:00:16
 # Errors: 0, Warnings: 4
